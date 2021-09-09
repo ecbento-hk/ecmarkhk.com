@@ -21,16 +21,16 @@
 
 </head>
 
-<body data-theme="dsc" class="antialiased bg-base-100">
+<body data-theme="light" class="antialiased bg-base-100">
 
     <div class="text-base-content relative flex justify-center min-h-screen sm:items-center sm:pt-0 px-4 lg:px-0">
 
         <div class="w-full max-w-screen-2xl mx-auto px-0 lg:px-12">
             @if (Route::has('login'))
             <div class="navbar mb-2 pt-0 text-base-content rounded-box">
-                <div class="flex flex-1 lg:px-2 lg:mx-2">
-                    <div class="w-64 pt-0 mt-0">
-                        <x-jet-authentication-card-logo />
+                <div class="flex flex-1">
+                    <div class="pt-0 mt-0">
+                        <x-jet-authentication-card-logo class="py-4 px-4 rounded-b-box bg-primary" />
                     </div>
                 </div>
                 <div class="flex-none hidden px-2 mx-2 lg:flex">

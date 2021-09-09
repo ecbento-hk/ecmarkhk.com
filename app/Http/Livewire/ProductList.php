@@ -82,7 +82,7 @@ class ProductList extends Component
     public function render()
     {
         // dd($this->menu_date);
-        $period_id = [18];
+        $period_id = [2];
         $menu = Menu::where([
             'menu_date' => $this->menu_date,
         ])->whereIn('period_id',$period_id)->active()->first();

@@ -24,14 +24,14 @@ class AddCart extends Component
         'name' => ''
     ];
     public $new_student = '';
-    public $disabledButton = true;
-    public $disabledRemark = true;
+    public $disabledButton = false;
+    public $disabledRemark = false;
     protected $listeners = ['addToCart' => 'addingProduct'];
 
     protected $rules = [
-        'remark'        => 'required',
-        'student.class' => 'required_if:remark,"New Student"|string',
-        'student.name'  => 'required_if:remark,"New Student"|string',
+        'remark'        => '',
+        // 'student.class' => 'string',
+        // 'student.name'  => 'string',
     ];
 
 
@@ -88,31 +88,31 @@ class AddCart extends Component
 
     public function updatedRemark($value)
     {
-        if (!in_array($value, $this->students)) {
+        // if (!in_array($value, $this->students)) {
 
-            if ($value == "New Student") {
-                // dd($value);
-                $this->disabledRemark = false;
-                $this->disabledButton = false;
-            } else {
-                $this->disabledRemark = true;
-                $this->disabledButton = true;
-            }
-        } else {
+        //     if ($value == "New Student") {
+        //         // dd($value);
+        //         $this->disabledRemark = false;
+        //         $this->disabledButton = false;
+        //     } else {
+        //         $this->disabledRemark = true;
+        //         $this->disabledButton = true;
+        //     }
+        // } else {
 
 
-            if ($value == "New Student") {
-                // dd($value);
-                $this->disabledRemark = false;
-                $this->disabledButton = false;
-            } else if ($value !== '---' && $value !== null) {
-                $this->disabledButton = false;
-                $this->disabledRemark = true;
-            } else {
-                $this->disabledRemark = true;
-                $this->disabledButton = true;
-            }
-        }
+        //     if ($value == "New Student") {
+        //         // dd($value);
+        //         $this->disabledRemark = false;
+        //         $this->disabledButton = false;
+        //     } else if ($value !== '---' && $value !== null) {
+        //         $this->disabledButton = false;
+        //         $this->disabledRemark = true;
+        //     } else {
+        //         $this->disabledRemark = true;
+        //         $this->disabledButton = true;
+        //     }
+        // }
     }
 
     public function addToCart()
@@ -143,27 +143,27 @@ class AddCart extends Component
             $refreshPage = true;
 
             $this->emit('$refresh');
-            if ($this->remark == 'New Student') {
-                $student = $this->student;
-                $class = $student['class'];
-                $name  = $student['name'];
-                if ($class && $name) {
-                    try {
-                        $this->new_student = $class . '--' . $name;
-                        $this->remark = str_replace('_', '', $this->new_student);
-                        $newRemark = $user->merchant->remark;
-                        $newRemark[] = $this->remark;
-                        $user->merchant->remark = $newRemark;
-                        $user->merchant->save();
-                        $refreshPage = true;
-                    } catch (\Throwable $th) {
-                        \Log::debug('start of create student error');
-                        \Log::debug($user);
-                        \Log::debug($th);
-                        \Log::debug('end of create student error');
-                    }
-                }
-            }
+            // if ($this->remark == 'New Student') {
+            //     $student = $this->student;
+            //     $class = $student['class'];
+            //     $name  = $student['name'];
+            //     if ($class && $name) {
+            //         try {
+            //             $this->new_student = $class . '--' . $name;
+            //             $this->remark = str_replace('_', '', $this->new_student);
+            //             $newRemark = $user->merchant->remark;
+            //             $newRemark[] = $this->remark;
+            //             $user->merchant->remark = $newRemark;
+            //             $user->merchant->save();
+            //             $refreshPage = true;
+            //         } catch (\Throwable $th) {
+            //             \Log::debug('start of create student error');
+            //             \Log::debug($user);
+            //             \Log::debug($th);
+            //             \Log::debug('end of create student error');
+            //         }
+            //     }
+            // }
 
             // if (!$cart) {
                 $newCart = [

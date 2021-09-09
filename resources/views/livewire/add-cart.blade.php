@@ -67,7 +67,7 @@
                 <x-input.quantity wire:model="quantity" />
               </div>
             </div>
-            <div class="w-full flex mt-6 items-center pb-5 border-b-2 border-base-300 mb-5">
+            <div class="hidden w-full flex mt-6 items-center pb-5 border-b-2 border-base-300 mb-5">
               <div class="flex items-center justify-start">
                 <span class="mr-4">{{__('Student')}}</span>
                 <div class="relative">

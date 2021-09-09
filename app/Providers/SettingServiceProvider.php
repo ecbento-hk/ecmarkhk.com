@@ -29,17 +29,17 @@ class SettingServiceProvider extends ServiceProvider
     {
         $type = 'normal';
         if($type == 'normal'){
-            $menu = Menu::with('products')->where('menu_date', '>=', date('Y-m-d'))->whereIn('period_id', [18])->active()
+            $menu = Menu::with('products')->where('menu_date', '>=', date('Y-m-d'))->whereIn('period_id', [2])->active()
             ->whereHas('locations', function ($query) {
                 $query->whereNotNull('stock')->where([
-                    'store_id' => 57
+                    'store_id' => 54
                 ]);
             })->get();
         } else {
-            $menu = Menu::with('products')->where('menu_date', '>=', date('Y-m-d'))->where('menu_date', '<=', date('Y-m-d',strtotime('last day of this month')))->whereIn('period_id', [18])
+            $menu = Menu::with('products')->where('menu_date', '>=', date('Y-m-d'))->where('menu_date', '<=', date('Y-m-d',strtotime('last day of this month')))->whereIn('period_id', [2])
             ->whereHas('locations', function ($query) {
                 $query->whereNotNull('stock')->where([
-                    'store_id' => 57
+                    'store_id' => 54
                 ]);
             })->get();
         }
