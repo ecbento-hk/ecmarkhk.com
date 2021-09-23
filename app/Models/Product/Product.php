@@ -145,6 +145,10 @@ class Product extends Model
         //     }
         //     $link = $this->getTranslation('image', 'en');
         // }
+
+        if (!file_exists($link)) {
+            return str_replace('air.ecbento.com','supplier.ecbento.com',$link);
+        }
         return $link;
         // return 'https://air.ecbento.com/' . $link;
     }
