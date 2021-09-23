@@ -30,9 +30,10 @@ class Media extends Model
         $link = 'https://air.ecbento.com' . Storage::url($this->path . $this->file_name);
         if (curl_init($link) !== false) {
             return $link;
+        } else {
+            return str_replace('air.ecbento.com','supplier.ecbento.com',$link);
         }
-        return str_replace('air.ecbento.com','supplier.ecbento.com',$link);
-
+        return $link;
     }
 
     public function getWebpUrlAttribute()
