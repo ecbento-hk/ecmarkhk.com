@@ -1,18 +1,18 @@
 <div>
 
-  <h3 class="text-2xl">Your Cart</h3>
+  <h3 class="text-2xl">{{__('Your Cart')}}</h3>
   <hr class="pb-6 mt-6">
   <table class="w-full text-sm lg:text-base" cellspacing="0">
     <thead>
       <tr class="h-12 uppercase">
-        <th class="hidden md:table-cell text-left">Picture</th>
-        <th class="text-left">Product</th>
+        <th class="hidden md:table-cell text-left">{{__('Picture')}}</th>
+        <th class="text-left">{{__('Product')}}</th>
         <th class="lg:text-right text-left pl-5 lg:pl-0">
-          <span class="lg:hidden" title="Quantity">QTY</span>
-          <span class="hidden lg:inline">QTY</span>
+          <span class="lg:hidden" title="Quantity">{{__('QTY')}}</span>
+          <span class="hidden lg:inline">{{__('QTY')}}</span>
         </th>
-        <th class="hidden text-right md:table-cell">Price</th>
-        <th class="text-right">Total</th>
+        <th class="hidden text-right md:table-cell">{{__('Price')}}</th>
+        <th class="text-right">{{__('Total')}}</th>
       </tr>
     </thead>
     <tbody>
@@ -26,8 +26,8 @@
         <td>
           <a href="#">
             <p class="mb-2">{{$item->product->title}}</p>
-            <p class="mb-2">Menu Date: <code>{{date('Y-m-d',strtotime($item->menu_date))}}</code></p>
-            <p class="mb-2">Remark: {{$item->remark}}</p>
+            <p class="mb-2">{{__('Menu Date')}}: <code>{{date('Y-m-d',strtotime($item->menu_date))}}</code></p>
+            <!-- <p class="mb-2">Remark: {{$item->remark}}</p> -->
             <button wire:click="removeItem({{$item->id}})" type="submit" class="text-gray-700 mb-5">
               <small class="text-red-500 text-xs"><u>{{__('Remove item')}}</u></small>
             </button>
@@ -68,7 +68,7 @@
   @if(count($cartItems)>0)
 
   <hr class="pb-6 mt-6">
-  <h3 class="text-2xl">Checkout Now</h3>
+  <h3 class="text-2xl">{{__('Checkout Now')}}</h3>
   <form wire:submit.prevent="submit">
     <div class="my-4 mt-6 -mx-2 lg:flex text-sm">
       <div class="hidden lg:px-2 lg:w-1/2">
@@ -87,7 +87,7 @@
         </div>
 
         <div class="p-4 mt-6 bg-base-300 rounded-lg">
-          <h1 class="ml-2 font-bold uppercase">Shipping Option</h1>
+          <h1 class="ml-2 font-bold uppercase">{{__('Shipping Option')}}</h1>
         </div>
         <div class="p-4">
           <p class="mb-4 italic">If you have a coupon code, please enter it in the box below</p>
@@ -102,7 +102,7 @@
         </div>
 
         <div class="p-4 mt-6 bg-base-300 rounded-lg">
-          <h1 class="ml-2 font-bold uppercase">Instruction for seller</h1>
+          <h1 class="ml-2 font-bold uppercase">{{__('Instruction for seller')}}</h1>
         </div>
 
         <div class="p-4">
@@ -112,7 +112,7 @@
       </div>
       <div class="lg:px-2 lg:w-1/2">
         <div class="p-4 bg-base-300 rounded-lg">
-          <h1 class="ml-2 font-bold uppercase">Payment Method</h1>
+          <h1 class="ml-2 font-bold uppercase">{{__('Payment Method')}}</h1>
         </div>
         <div class="p-4">
           <p class="mb-4 italic">Please choose a payment method to pay your order.</p>
@@ -124,13 +124,13 @@
             @foreach ($payments as $payment)
             <div wire:click="$emit('payment_method','{{$payment->code}}')" class="{{ ($selected_payment==$payment->code)?'bg-primary text-white':'bg-gray-100 text-gray-400' }} text-center text-md cursor-pointer hover:shadow-lg shadow-md font-bold p-2 rounded-lg">
               <!-- {{$payment->title}} -->
-              Credit Card
+              {{__('Credit Card')}}
             </div>
             @endforeach
             @endif
 
             <div wire:click="$emit('payment_method','new')" class="{{ ($selected_payment=='new')?'bg-primary text-white':'bg-gray-100 text-gray-400' }} text-center text-md cursor-pointer hover:shadow-lg shadow-md font-bold p-2 rounded-lg">
-              New Credit Cards
+            {{__('New Credit Cards')}}
             </div>
 
           </div>
@@ -197,7 +197,7 @@
 
         @if($selected_payment == 'stripe')
         <div class="p-4 mt-6 bg-base-300 rounded-lg">
-          <h1 class="ml-2 font-bold uppercase">Choose Your Card</h1>
+          <h1 class="ml-2 font-bold uppercase">{{__('Choose Your Card')}}</h1>
         </div>
         <div class="p-4 grid grid-cols-3 gap-4">
           @foreach($userCards as $card)
@@ -207,9 +207,9 @@
 
           <div class="shadow stats cursor-pointer">
             <div wire:click="updateCardPayment('{{$card->id}}')" class="{{ ($selected_card==$card->id) ? 'bg-primary text-white':'bg-gray-100 text-gray-400' }} stat">
-              <div class="stat-title">Credit Card</div> 
+              <div class="stat-title">{{__('Credit Card')}}</div> 
               <div class="stat-value">{{substr($card->name, -4)}}</div> 
-              <div class="stat-desc">Last 4 Characters</div>
+              <div class="stat-desc">{{__('Last 4 Characters')}}</div>
             </div>
           </div>
 
@@ -224,13 +224,13 @@
 
 
         <div class="p-4 bg-base-300 rounded-lg">
-          <h1 class="ml-2 font-bold uppercase">Order Details</h1>
+          <h1 class="ml-2 font-bold uppercase">{{__('Order Details')}}</h1>
         </div>
         <div class="p-4">
           <p class="mb-6 italic">Shipping and additionnal costs are calculated based on values you have entered</p>
           <div class="flex justify-between border-b">
             <div class="lg:px-4 lg:py-2 m-2 font-bold text-center text-gray-800">
-              Subtotal
+              {{__('Subtotal')}}
             </div>
             <div class="lg:px-4 lg:py-2 m-2 font-bold text-center text-gray-900">
               ${{$cartItems->sum('amount')}}
@@ -238,7 +238,7 @@
           </div>
           <div class="flex justify-between border-b">
             <div class="lg:px-4 lg:py-2 m-2 font-bold text-center text-gray-800">
-              Discount
+              {{__('Discount')}}
             </div>
             <div class="lg:px-4 lg:py-2 m-2 font-bold text-center text-gray-900">
               ${{0}}
@@ -246,7 +246,7 @@
           </div>
           <div class="flex justify-between border-b">
             <div class="lg:px-4 lg:py-2 m-2 font-bold text-center text-gray-800">
-              Coupon
+              {{__('Coupon')}}
             </div>
             <div class="lg:px-4 lg:py-2 m-2 font-bold text-center text-gray-900">
               ${{$selected_coupon_price}}
@@ -254,7 +254,7 @@
           </div>
           <div class="flex justify-between border-b">
             <div class="lg:px-4 lg:py-2 m-2 font-bold text-center text-gray-800">
-              Shipping
+              {{__('Shipping')}}
             </div>
             <div class="lg:px-4 lg:py-2 m-2 font-bold text-center text-gray-900">
               ${{0}}
@@ -264,7 +264,7 @@
 
           <div class="flex justify-between pt-4 border-b">
             <div class="lg:px-4 lg:py-2 m-2 font-bold text-center text-gray-800">
-              Total
+              {{__('Total')}}
             </div>
             <div class="lg:px-4 lg:py-2 m-2 font-bold text-center text-gray-900">
               ${{ ($cartItems->sum('amount') - $selected_coupon_price) <=0 ? 0 : $cartItems->sum('amount') - $selected_coupon_price }}
@@ -288,8 +288,8 @@
           <button {{
                 $done==true ?'type="submit"':'disabled'
               }} wire:loading.class="loading" class="flex justify-center w-full mt-6 font-medium uppercase btn btn-primary rounded-lg">
-            <span class="ml-2 mt-5px text-xl" wire:loading.remove>{{ $procced }}</span>
-            <span class="ml-2 mt-5px text-xl hidden" wire:loading.class.remove="hidden">Loading</span>
+            <span class="ml-2 mt-5px text-xl" wire:loading.remove>{{ __($procced) }}</span>
+            <span class="ml-2 mt-5px text-xl hidden" wire:loading.class.remove="hidden">{{__('Loading')}}</span>
           </button>
 
         </div>
