@@ -3,7 +3,7 @@
 
     @livewire('user-notify',['location'=>$location?$location:null])
 
-    <div class="py-4 bg-base-200 text-base-content w-full card shadow-lg rounded-box mb-8">
+    <div class="hidden lg:block py-4 bg-base-200 text-base-content w-full card shadow-lg rounded-box mb-8">
 
         <ul class="w-full menu">
             <li class="menu-title">
@@ -66,7 +66,7 @@
     </div>
 
 
-    <div class="py-4 rounded-box">
+    <div class="hidden lg:block py-4 rounded-box">
         <ul class="menu w-full text-gray-600">
             <li class="menu-title">
                 <span>
