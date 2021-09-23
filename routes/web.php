@@ -32,6 +32,31 @@ Route::get('/lang/{lang}', function ($lang) {
     return back();
 })->name('lang.switch');
 
+
+
+Route::group(['prefix' => 'logistics', 'as' => 'logistics.'], function () {
+    Route::get('/', 'LogisticsController@index')->name('home');
+    Route::get('/location/{location}/store', 'LogisticsController@store')->name('store');
+    Route::get('/machine/{machine}/status', 'LogisticsController@status')->name('status');
+    Route::get('/store/{store}/machine', 'LogisticsController@machine')->name('machine');
+    Route::get('/store/{store}/machine/{machine}/status', 'LogisticsController@machineStatus')->name('machine.status');
+    Route::get('/login', 'LogisticsController@login')->name('login');
+    Route::post('/login', 'LogisticsController@auth')->name('login');
+    Route::get('/supplier', 'LogisticsController@supplier')->name('supplier');
+    Route::post('/checkin', 'LogisticsController@checkin')->name('checkin');
+    Route::get('/orders/loading', 'LogisticsController@loading')->name('loading');
+    Route::get('/store/{store}/shelf', 'LogisticsController@shelf')->name('shelf');
+    Route::any('/orders/extraction', 'LogisticsController@extraction')->name('extraction');
+    Route::any('/buffer/extraction', 'LogisticsController@buffer_extraction')->name('buffer_extraction');
+    Route::any('/track/{machineProduct}/delete', 'LogisticsController@trackDelete')->name('track.delete');
+    Route::get('/{machine}/cell/{cell}/extraction/{action}', 'LogisticsController@action')->name('action');
+    Route::get('/machine/{machine}/{orderClass}/create/{orderId}/{boxSize}/{warm?}', 'LogisticsController@create')->name('create');
+    Route::post('/machine/{machine}/{orderClass}/auto-create/{store}/{product}/{boxSize}', 'LogisticsController@autoCreate')->name('auto-create');
+    Route::post('/machine/{machine}/{orderClass}/create/{orderId}/{boxSize}/{warm?}', 'LogisticsController@create')->name('create');
+    Route::get('/machine/{machine}/order/add/{orderId}/{boxSize}', 'LogisticsController@add')->name('add');
+    Route::get('/sendFcmByStore/{store}', 'LogisticsController@sendFcmByStore')->name('sendFcmByStore');
+});
+
 // Route::get('/terms-and-conditions', function () {
 //     // abort(404);
 //     return view('terms_and_conditions');
