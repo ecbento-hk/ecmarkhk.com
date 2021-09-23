@@ -68,8 +68,8 @@ class ProductList extends Component
         ->whereNotNull('end_date')
         ->whereIn('period_id',$period_id)
         ->whereHas('locations', function($query) use($store){
-            $query->whereIn('store_id', [$store])->where('active',1)->whereNotNull('stock');
-        })->active()->first();
+                $query->whereIn('store_id', [$store])->where('active',1)->whereNotNull('stock');
+            })->active()->first();
         if ($menu) {
             $this->products = ProductResource::collection($menu->products()->get());
             // dd($this->products);
