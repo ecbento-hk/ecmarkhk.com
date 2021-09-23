@@ -7,20 +7,20 @@
             <div class="overflow-x-auto">
 
                 <h3 class="font-bold uppercase mb-5 text-xl font-bold text-gray-400">
-                    Order List
+                    {{__('Order List')}}
                 </h3>
 
                 <table class="table w-full">
                     <thead>
                         <tr>
-                            <th>Order</th>
-                            <th>Payment</th>
-                            <th>Bento / Product</th>
-                            <th>Total </th>
-                            <th>Code</th>
-                            <th>Amount</th>
+                            <th>{{__('Order')}}</th>
+                            <th>{{__('Payment')}}</th>
+                            <th>{{__('Bento')}} / {{__('Product')}}</th>
+                            <th>{{__('Total')}} </th>
+                            <th>{{__('Code')}}</th>
+                            <th>{{__('Amount')}}</th>
                             <!-- <th>Discount</th> -->
-                            <th>Action</th>
+                            <th>{{__('Action')}}</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -79,7 +79,7 @@
             <td>${{$order->real_amount}}
             <!-- <td>{{ $order->charges()->where('value','<=',0)->get()->sum('value') }}</td> -->
             <th>
-                <button wire:click="viewDetail({{$order->id}})" class="btn btn-primary btn-sm btn-block">details</button>
+                <button wire:click="viewDetail({{$order->id}})" class="btn btn-primary btn-sm btn-block">{{__('Details')}}</button>
                 <!-- <a href="#my-modal" class="btn btn-primary">open modal</a> -->
                 <!-- <button wire:click="viewDetail({{$order->id}})" class="btn btn-primary btn-xs">receipt</button> -->
             </th>
@@ -88,13 +88,13 @@
             </tbody>
             <tfoot class="hidden">
                 <tr>
-                    <th>Order</th>
-                    <th>Payment</th>
-                    <th>Bento / Product</th>
-                    <th>Code</th>
-                    <th>Amount</th>
-                    <th>Discount</th>
-                    <th>Action</th>
+                    <th>{{__('Order')}}</th>
+                    <th>{{__('Payment')}}</th>
+                    <th>{{__('Bento')}} / {{__('Product')}}</th>
+                    <th>{{__('Code')}}</th>
+                    <th>{{__('Amount')}}</th>
+                    <th>{{__('Discount')}}</th>
+                    <th>{{__('Action')}}</th>
                 </tr>
             </tfoot>
             </table>

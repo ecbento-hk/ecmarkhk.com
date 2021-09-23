@@ -1,10 +1,10 @@
 <div class="stack mb-8 w-full">
     <div class="shadow-md card bg-primary text-primary-content">
         <div class="card-body">
-            <h2 class="card-title">Select Location</h2>
+            <h2 class="card-title">{{__('Select Location')}}</h2>
             <!-- <p>The cuffoff time on Thursday.</p> -->
             <select wire:model="storeid" class="select select-bordered text-black w-full max-w-xs">
-                <option disabled="disabled" selected="selected">Choose Your Location</option>
+                <option disabled="disabled" selected="selected">{{__('Choose Your Location')}}</option>
                 @foreach($stores as $store)
                 <option value="{{$store->id}}">{{$store->name}}</option>
                 @endforeach

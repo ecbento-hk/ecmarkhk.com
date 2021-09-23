@@ -70,7 +70,7 @@
         <ul class="menu w-full text-gray-600">
             <li class="menu-title">
                 <span>
-                    Instructions
+                    {{__('Instructions')}}
                 </span>
             </li>
             <li>
@@ -78,7 +78,7 @@
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="inline-block w-5 h-5 mr-1 stroke-current">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
                     </svg>
-                    = Ordered
+                    = {{__('Ordered')}}
                 </a>
             </li>
             <li>
@@ -86,7 +86,7 @@
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="inline-block w-5 h-5 mr-1 stroke-current">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
                     </svg>
-                    = Normal Status *No order
+                    = {{__('Normal Status *No order')}}
                 </a>
             </li>
             <li>
@@ -98,7 +98,7 @@
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="inline-block w-5 h-5 mr-1 stroke-current text-secondary">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
                     </svg>
-                    = Products in cart
+                    = {{__('Products in cart')}}
                 </a>
             </li>
         </ul>

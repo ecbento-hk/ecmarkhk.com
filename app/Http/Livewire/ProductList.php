@@ -52,7 +52,7 @@ class ProductList extends Component
 
     public function loadProduct($brand)
     {
-        $this->reset(['products']);
+        // $this->reset(['products']);
         $this->brand = $brand;
 
         $period_id = [2];

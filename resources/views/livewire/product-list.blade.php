@@ -70,7 +70,7 @@
             <div class="col-span-12 w-full">
                 <div class="w-full overflow-hidden">
                     <div class="grid grid-cols-12 gap-4 pb-4">
-                        <h3 class="col-span-12 font-semibold">Extraction Code:</h3>
+                        <h3 class="col-span-12 font-semibold">{{__('Extraction Code')}}:</h3>
                         @foreach ($codes as $code => $orders)
                         <div class="stat shadow rounded-box bg-base-200 col-span-6 md:col-span-4">
                             <div class="stat-figure text-info">
@@ -90,7 +90,7 @@
             <div class="hidden md:flex col-span-12 w-full">
                 <div class="w-full overflow-hidden">
                     <div class="grid grid-cols-12 gap-4 pb-4">
-                        <h3 class="col-span-12 font-semibold">Ordered:</h3>
+                        <h3 class="col-span-12 font-semibold">{{__('Ordered')}}:</h3>
                         @foreach ($bentos as $k => $bento)
                         <div class="stat text-xs shadow rounded-box bg-base-200 col-span-6 md:col-span-4">
                             <div class="stat-figure text-info">
@@ -113,7 +113,7 @@
             @endauth
 
 
-            <h3 class="col-span-12 font-semibold">Menu:</h3>
+            <h3 class="col-span-12 font-semibold">{{__('Menu')}}:</h3>
             @if(count($products)>0)
             @foreach ($products as $product)
             <div class="col-span-6 md:col-span-4 lg:col-span-4 xl:col-span-3 md:flex pb-8 w-full indicator">
