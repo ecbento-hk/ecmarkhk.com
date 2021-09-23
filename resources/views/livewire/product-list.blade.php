@@ -163,17 +163,18 @@
                         <h3 class="text-md font-bold mb-3">
                             ${{$product->price}}
                         </h3>
-                        @auth
 
                         @if($stock <= 0)
                         <button disabled class="btn btn-primary btn-block btn-sm text-sm m-0 rounded-lg">{{__('Sold Out')}}</button>
                         @else
-                        <button wire:click="addToCart({{$product->id}},'{{$menu_date}}')" class="btn btn-primary btn-block btn-sm text-sm m-0 rounded-lg">{{__('Add To Cart')}}</button>
+                            @auth
+                            <button wire:click="addToCart({{$product->id}},'{{$menu_date}}')" class="btn btn-primary btn-block btn-sm text-sm m-0 rounded-lg">{{__('Add To Cart')}}</button>
+                            @else
+                            <a href="{{route('login')}}" class="btn btn-primary btn-block btn-sm text-sm m-0 rounded-lg">{{__('Add To Cart')}}</a>
+                            @endauth
                         @endif
                         
-                        @else
-                        <a href="{{route('login')}}" class="btn btn-primary btn-block btn-sm text-sm m-0 rounded-lg">{{__('Add To Cart')}}</a>
-                        @endauth
+                        
                     </div>
                 </div>
                 <!-- ordered -->
