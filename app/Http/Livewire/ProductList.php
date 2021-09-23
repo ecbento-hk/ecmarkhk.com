@@ -55,29 +55,7 @@ class ProductList extends Component
         // $this->reset(['products']);
         $this->brand = $brand;
 
-        $period_id = [17];
-        $store = $this->location;
-        // $menu = Menu::where([
-        //     'menu_date' => $this->menu_date,
-        // ])->whereIn('period_id',$period_id)
-        // ->whereHas('locations', function($query) use($store){
-        //     $query->whereIn('store_id', [$store])->where('active',1)->whereNotNull('stock');
-        // })->active()->first();
-        $menu = Menu::where('menu_date','<=',$this->menu_date)
-        ->where('end_date','>=',$this->menu_date)
-        ->whereNotNull('end_date')
-        ->whereIn('period_id',$period_id)
-        ->whereHas('locations', function($query) use($store){
-                $query->whereIn('store_id', [$store])->where('active',1)->whereNotNull('stock');
-            })->active()->first();
-        if ($menu) {
-            $this->products = ProductResource::collection($menu->products()->get());
-            // dd($this->products);
-        } else {
-            $this->products = [];
-            $this->filter = [];
-        }
-
+       
         // $this->emit('$refresh');
     }
 
@@ -130,6 +108,32 @@ class ProductList extends Component
 
     public function render()
     {
+        $period_id = [17];
+        $store = $this->location;
+
+        // $menu = Menu::where([
+        //     'menu_date' => $this->menu_date,
+        // ])->whereIn('period_id',$period_id)
+        // ->whereHas('locations', function($query) use($store){
+        //     $query->whereIn('store_id', [$store])->where('active',1)->whereNotNull('stock');
+        // })->active()->first();
+        
+        $menu = Menu::where('menu_date','<=',$this->menu_date)
+        ->where('end_date','>=',$this->menu_date)
+        ->whereNotNull('end_date')
+        ->whereIn('period_id',$period_id)
+        ->whereHas('locations', function($query) use($store){
+                $query->whereIn('store_id', [$store])->where('active',1)->whereNotNull('stock');
+            })->active()->first();
+        if ($menu) {
+            $this->products = ProductResource::collection($menu->products()->get());
+            // dd($this->products);
+        } else {
+            $this->products = [];
+            $this->filter = [];
+        }
+
+        
         return view('livewire.product-list', [
             'products' => $this->products,
             'tag' => $this->filter,
