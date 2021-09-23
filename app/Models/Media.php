@@ -26,7 +26,13 @@ class Media extends Model
 
     public function getUrlAttribute()
     {
-        return 'https://air.ecbento.com' . Storage::url($this->path . $this->file_name);
+
+        $link = 'https://air.ecbento.com' . Storage::url($this->path . $this->file_name);
+        if (!file_exists($link)) {
+            return str_replace('air.ecbento.com','supplier.ecbento.com',$link);
+        }
+
+        return $link;
     }
 
     public function getWebpUrlAttribute()
