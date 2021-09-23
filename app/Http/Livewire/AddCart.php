@@ -196,7 +196,7 @@ class AddCart extends Component
             $this->disabledRemark = true;
 
             $this->emitTo('cart-count', 'refreshCart');
-            $this->emitTo('sub-menu', 'refreshCart');
+            // $this->emitTo('sub-menu', 'refreshCart');
             $this->emit('$refresh');
             if($refreshPage){
                 return redirect()->back();

@@ -125,7 +125,6 @@ class ProductList extends Component
 
     public function addToCart($productId,$menuDate)
     {
-        // dd($menuDate);
         $this->emitTo('add-cart', 'addToCart', $productId, $menuDate);
     }
 
