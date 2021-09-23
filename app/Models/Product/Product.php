@@ -168,7 +168,7 @@ class Product extends Model
             if($menuDate > date('Y-m-d H:i:s')){
                 $stock = $locationStock->menuProduct->stock;
             } else {
-                $stock = $locationStock->stock;
+                $stock = $locationStock->real_stock;
             }
         }
         return $stock;
