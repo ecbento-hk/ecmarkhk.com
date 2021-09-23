@@ -154,7 +154,7 @@ class Product extends Model
         return $this->getTranslation('title', 'zh-hk');
         // return route('images.product', ['slug' => $this->slug]);
     }
-    public function stock($menuId,$location)
+    public function stock($menuId,$menuDate,$location)
     {
         $stock = 0;
         $locationStock = MenuLocationStock::where([
@@ -164,7 +164,8 @@ class Product extends Model
                             'active'         => 1
                         ])->first();
         if($locationStock){
-            $menuDate = $locationStock->menu->menu_date . ' - ' .$locationStock->menu->period->preorder_end;
+            $menuDate = $menuDate . ' ' .$locationStock->menu->period->preorder_end;
+            // dd($menuDate);
             if($menuDate > date('Y-m-d H:i:s')){
                 $stock = $locationStock->menuProduct->stock;
             } else {

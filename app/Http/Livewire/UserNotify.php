@@ -14,7 +14,7 @@ class UserNotify extends Component
     
     public function mount($location = null)
     {
-        $this->stores = Store::where('active',1)->whereIn('id',[54,58,30,31])->get();
+        $this->stores = Store::where('active',1)->whereIn('id',[54,58,31])->get();
         if(Auth::check()){
         $this->user_store = UserAddress::where('user_id',Auth::user()->id)->orderBy('created_at','desc')->first();
         $this->storeid = $this->user_store->location_id;

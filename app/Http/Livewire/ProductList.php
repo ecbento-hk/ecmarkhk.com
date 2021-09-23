@@ -55,7 +55,7 @@ class ProductList extends Component
         // $this->reset(['products']);
         $this->brand = $brand;
 
-        $period_id = [2];
+        $period_id = [17];
         $store = $this->location;
         // $menu = Menu::where([
         //     'menu_date' => $this->menu_date,

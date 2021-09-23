@@ -129,7 +129,7 @@
                             } catch (\Throwable $th) {
                             $product->id;
                             }
-                            $stock = $product->stock($product->pivot->id,$location);
+                            $stock = $product->stock($product->pivot->id,$menu_date,$location);
                             @endphp
                         </span>
                         <h4 class="font-bold text-xs lg:text-md">
