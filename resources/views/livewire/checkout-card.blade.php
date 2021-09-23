@@ -287,7 +287,7 @@
 
           <button {{
                 $done==true ?'type="submit"':'disabled'
-              }} wire:loading.class="loading" class="flex justify-center w-full mt-6 font-medium uppercase btn btn-primary rounded-lg">
+              }} wire:loading.class="loading" class="flex justify-center w-full mt-6 mb-8 md:mb-0 font-medium uppercase btn btn-primary rounded-lg">
             <span class="ml-2 mt-5px text-xl" wire:loading.remove>{{ __($procced) }}</span>
             <span class="ml-2 mt-5px text-xl hidden" wire:loading.class.remove="hidden">{{__('Loading')}}</span>
           </button>
