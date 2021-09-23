@@ -72,15 +72,15 @@ class Order extends Model
                     Mail::to($user)->send(new OrderCreated($model));
                 }
                 // if ($model->payment_status == 'paid') {
-                if($model->getOriginal('payment_status')!=='paid' && $model->payment_status == 'paid'){
-                    $user = $model->user;
-                    $content = Message::find(1)->getTranslation('content',$user->language);
-                    $content = str_replace('[code]', $model->extraction_code, $content);
-                    $sms_data['phone_no'] = $user->phone_no;
-                    $sms_data['user_define_no'] = $user->phone_no;
-                    $sms_data['message'] = $content;
-                    SMS::send($content,$sms_data);
-                }
+                // if($model->getOriginal('payment_status')!=='paid' && $model->payment_status == 'paid'){
+                //     $user = $model->user;
+                //     $content = Message::find(1)->getTranslation('content',$user->language);
+                //     $content = str_replace('[code]', $model->extraction_code, $content);
+                //     $sms_data['phone_no'] = $user->phone_no;
+                //     $sms_data['user_define_no'] = $user->phone_no;
+                //     $sms_data['message'] = $content;
+                //     SMS::send($content,$sms_data);
+                // }
             } catch (\Throwable $th) {
                 \Log::debug('send sms error');
                 \Log::debug($th);
