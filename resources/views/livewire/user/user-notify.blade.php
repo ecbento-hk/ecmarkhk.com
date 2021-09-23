@@ -1,4 +1,4 @@
-<div class="stack mb-8 w-full">
+<div class="stack mb-3 lg:mb-8 w-full">
     <div class="shadow-md card bg-primary text-primary-content">
         <div class="card-body">
             <h2 class="card-title">{{__('Select Location')}}</h2>
