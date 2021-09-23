@@ -57,9 +57,17 @@ class ProductList extends Component
 
         $period_id = [2];
         $store = $this->location;
-        $menu = Menu::where([
-            'menu_date' => $this->menu_date,
-        ])->whereIn('period_id',$period_id)
+        // $menu = Menu::where([
+        //     'menu_date' => $this->menu_date,
+        // ])->whereIn('period_id',$period_id)
+        // ->whereHas('locations', function($query) use($store){
+        //     $query->whereIn('store_id', [$store])->where('active',1)->whereNotNull('stock');
+        // })->active()->first();
+        $menu = Menu::where('period_id', '=',$period_id)
+        ->where('menu_date','<=',$this->menu_date)
+        ->where('end_date','>=',$this->menu_date)
+        ->whereNotNull('end_date')
+        ->whereIn('period_id',$period_id)
         ->whereHas('locations', function($query) use($store){
             $query->whereIn('store_id', [$store])->where('active',1)->whereNotNull('stock');
         })->active()->first();
