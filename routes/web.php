@@ -35,7 +35,7 @@ Route::get('/lang/{lang}', function ($lang) {
 
 
 Route::group(['prefix' => 'logistics', 'as' => 'logistics.'], function () {
-    Route::get('/', 'LogisticsController@index')->name('home');
+    Route::get('/', LogisticsController::class,'index')->name('home');
     Route::get('/location/{location}/store', 'LogisticsController@store')->name('store');
     Route::get('/machine/{machine}/status', 'LogisticsController@status')->name('status');
     Route::get('/store/{store}/machine', 'LogisticsController@machine')->name('machine');

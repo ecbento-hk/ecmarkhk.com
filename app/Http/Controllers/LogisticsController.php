@@ -20,11 +20,12 @@ class LogisticsController extends Controller
 {
 
  
-    // public function index()
-    // {
-    //     $lists = Area::where(['type' => 'sub-district', 'active' => 1])->orderBy('priority')->get();
-    //     return view('logistics.index', ['lists' => $lists]);
-    // }
+    public function index()
+    {
+        dd('index');
+        // $lists = Area::where(['type' => 'sub-district', 'active' => 1])->orderBy('priority')->get();
+        // return view('logistics.index', ['lists' => $lists]);
+    }
 
     // public function store(Aree $location)
     // {
