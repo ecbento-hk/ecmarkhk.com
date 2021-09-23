@@ -52,7 +52,7 @@
                             </svg> -->
                             @endif
 
-                            <code class="text-xs">{{ $menuDate }} ({{date('D',strtotime($menuDate))}})</code>
+                            <code class="text-xs">{{ $menuDate }} ({{ __(date('D',strtotime($menuDate))) }})</code>
                         </span>
                         <div class="text-xs badge ml-2 badge-secondary">
                             {{$quantity}}

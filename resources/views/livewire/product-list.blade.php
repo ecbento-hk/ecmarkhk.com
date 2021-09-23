@@ -14,14 +14,14 @@
                         <a @if($date!==$menu_date) href="{{route('welcome')}}?menu={{base64_encode( serialize(['menu_date'=>$date]) )}}" @endif>
                             <div class="bg-base-200 shadow-lg w-32 block rounded-lg col-span-2 overflow-hidden text-center">
                                 <div class="py-3 {{$menu_date===$date?'bg-primary':' bg-primary-focus cursor-pointer hover:shadow-lg'}}">
-                                    <h3 class="text-white text-md">{{date('M',strtotime($date))}}</h3>
+                                    <h3 class="text-white text-md">{{ __(date('M',strtotime($date))) }}</h3>
                                 </div>
                                 <div class="py-3">
                                     <h2 class="text-2xl text-base-content font-bold">{{date('d',strtotime($date))}}</h2>
                                 </div>
                                 <div class="text-base-content pb-3 rounded-b-lg px-3 bottom-0 flex justify-between">
-                                    <h3 class="text-md font-bold">{{date('D',strtotime($date))}}</h3>
-                                    <h3 class="text-md font-bold">{{date('Y',strtotime($date))}}</h3>
+                                    <h3 class="text-md font-bold">{{ __(date('D',strtotime($date))) }}</h3>
+                                    <h3 class="text-md font-bold">{{ date('Y',strtotime($date)) }}</h3>
                                 </div>
                             </div>
                         </a>

@@ -2,9 +2,11 @@
 
 use App\Models\Product\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Password;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Session;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,6 +23,14 @@ Route::get('/', function () {
     // abort(404);
     return view('welcome');
 })->name('welcome');
+
+Route::get('/lang/{lang}', function ($lang) {
+    // abort(404);
+    if(array_key_exists($lang, Config::get('languages'))) {
+        Session::put('applocale', $lang);
+    }
+    return back();
+})->name('lang.switch');
 
 // Route::get('/terms-and-conditions', function () {
 //     // abort(404);
