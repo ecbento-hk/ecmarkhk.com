@@ -18,7 +18,7 @@
 
 @endcomponent
 
-@component('mail::button', ['url' => config('app.url')])
+@component('mail::button', ['url' => 'https://air.ecbento.com/qr/ecb'.$order->extraction_code])
 View Detail
 @endcomponent
 
