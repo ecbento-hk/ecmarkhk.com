@@ -116,7 +116,7 @@
             <h3 class="col-span-12 font-semibold">Menu:</h3>
             @if(count($products)>0)
             @foreach ($products as $product)
-            <div wire:loading.remove wire:loading.target="changeBrand" class="col-span-6 md:col-span-4 lg:col-span-4 xl:col-span-3 md:flex pb-8 w-full indicator">
+            <div class="col-span-6 md:col-span-4 lg:col-span-4 xl:col-span-3 md:flex pb-8 w-full indicator">
                 <div class="card bordered shadow-lg w-full rounded-box bg-base-200">
                     <figure class="px-4 pt-4">
                         <img src="{{$product->image_file? $product->image_file : 'https://www.kenyons.com/wp-content/uploads/2017/04/default-image-620x600.jpg'}}" class="h-40 object-cover object-center rounded-box bg-cover bg-center">
@@ -140,23 +140,18 @@
                     </div>
 
                     <div class="flex space-x-4 text-sm w-full px-6 pt-3 pb-6">
-                        <a href="/" aria-label="Likes" class="flex items-start text-gray-800 transition-colors duration-200 hover:text-deep-purple-accent-700 group">
+                       
+                        <a aria-label="Stock" class="flex items-start text-gray-800 transition-colors duration-200 hover:text-deep-purple-accent-700 group">
                             <div class="mr-2">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-4 h-4 text-gray-600 transition-colors duration-200 group-hover:text-deep-purple-accent-700">
-                                    <polyline points="6 23 1 23 1 12 6 12" fill="none" stroke-miterlimit="10"></polyline>
-                                    <path d="M6,12,9,1H9a3,3,0,0,1,3,3v6h7.5a3,3,0,0,1,2.965,3.456l-1.077,7A3,3,0,0,1,18.426,23H6Z" fill="none" stroke="currentColor" stroke-miterlimit="10"></path>
-                                </svg>
-                            </div>
-                            <p class="font-semibold">{{$product->sold_count}}</p>
-                        </a>
-                        <a href="/" aria-label="Comments" class="flex items-start text-gray-800 transition-colors duration-200 hover:text-deep-purple-accent-700 group">
-                            <div class="mr-2">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" stroke="currentColor" class="w-4 h-4 text-gray-600 transition-colors duration-200 group-hover:text-deep-purple-accent-700">
-                                    <polyline points="23 5 23 18 19 18 19 22 13 18 12 18" fill="none" stroke-miterlimit="10"></polyline>
-                                    <polygon points="19 2 1 2 1 14 5 14 5 19 12 14 19 14 19 2" fill="none" stroke="currentColor" stroke-miterlimit="10"></polygon>
-                                </svg>
+                                <svg stroke="currentColor" class="w-4 h-5 text-gray-600 transition-colors duration-200 group-hover:text-deep-purple-accent-700" width="24" height="24" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="6" y="12" width="36" height="30" rx="2" fill="none" stroke="#333" stroke-width="4" stroke-linejoin="round"/><path d="M17.9498 24.0083L29.9498 24.0083" stroke="#333" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/><path d="M6 13L13 5H35L42 13" stroke="#333" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/></svg>
                             </div>
                             <p class="font-semibold">{{$stock}}</p>
+                        </a>
+                        <a href="/" aria-label="Comment" class="flex items-start text-gray-800 transition-colors duration-200 hover:text-deep-purple-accent-700 group">
+                            <div class="mr-2">
+                                <svg width="24" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-4 h-5 text-gray-600 transition-colors duration-200 group-hover:text-deep-purple-accent-700" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4 6H44V36H29L24 41L19 36H4V6Z" fill="none" stroke="#333" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/><path d="M23 21H25.0025" stroke="#333" stroke-width="4" stroke-linecap="round"/><path d="M33.0011 21H35" stroke="#333" stroke-width="4" stroke-linecap="round"/><path d="M13.001 21H14.9999" stroke="#333" stroke-width="4" stroke-linecap="round"/></svg>
+                            </div>
+                            <p class="font-semibold">{{$product->sold_count}}</p>
                         </a>
                     </div>
                     <div class="pb-4 px-5 w-full mt-3 justify-between">
