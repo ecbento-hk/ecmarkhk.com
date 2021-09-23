@@ -65,6 +65,7 @@ class ProductList extends Component
         })->active()->first();
         if ($menu) {
             $this->products = ProductResource::collection($menu->products()->get());
+            // dd($this->products);
         } else {
             $this->products = [];
             $this->filter = [];

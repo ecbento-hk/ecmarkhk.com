@@ -36,140 +36,169 @@
 
             </div>
 
+
+
+            <div class="alert alert-info col-span-12">
+                <div class="flex-1">
+                    <svg stroke="#2196f3" class="w-6 h-6 mx-2" width="24" height="24" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M9.85786 32.7574C6.23858 33.8432 4 35.3432 4 37C4 40.3137 12.9543 43 24 43V43C35.0457 43 44 40.3137 44 37C44 35.3432 41.7614 33.8432 38.1421 32.7574" stroke="#2196f3" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" />
+                        <path d="M24 35C24 35 37 26.504 37 16.6818C37 9.67784 31.1797 4 24 4C16.8203 4 11 9.67784 11 16.6818C11 26.504 24 35 24 35Z" fill="none" stroke="#2196f3" stroke-width="4" stroke-linejoin="round" />
+                        <path d="M24 22C26.7614 22 29 19.7614 29 17C29 14.2386 26.7614 12 24 12C21.2386 12 19 14.2386 19 17C19 19.7614 21.2386 22 24 22Z" fill="none" stroke="#2196f3" stroke-width="4" stroke-linejoin="round" />
+                    </svg>
+                    <label class="animate-pulse font-bold">                          
+                        {{\App\Models\Store::find($location)->name}}
+                    </label>
+                </div>
+            </div>
+
+
             @auth
 
-            <div class="hidden col-span-12 pb-8 w-full">
-                @php
-                $bentos = auth()->user()->bentos()->where([
-                'status' => 'paid',
-                'menu_date' => $menu_date
-                ])->get();
-                @endphp
+            @php
+            $bentos = auth()
+            ->user()
+            ->bentos()
+            ->where([
+            'status' => 'paid',
+            'menu_date' => $menu_date,
+            ])
+            ->get();
+            $codes = $bentos->groupBy('extraction_code');
+            @endphp
+
+            @if (count($bentos) > 0)
+            <div class="col-span-12 w-full">
                 <div class="w-full overflow-hidden">
-                    @if(count($bentos)>0)
-                    <h3>Ordered:</h3>
-                    <div class="grid grid-cols-12 gap-4 py-4">
-                        @foreach ($bentos as $bento)
-                        <div class="shadow card col-span-4">
-                            <div class="card-body p-3">
-                                <h5 class="text-md">{{$bento->product->title}}</h5>
-                                <p>Student: {{$bento->remark}}</p>
+                    <div class="grid grid-cols-12 gap-4 pb-4">
+                        <h3 class="col-span-12 font-semibold">Extraction Code:</h3>
+                        @foreach ($codes as $code => $orders)
+                        <div class="stat shadow rounded-box bg-base-200 col-span-6 md:col-span-4">
+                            <div class="stat-figure text-info">
+                                <div class="avatar">
+                                    <div class="w-16 h-16 p-1 bg-base-100">
+                                        <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=ecb{{$code}}" alt="">
+                                    </div>
+                                </div>
                             </div>
+                            <div class="text-sm"><code>{{ $code }}</code></div>
+                            <a target="_blank" class="text-xs link link-primary" href="https://air.ecbento.com/qr/ecb{{$code}}">View Detail</a>
+                        </div>
+                        @endforeach
+                    </div>
+                </div>
+            </div>
+            <div class="hidden md:flex col-span-12 w-full">
+                <div class="w-full overflow-hidden">
+                    <div class="grid grid-cols-12 gap-4 pb-4">
+                        <h3 class="col-span-12 font-semibold">Ordered:</h3>
+                        @foreach ($bentos as $k => $bento)
+                        <div class="stat text-xs shadow rounded-box bg-base-200 col-span-6 md:col-span-4">
+                            <div class="stat-figure text-info">
+                                <div class="avatar">
+                                    <div class="w-16 h-16 p-1 mask mask-squircle bg-base-100">
+                                        <img class="mask mask-squircle" src="{{ $bento->product->image_file ? $bento->product->image_file : 'https://www.kenyons.com/wp-content/uploads/2017/04/default-image-620x600.jpg' }}">
+                                    </div>
+                                </div>
+                            </div>
+                            <div>{{ $bento->product->title }}</div>
                         </div>
 
 
-
-                        {{-- <div class="bg-base-200 shadow-lg mr-3 p-3"> 
-                   <p>{{$bento->product->title}}</p>
-                        <p>{{$bento->remark}}</p>
-                    </div> --}}
-                    @endforeach
+                        @endforeach
+                    </div>
                 </div>
-                @endif
             </div>
-        </div>
-        @endauth
 
-        <h2 class="col-span-12">{{\App\Models\Store::find($location)->title}}</h2>
+            @endif
+            @endauth
 
-        @if(count($products)>0)
-        @foreach ($products as $product)
-        <div wire:loading.remove wire:loading.target="changeBrand" class="col-span-6 md:col-span-4 lg:col-span-4 xl:col-span-3 md:flex pb-8 w-full indicator">
-            <div class="card bordered shadow-lg w-full rounded-box bg-base-200">
-                <figure class="px-4 pt-4">
-                    <img src="{{$product->image_file? $product->image_file : 'https://www.kenyons.com/wp-content/uploads/2017/04/default-image-620x600.jpg'}}" class="h-40 object-cover object-center rounded-box bg-cover bg-center">
-                </figure>
-                <div class="card-body h-30 px-5 pt-4 pb-0">
-                    <span class="menu-title text-opacity-50 text-xs text-gray-800">
-                        @php
-                        try {
-                        $product->brand->name;
-                        } catch (\Throwable $th) {
-                        $product->id;
-                        }
-                        @endphp
-                    </span>
-                    <h4 class="font-bold text-xs lg:text-md">
-                        {{$product->title}}
-                    </h4>
-                    <p class="hidden lg:block text-xs mt-2">{{ mb_strimwidth($product->description, 0, 50, "...") }}</p>
-                        
-                </div>
 
-                <div class="flex space-x-4 text-sm w-full px-6 pt-3 pb-6">
+            <h3 class="col-span-12 font-semibold">Menu:</h3>
+            @if(count($products)>0)
+            @foreach ($products as $product)
+            <div wire:loading.remove wire:loading.target="changeBrand" class="col-span-6 md:col-span-4 lg:col-span-4 xl:col-span-3 md:flex pb-8 w-full indicator">
+                <div class="card bordered shadow-lg w-full rounded-box bg-base-200">
+                    <figure class="px-4 pt-4">
+                        <img src="{{$product->image_file? $product->image_file : 'https://www.kenyons.com/wp-content/uploads/2017/04/default-image-620x600.jpg'}}" class="h-40 object-cover object-center rounded-box bg-cover bg-center">
+                    </figure>
+                    <div class="card-body h-30 px-5 pt-4 pb-0">
+                        <span class="menu-title text-opacity-50 text-xs text-gray-800">
+                            @php
+                            try {
+                            $product->brand->name;
+                            } catch (\Throwable $th) {
+                            $product->id;
+                            }
+                            $stock = $product->stock($product->pivot->id,$location);
+                            @endphp
+                        </span>
+                        <h4 class="font-bold text-xs lg:text-md">
+                            {{$product->title}}
+                        </h4>
+                        <p class="hidden lg:block text-xs mt-2">{{ mb_strimwidth($product->description, 0, 50, "...") }}</p>
+
+                    </div>
+
+                    <div class="flex space-x-4 text-sm w-full px-6 pt-3 pb-6">
                         <a href="/" aria-label="Likes" class="flex items-start text-gray-800 transition-colors duration-200 hover:text-deep-purple-accent-700 group">
                             <div class="mr-2">
-                            <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                width="24"
-                                height="24"
-                                viewBox="0 0 24 24"
-                                stroke="currentColor"
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
-                                stroke-width="2"
-                                class="w-4 h-4 text-gray-600 transition-colors duration-200 group-hover:text-deep-purple-accent-700"
-                            >
-                                <polyline points="6 23 1 23 1 12 6 12" fill="none" stroke-miterlimit="10"></polyline>
-                                <path d="M6,12,9,1H9a3,3,0,0,1,3,3v6h7.5a3,3,0,0,1,2.965,3.456l-1.077,7A3,3,0,0,1,18.426,23H6Z" fill="none" stroke="currentColor" stroke-miterlimit="10"></path>
-                            </svg>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-4 h-4 text-gray-600 transition-colors duration-200 group-hover:text-deep-purple-accent-700">
+                                    <polyline points="6 23 1 23 1 12 6 12" fill="none" stroke-miterlimit="10"></polyline>
+                                    <path d="M6,12,9,1H9a3,3,0,0,1,3,3v6h7.5a3,3,0,0,1,2.965,3.456l-1.077,7A3,3,0,0,1,18.426,23H6Z" fill="none" stroke="currentColor" stroke-miterlimit="10"></path>
+                                </svg>
                             </div>
                             <p class="font-semibold">{{$product->sold_count}}</p>
                         </a>
                         <a href="/" aria-label="Comments" class="flex items-start text-gray-800 transition-colors duration-200 hover:text-deep-purple-accent-700 group">
                             <div class="mr-2">
-                            <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                width="24"
-                                height="24"
-                                viewBox="0 0 24 24"
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
-                                stroke-width="2"
-                                stroke="currentColor"
-                                class="w-4 h-4 text-gray-600 transition-colors duration-200 group-hover:text-deep-purple-accent-700"
-                            >
-                                <polyline points="23 5 23 18 19 18 19 22 13 18 12 18" fill="none" stroke-miterlimit="10"></polyline>
-                                <polygon points="19 2 1 2 1 14 5 14 5 19 12 14 19 14 19 2" fill="none" stroke="currentColor" stroke-miterlimit="10"></polygon>
-                            </svg>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" stroke="currentColor" class="w-4 h-4 text-gray-600 transition-colors duration-200 group-hover:text-deep-purple-accent-700">
+                                    <polyline points="23 5 23 18 19 18 19 22 13 18 12 18" fill="none" stroke-miterlimit="10"></polyline>
+                                    <polygon points="19 2 1 2 1 14 5 14 5 19 12 14 19 14 19 2" fill="none" stroke="currentColor" stroke-miterlimit="10"></polygon>
+                                </svg>
                             </div>
-                            <p class="font-semibold">{{$product->pivot->stock}}</p>
+                            <p class="font-semibold">{{$stock}}</p>
                         </a>
                     </div>
-                <div class="pb-4 px-5 w-full mt-3 justify-between">
-                    <h3 class="text-md font-bold mb-3">
-                        ${{$product->price}}
-                    </h3>
-                    @auth
-                    <button wire:click="addToCart({{$product->id}},'{{$menu_date}}')" class="btn btn-primary btn-block w-full btn-sm text-sm m-0 rounded-lg">{{__('Add To Cart')}}</button>
-                    @else
-                    <a href="{{route('login')}}" class="btn btn-primary btn-block btn-sm text-sm m-0 rounded-lg">{{__('Add To Cart')}}</a>
-                    @endauth
+                    <div class="pb-4 px-5 w-full mt-3 justify-between">
+                        <h3 class="text-md font-bold mb-3">
+                            ${{$product->price}}
+                        </h3>
+                        @auth
+
+                        @if($stock <= 0)
+                        <button disabled class="btn btn-primary btn-block btn-sm text-sm m-0 rounded-lg">{{__('Sold Out')}}</button>
+                        @else
+                        <button wire:click="addToCart({{$product->id}},'{{$menu_date}}')" class="btn btn-primary btn-block btn-sm text-sm m-0 rounded-lg">{{__('Add To Cart')}}</button>
+                        @endif
+                        
+                        @else
+                        <a href="{{route('login')}}" class="btn btn-primary btn-block btn-sm text-sm m-0 rounded-lg">{{__('Add To Cart')}}</a>
+                        @endauth
+                    </div>
                 </div>
-            </div>
-            <!-- ordered -->
-            @auth
+                <!-- ordered -->
+                @auth
                 @php
                 $ordered = \App\Models\Order\OrderItem::where([
-                        'user_id'=>auth()->user()->id,
-                        'product_id'=>$product->id,
-                        'status'=>'paid',
-                        'menu_date'=>$menu_date,
-                    ])->exists();
+                'user_id'=>auth()->user()->id,
+                'product_id'=>$product->id,
+                'status'=>'paid',
+                'menu_date'=>$menu_date,
+                ])->exists();
                 @endphp
                 @if($ordered)
                 <div class="indicator-item badge badge-info uppercase text-xs py-4" style="right:20px!important">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M5 13l4 4L19 7" />
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M5 13l4 4L19 7" />
                     </svg>
                 </div>
                 @endif
-            @endauth
-        </div>
-        @endforeach
-        @endif
-        @livewire('add-cart')
-       {{-- @if ($products)
+                @endauth
+            </div>
+            @endforeach
+            @endif
+            @livewire('add-cart')
+            {{-- @if ($products)
         <div class="col-span-12 px-4 py-8">
             {{ $products->links() }}
         </div>

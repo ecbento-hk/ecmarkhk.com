@@ -154,6 +154,104 @@ class Product extends Model
         return $this->getTranslation('title', 'zh-hk');
         // return route('images.product', ['slug' => $this->slug]);
     }
+    public function stock($menuId,$location)
+    {
+        $stock = 0;
+        $locationStock = MenuLocationStock::where([
+                            'menu_product_id' => $menuId,
+                            'product_id'     => $this->id,
+                            'store_id'       => $location,
+                            'active'         => 1
+                        ])->first();
+        if($locationStock){
+            $menuDate = $locationStock->menu->menu_date . ' - ' .$locationStock->menu->period->preorder_end;
+            if($menuDate > date('Y-m-d H:i:s')){
+                $stock = $locationStock->menuProduct->stock;
+            } else {
+                $stock = $locationStock->stock;
+            }
+        }
+        return $stock;
+    }
+    // {
+    //     $locationStock = MenuLocationStock::where([
+    //         'menu_product_id' => $this->pivot->id,
+    //         'product_id'     => $this->id,
+    //         'store_id'       => $location,
+    //         'active'         => 1
+    //     ])->first();
+    //     if ($locationStock) {
+    //         //REMARK: < 10AM preorder + buffer
+    //         if ($request->date . ' ' . $period >= date('Y-m-d H:i:s')) {
+    //             // $locationStock = $this->pivot->preset_buffer - $locationStock->sold;
+    //             $locationStock = $this->pivot->preset_buffer - $this->pivot->real_stock;
+    //             \Log::info($this->getTranslation('title', $lang) . ' - TEsting Stock');
+    //             \Log::info($this->pivot->preset_buffer);
+    //             \Log::info($this->pivot->real_stock);
+    //             if ($locationStock < 0) {
+    //                 $locationStock = 0;
+    //             }
+    //         } else {
+    //             $v1buffer = false;
+    //             // $v1buffer = check_buffer_v1($location, $this->id);
+    //             if (!$v1buffer) {
+    //                 $locationStock = $locationStock->real_stock;
+    //                 if ($request->period == 3) {
+    //                     if (date('H:i:s') >= '17:30:00') {
+    //                         $locationStock = 0;
+    //                     }
+    //                 } else {
+    //                     if (date('H:i:s') >= '14:30:00') {
+    //                         if ($location < 50) {
+    //                             if ($request->period < 7) {
+    //                                 $locationStock = 0;
+    //                             }
+    //                             // $locationStock = 0;
+    //                         } else {
+    //                             if ($location < 55) {
+    //                             if ($request->period < 7) {
+    //                                 $locationStock = 0;
+    //                             }
+    //                             }
+    //                         }
+    //                         // $locationStock = 0;
+    //                     }
+    //                     if (date('H:i:s') >= $end_period) {
+    //                         if ($location <= 56) {
+    //                             if ($request->period !== 15) {
+    //                                 $locationStock = 0;
+    //                             }
+    //                         }
+    //                     }
+    //                 }
+    //             } else {
+    //                 $cart_stock = CartItem::where([
+    //                     'store_id' => $location,
+    //                     'product_id' =>  $this->id,
+    //                     'menu_date' => $request->date
+    //                 ])->get()->sum('quantity');
+    //                 $cart_stock = 0;
+    //                 $v1buffer = 0;
+
+    //                 // $locationStock = $v1buffer - $cart_stock;
+    //                 $locationStock = $locationStock->real_stock;
+
+    //                 if (date('H:i:s') >= '14:30:00') {
+    //                     if ($location < 50) {
+    //                         if ($request->period < 7) {
+    //                             $locationStock = 0;
+    //                         }
+    //                     }
+    //                 }
+                    
+                   
+
+    //             }
+    //         }
+    //     } else {
+    //         $locationStock = 0;
+    //     }
+    // }
 
     public function getPreferencesAttribute($value)
     {

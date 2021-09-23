@@ -3,15 +3,11 @@
 namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
-use App\Http\Resources\TagResource;
-use App\MenuLocationStock;
+use App\Models\CartItem;
+use App\Models\Period;
+use App\Models\Product\MenuLocationStock;
+use Illuminate\Support\Facades\Auth;
 use JWTAuth;
-use App\Http\Api\V1\Model\Period;
-use Illuminate\Support\Facades\DB;
-use Intervention\Image\ImageManagerStatic as Image;
-
-use App\Http\Api\V1\Model\CartItem;
-use Illuminate\Support\Facades\Storage;
 
 class ProductResource extends JsonResource
 {
@@ -34,7 +30,7 @@ class ProductResource extends JsonResource
             $lang = 'en';
         }
 
-        // dd($this);
+        dd($lang);
         $locationPrice = $this->price ? $this->price : 0;
         $locationStock = 0;
         $totalStock = 0;
@@ -76,8 +72,8 @@ class ProductResource extends JsonResource
                         $locationStock = 0;
                     }
                 } else {
-
-                    $v1buffer = check_buffer_v1($location, $this->id);
+                    $v1buffer = false;
+                    // $v1buffer = check_buffer_v1($location, $this->id);
                     if (!$v1buffer) {
                         $locationStock = $locationStock->real_stock;
                         if ($request->period == 3) {
@@ -267,10 +263,10 @@ class ProductResource extends JsonResource
         ];
         $data['user_cart'] = 0;
 
-        if ($token = JWTAuth::getToken()) {
-            $user = JWTAuth::parseToken()->authenticate();
+        if (Auth::check()) {
+            $user = auth()->user();
             // dd($user);
-            if ($user) {
+            if($user) {
                 $userCart = $user->cartItem()->where('menu_product_id', $this->pivot->id)->first();
                 if ($userCart) {
                     $data['user_cart'] = $userCart->quantity;
