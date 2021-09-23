@@ -1,0 +1,363 @@
+
+/*Header*/
+
+/* Context*/
+
+.mainContent{
+	position: relative;
+}
+
+.mainBg{
+	position:absolute;
+	z-index:-1;
+	width:100%;
+}
+
+
+.bodyTitle{
+	font-size:46px;
+	color:#ffffff;
+}
+
+
+
+.bodyContext{
+	min-height:500px;
+	background-color:#f4f4f4;
+	padding:50px;
+}
+
+.bodyContextMain{
+	background-color:#f4f4f4;
+	/*padding:15px;*/
+	padding-bottom: 50px;
+}
+
+.bodyContextSides{
+	
+}
+
+.bodyContextMain table{
+	width:100%;
+}
+
+.bodyContextMain ol{
+	padding-left:20px;
+	padding-bottom:10px;
+}
+
+.bodyContextMain .additional{
+	color:#b10f1f;
+}
+
+.mainTitle{
+	font-size:24px;
+	font-weight:bold;
+	padding-bottom:20px;
+}
+
+.mainTitle.red{
+	color:#b10f1f;
+}
+
+.mainImage{
+	width:100%
+}
+
+/**custom tab css**/
+
+.ui-widget.ui-widget-content{
+	border:0px;
+	background-color: transparent;
+}
+
+.ui-widget-content{
+	border:0px;
+}
+
+.ui-tabs .ui-tabs-nav{
+	padding:0px;
+	border: 0px;
+	border-bottom: 7px solid #b10f1f;
+	
+	display:flex;
+}
+
+.ui-tabs .ui-tabs-nav li{
+	margin:0px;
+	border:0px;
+}
+
+.ui-tabs .ui-tabs-nav .ui-tabs-anchor{
+	padding:20px;
+	text-transform:uppercase;
+	color:#ffffff;
+	outline: 0;
+	white-space: pre-line;
+}
+
+.ui-tabs .ui-tabs-panel{
+	padding: 0px 0px 20px 0px;
+}
+
+.ui-corner-all, .ui-corner-bottom, .ui-corner-right, .ui-corner-br{
+	border-bottom-right-radius: 0px;
+}
+
+.ui-corner-all, .ui-corner-bottom, .ui-corner-left, .ui-corner-bl{
+	border-bottom-left-radius: 0px;
+}
+
+.ui-corner-all, .ui-corner-top, .ui-corner-right, .ui-corner-tr{
+	border-top-right-radius: 0px;
+}
+
+.ui-corner-all, .ui-corner-top, .ui-corner-left, .ui-corner-tl{
+	border-top-left-radius: 0px;
+}
+
+.ui-tabs .ui-tabs-nav li.ui-tabs-active{
+	padding:0px;
+}
+
+.ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default, .ui-button, html .ui-button.ui-state-disabled:hover, html .ui-button.ui-state-disabled:active{
+	background-color: #151515;
+	font-weight:bold;
+}
+
+.ui-state-active, .ui-widget-content .ui-state-active, .ui-widget-header .ui-state-active, a.ui-button:active, .ui-button:active, .ui-button.ui-state-active:hover{
+	background-color: #b10f1f;
+	font-weight:bold;
+}
+
+
+
+
+.programme_tabs{
+	
+}
+
+.programme_tabs ul{
+	width:100%;
+}
+
+.programme_tabs ul li{
+	width:50%;
+}
+
+.programme_tabs ul li a{
+	font-size:16px;
+	text-align:center;
+	width:100%;
+}
+
+.programme_tabs > div{
+	
+	
+}
+
+.tab_intro{
+	font-weight:bold;
+	padding: 10px 0px;
+}
+
+.programmeList{
+	
+}
+
+.programmeTitle{
+	font-size:24px;
+	font-weight:bold;
+	color: #b10f1f;
+	padding-bottom:20px;
+	padding-top:30px;
+	text-transform: uppercase;
+}
+
+.programmeItem{
+	width:100%;
+	display:table;
+	background-color:#ffffff;
+	margin-bottom: 15px;
+	min-height:180px;
+}
+
+.programmeItemImg{
+	display:table-cell;
+	width:187px;
+}
+
+.programmeItemImg img{
+	width:100%;
+}
+
+.programmeItemDetails{
+	display:table-cell;
+	padding:10px 15px 15px 15px;
+	vertical-align: top;
+	position: relative;
+}
+
+.programmeItemTitle{
+	font-size:18px;
+	font-weight:bold;
+	color: #b10f1f;
+}
+
+.programmeItemCampus{
+	color:#666666;
+	font-size:14px;
+}
+
+.programmeItemCampus span{
+	padding-right:10px;
+}
+
+.programmeItemCampusSymbol{
+	padding-left:10px;
+	padding-right:10px;
+}
+
+.programmeItemSubTitle{
+	font-size:18px;
+	font-weight:bold;
+	padding-top:5px;
+	padding-bottom:5px;
+}
+
+.programmeItemContent{
+	font-size:14px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+    line-height: 19px;
+    max-height: 57px;
+}
+
+.programmeItemButton{
+	position: absolute;
+    bottom: 10px;
+}
+
+.programmeItemButton a{
+	padding:10px 30px;
+	text-transform:uppercase;
+	font-weight:bold;
+	background-color:#000000;
+	color:#ffffff;
+	display:inline-block;
+}
+
+.additionalAddress{
+	
+}
+
+.additionalAddressList{
+	float:left;
+	width:250px;
+	padding-right:20px;
+}
+
+.additionalAddressTitle{
+	font-weight:bold;
+	border-bottom:1px solid #AAAAAA;
+	padding-bottom: 10px;
+}
+
+.additionalAddressContent{
+	padding-top: 5px;
+	padding-bottom: 20px;
+}
+
+.additionalAddressContent td{
+	min-width:50px;
+}
+
+
+/*IPAD*/
+
+@media only screen and (min-width: 992px) {
+
+}
+
+
+
+
+
+
+@media only screen and (max-width: 992px) {
+
+	
+	
+}
+
+
+@media only screen and (min-width: 768px) {
+	
+	
+}
+
+
+
+
+@media only screen and (max-width: 768px) {
+	
+}
+
+
+
+
+/* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
+@media screen and (max-height: 450px) {
+    
+}
+
+@media screen and (max-width: 480px) {
+	
+	.programmeItem{
+		position:relative;
+	}
+	
+	.programmeItemImg{
+		/*display:none;*/
+		position: absolute;
+		bottom: 135px;
+		padding-left: 15px;
+		padding-right: 15px;
+		width: 100%;
+	}
+	
+	.programmeItemImg img{
+		width:100%;
+	}
+	
+    .programmeItemDetails{
+		padding-bottom: 60px;
+	}
+	
+	.programmeItemContent{
+		margin-top:335px;
+	}
+
+	
+}
+
+
+@media only screen and (max-width: 768px){
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+

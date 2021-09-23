@@ -105,6 +105,11 @@ class User extends Authenticatable implements Wallet
     {
         return $this->hasMany(OrderItem::class);
     }
+    
+    public function addresses(){
+        return $this->hasMany(UserAddress::class);
+    }
+    
 
     public function referral(){
         return $this->hasMany(User::class,'referrer');

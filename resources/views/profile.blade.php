@@ -7,7 +7,7 @@
             <div class="left-side col-span-12 lg:col-span-3">
                 @livewire('user-card')
 
-                <!-- @livewire('user-notify') -->
+                {{-- @livewire('user-notify') --}}
 
                 @livewire('order-calender')
 

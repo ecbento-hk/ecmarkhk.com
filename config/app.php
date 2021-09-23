@@ -16,6 +16,7 @@ return [
     'name' => env('APP_NAME', 'Laravel'),
     'company' => env('COMPANY_NAME', 'ECBento Hong Kong Ltd'),
     'merchant' => env('MERCHANT', '34'),
+    'prefix' => env('APP_PREFIX', 'EC-BENTO-'),
     'payment_test' => env('PAYMENT_TEST', true),
     'payment_stripe_key' => env('PAYMENT_STRIPE_KEY', 'sk_live_DOnG2rKpmX3aipEdyCCWuaKC00gjeG2yB9'),
     'payment_stripe_test_key' => env('PAYMENT_STRIPE_TEST_KEY', 'sk_test_UE3xmTh2owaSc94Adn91xJOx00ES1c7uqG'),

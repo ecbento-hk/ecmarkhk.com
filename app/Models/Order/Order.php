@@ -3,6 +3,7 @@
 namespace App\Models\Order;
 
 use App\Classes\Offer;
+use App\Classes\SMS;
 use App\Mail\OrderCreated;
 use App\Models\Message;
 use App\Models\User;
@@ -70,13 +71,15 @@ class Order extends Model
                     $user = User::find($model->user_id);
                     Mail::to($user)->send(new OrderCreated($model));
                 }
-                if ($model->payment_status == 'paid') {
-                    $sms_data['phone_no'] = $model->user->phone_no;
-                    $sms_data['user_define_no'] = $model->user->phone_no;
-                    $content = Message::find(1)->content;
+                // if ($model->payment_status == 'paid') {
+                if($model->getOriginal('payment_status')!=='paid' && $model->payment_status == 'paid'){
+                    $user = $model->user;
+                    $content = Message::find(1)->getTranslation('content',$user->language);
                     $content = str_replace('[code]', $model->extraction_code, $content);
+                    $sms_data['phone_no'] = $user->phone_no;
+                    $sms_data['user_define_no'] = $user->phone_no;
                     $sms_data['message'] = $content;
-                    // send_sms($sms_data);
+                    SMS::send($content,$sms_data);
                 }
             } catch (\Throwable $th) {
                 \Log::debug('send sms error');

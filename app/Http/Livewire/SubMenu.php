@@ -11,20 +11,30 @@ class SubMenu extends Component
 {
     public $menu_quantity = 0;
     public $menu_date = 0;
-    public $period = [];
+    public $location = 54;
+    public $period = [2];
     
+    protected $listeners = [
+        'updateLocation' => 'locationUpdate'
+    ];
+
     public function mount($type='normal',$filter = null)
     {
         $this->menu_date = date('Y-m-d');
         if($filter!==null){
             $filter = base64_decode($filter);
-            $filter = unserialize($filter);
-            if(isset($filter['tag'])){
-                $filter = $filter['tag'];
+            $menuFilter = unserialize($filter);
+            if(isset($menuFilter['tag'])){
+                $filter = $menuFilter['tag'];
             }
-            if(isset($filter['menu_date'])){
-                $filter = $filter['menu_date'];
+            if(isset($menuFilter['menu_date'])){
+                $filter = $menuFilter['menu_date'];
                 $this->menu_date = $filter;
+            }
+            if(isset($menuFilter['location'])){
+                // dd($filter);
+                $filter = $menuFilter['location'];
+                $this->location = $filter;
             }
         }
        
@@ -33,16 +43,21 @@ class SubMenu extends Component
        
     }
 
+    public function locationUpdate($locationId){
+        $this->location = $locationId;
+        $this->emit('$refresh');
+    }
 
     public function render()
     {
         $period = $this->period;
+        // dd($this->period);
         $this->emitTo('product-list','startDate',$period[0]);
         // $startDate = new \DateTime('NOW');
         // $endDate = (new \DateTime('NOW'))->modify('+7 day');
         // $interval = \DateInterval::createFromDateString('1 day');
         // $period = new \DatePeriod($startDate, $interval, $endDate);
-        // dd($period);
+        // dd($this->location);
 
         return view('livewire.sub-menu',['items'=>$period]);
     }

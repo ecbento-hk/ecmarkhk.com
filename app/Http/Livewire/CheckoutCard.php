@@ -2,9 +2,11 @@
 
 namespace App\Http\Livewire;
 
+use App\Classes\SMS;
 use App\Http\Resources\CartResource;
 use App\Models\CartItem;
 use App\Models\Coupon;
+use App\Models\Message;
 use App\Models\Order\Order;
 use App\Models\Payment;
 use App\Models\Period;
@@ -319,7 +321,7 @@ class CheckoutCard extends Component
                         'amount' => $amount, 'currency' => 'HKD',
                         'customerReference' => $customerReference,
                         'receipt_email' => auth()->user()->email,
-                        'description' => 'SCH-DSC-'.$order->no,
+                        'description' => config('app.prefix').$order->no,
                         'metadata' => auth()->user()->cartItem->map(function($product){
                             return $product->title;
                         })
@@ -339,6 +341,7 @@ class CheckoutCard extends Component
                         $this->checkingOut = false;
                         session()->flash('message', 'Order successfully created.');
                         // $this->emit('$refresh');
+                     
                         return redirect('orders');
                     } else {
                         // payment failed: display message to customer

@@ -1,0 +1,639 @@
+
+/*Header*/
+
+/* Context*/
+
+.mainContent{
+	position: relative;
+}
+
+.mainBg{
+	position:absolute;
+	z-index:-1;
+	width:100%;
+}
+
+
+.bodyTitle{
+	font-size:46px;
+	color:#ffffff;
+}
+
+
+
+.bodyContext{
+	min-height:500px;
+	background-color:#f4f4f4;
+	padding:30px;
+	overflow:auto;
+	padding-top: 15px;
+}
+
+.bodyContextMain{
+	background-color:#f4f4f4;
+	/*padding:15px;*/
+	padding-bottom: 50px;
+}
+
+.bodyContextSides{
+	
+}
+
+.bodyContextMain table{
+	width:100%;
+}
+
+.bodyContextMain ol{
+	padding-left:20px;
+	padding-bottom:10px;
+}
+
+.bodyContextMain .additional{
+	color:#b10f1f;
+}
+
+.mainTitle{
+	font-size:24px;
+	font-weight:bold;
+	padding-bottom:20px;
+	padding-top:35px;
+}
+
+.mainTitle.red{
+	color:#b10f1f;
+}
+
+.mainImage{
+	width:100%
+}
+
+/**custom tab css**/
+
+.ui-widget.ui-widget-content{
+	border:0px;
+	background-color: transparent;
+}
+
+.ui-widget-content{
+	border:0px;
+}
+
+.ui-tabs .ui-tabs-nav{
+	padding:0px;
+	border: 0px;
+	border-bottom: 0px solid #b10f1f;
+}
+
+.ui-tabs .ui-tabs-nav li{
+	margin:0px;
+	border:0px;
+	font-weight:bold;
+}
+
+.ui-tabs .ui-tabs-nav .ui-tabs-anchor{
+	padding:20px;
+	text-transform:uppercase;
+	color:#ffffff;
+}
+
+.ui-tabs .ui-tabs-panel{
+	padding: 0px 0px 20px 0px;
+}
+
+.ui-corner-all, .ui-corner-bottom, .ui-corner-right, .ui-corner-br{
+	border-bottom-right-radius: 0px;
+}
+
+.ui-corner-all, .ui-corner-bottom, .ui-corner-left, .ui-corner-bl{
+	border-bottom-left-radius: 0px;
+}
+
+.ui-corner-all, .ui-corner-top, .ui-corner-right, .ui-corner-tr{
+	border-top-right-radius: 0px;
+}
+
+.ui-corner-all, .ui-corner-top, .ui-corner-left, .ui-corner-tl{
+	border-top-left-radius: 0px;
+}
+
+.ui-tabs .ui-tabs-nav li.ui-tabs-active{
+	padding:0px;
+}
+
+.ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default, .ui-button, html .ui-button.ui-state-disabled:hover, html .ui-button.ui-state-disabled:active{
+	background-color: #151515;
+	
+}
+
+.ui-state-active, .ui-widget-content .ui-state-active, .ui-widget-header .ui-state-active, a.ui-button:active, .ui-button:active, .ui-button.ui-state-active:hover{
+	background-color: #b10f1f;
+	font-weight:bold;
+}
+
+
+
+
+.campus_tabs{
+	width:100%;
+}
+
+.campus_tabs ul{
+	width:100%;
+}
+
+.campus_tabs ul li{
+	width:25%;
+}
+
+.campus_tabs ul li a{
+	font-size:16px;
+	text-align:center;
+	width:100%;
+}
+
+.campus_tabs > div{
+	
+	
+}
+
+.tab_intro{
+	font-weight:bold;
+}
+
+.sideSubMenu{
+	
+}
+
+.sideSubMenuTitle{
+	font-size:14px;
+	font-weight:bold;
+	text-transform:uppercase;
+	color:#000000;
+	padding:15px;
+	border-bottom: 1px solid #d2d2d2;
+}
+
+.sideSubMenuContent{
+	padding:15px;
+	padding-bottom: 30px;
+}
+
+.sideSubMenuContent ul{
+	padding:0px;
+	margin:0px;
+	list-style-type: none;
+}
+
+.sideSubMenuContent ul li{
+	padding:0px;
+	margin:0px;
+}
+
+.sideSubMenuContent ul li a{
+	color:#000000;
+	padding:10px;
+	display:inline-block;
+	padding-left:30px;
+	background: url('../images/btnIconGray.png') no-repeat left center;
+}
+
+.sideSubMenuContent ul li a.active{
+	background: url('../images/btnIcon.png') no-repeat left center;
+}
+
+
+.campusList{
+	padding:5px 0px;
+	box-sizing: border-box;
+	display: flex;
+	flex-wrap: wrap;
+}
+
+.campusItem{
+	width:33.3%;
+	box-sizing: border-box;
+	padding:3px;
+}
+
+.campusItemImg{
+}
+
+.campusItemImg img{
+	width:100%;
+}
+
+.campusItemContent{
+	background-color:#ffffff;
+	padding:15px;
+}
+
+.campusItemTitle{
+	font-size:24px;
+	font-weight:bold;
+	padding-bottom:10px;
+}
+
+.campusItemDetails{
+	
+}
+
+.campusItemDetails a{
+	
+}
+
+
+.alumniSharingList{
+	
+}
+
+.alumniSharingListItem{
+	width:100%;
+	padding-bottom:20px;
+}
+
+.alumniSharingListItem table{
+	width:100%;
+}
+
+.alumniSharingListItemDetails{
+	width:50%;
+	background-color:#e1dfe0;
+	vertical-align:top;
+}
+
+.alumniSharingListItemContent{
+	width:50%;
+	vertical-align:top;
+	background-color:#a9a7a8;
+	padding:30px;
+}
+
+.alumniSharingListItemImg{
+	
+}
+
+.alumniSharingListItemImg img{
+	width:100%;
+}
+
+.alumniSharingListItemIntro{
+	padding: 10px;
+    text-align: right;
+	
+}
+
+.alumniSharingListItemIntroName{
+	font-weight:bold;
+}
+
+.alumniSharingListItemIntroTitle{
+	font-size:12px;
+	font-style: italic;
+}
+
+.alumniSharingListItemContentProgramme{
+	padding:10px 10px;
+	background-color:#f6f6f6;
+	font-weight:bold;
+	margin-bottom:5px;
+	line-height:16px;
+	min-height:50px;
+	display: flex;
+    /*justify-content: center;*/ /* align horizontal */
+    align-items: center; /* align vertical */
+}
+
+.alumniSharingListItemContentProgramme span{
+	font-weight:normal;
+	font-size:14px;
+	padding-top:5px;
+	display:inline-block;
+}
+
+.alumniSharingListItemContentProgramme.type1{
+	background-color:#e4e4e4;
+}
+.alumniSharingListItemContentProgramme.type2{
+	background-color:#c7c9c8;
+}
+.alumniSharingListItemContentProgramme.type3{
+	background-color:#ada9a6;
+}
+
+
+.alumniSharingListItemContent.type1{
+	background-color:#777777;
+}
+.alumniSharingListItemContent.type1 .alumniSharingListItemContentSharing{
+	color:#ffffff;
+}
+.alumniSharingListItemContent.type2{
+	background-color:#9f9f9f;
+}
+.alumniSharingListItemContent.type3{
+	background-color:#e2e0e1;
+}
+
+.alumniSharingListItemDetails.type1{
+	background-color:#b4b2b3;
+}
+
+
+.alumniSharingListItemContentSharing{
+	padding:10px;
+}
+
+
+.outstandingAlumniList{
+	display: flex; 
+  flex-flow: row wrap; 
+}
+
+.outstandingAlumniListItem{
+	display: flex; 
+	width: 50%;
+	flex-wrap: wrap;
+    margin-bottom: 20px;
+}
+
+.outstandingAlumniListItemContext{
+	background-color:#a90e1e;
+}
+
+.outstandingAlumniListItem:nth-child(odd){
+	padding-right:10px;
+}
+.outstandingAlumniListItem:nth-child(even){
+	padding-left:10px;
+}
+
+.outstandingAlumniListItemImg{
+	
+}
+
+.outstandingAlumniListItemImg img{
+	width:100%;
+}
+
+.outstandingAlumniListItemImgBottomText{
+	display:none;
+}
+
+.outstandingAlumniListItemContent{
+	background-color:#a90e1e;
+	color:#ffffff;
+	padding:20px;
+}
+
+.outstandingAlumniListItemContentName{
+	font-weight:bold;
+	font-size:20px;
+	padding-bottom:5px;
+}
+
+.outstandingAlumniListItemContentTitle{
+	font-style: italic;
+	padding-bottom:20px;
+}
+
+.outstandingAlumniListItemContentProgramme{
+	font-weight:bold;
+	font-size:20px;
+	padding-bottom:20px;
+}
+
+.outstandingAlumniListItemContentProgramme span{
+	font-weight:normal;
+	font-size:14px;
+	display:block;
+}
+
+.outstandingAlumniListItemContentDetails{
+	font-size:20px;
+}
+
+
+.businessComment{
+	margin-top:50px;
+	width:100%;
+}
+.businessCommentItem{
+	display:flex;
+	margin-bottom: 35px;
+	
+}
+
+.businessCommentItem.reverse{
+	flex-direction: row-reverse;
+	
+}
+
+.businessCommentItem.reverse .businessCommentItemInfo{
+	margin-left:20px;
+}
+
+.businessCommentItem.reverse .businessCommentItemDetails{
+	background-color: #fbcdcd;
+}
+
+.owl-item{
+       transform: scale(0.5, 0.5) !important; 
+ }
+
+.owl-item.active.center {
+    transform: scale(1, 1) !important;
+ }
+ 
+ .owl-item.active.center img{
+ border-radius: 200px;
+    border: 5px solid #ffffff;
+ }
+ 
+ .businessCommentOuter{
+	 position:relative;
+ }
+ 
+.businessCommentItemInfo{
+	width:100%;
+	text-align:center;
+}
+
+.businessComment .slick-slide img{
+	display:inline-block;
+}
+
+.businessCommentDetails{
+	margin-top:-30px;
+	margin-bottom:50px;
+	padding-left:50px;
+	padding-right:50px;
+}
+
+.businessCommentDetails .businessCommentItemDetailsComment, .businessCommentDetails .businessCommentItemDetailsProgram, .businessCommentDetails .businessCommentItemDetailsName{
+	line-height:30px;
+}
+
+.businessCommentItemDetails{
+	width: 100%;
+    /*border-radius: 30px;
+    background-color: #ffffff;
+    padding: 20px 20px 20px 50px;
+    margin-left: 30px;*/
+	position:relative;
+	display:none;
+	text-align:center;
+}
+/*.businessCommentItemDetails::after{
+	content: "";
+    background-image: url(../images/ds_a_bg.png);
+    background-repeat: no-repeat;
+    display: block;
+    width: 47px;
+    height: 40px;
+    position: absolute;
+    left: -15px;
+    top: -15px;
+}*/
+
+.businessCommentItemDetailsName{
+	
+	color: #af0f20;
+	font-size: 20px;
+	font-weight: bold;
+}
+.businessCommentItemDetailsProgram{
+
+	color: #af0f20;
+    display:block;
+}
+
+.businessCommentItemDetailsProgram::before{
+	/*content:"|";
+    padding-left: 10px;
+	padding-right: 10px;*/
+}
+
+.alumniSharingSlide {
+	background-color:#ffffff;
+	padding: 30px;
+	
+}
+
+.alumniSharingSlideTitle{
+	font-size: 24px;
+    font-weight: bold;
+    padding-bottom: 20px;
+    
+}
+
+.alumniSharingSlide .bx-wrapper{
+	box-shadow: none;
+}
+
+.alumniSharingSlide .bx-prev{
+	left: -30px !important;
+}
+
+.alumniSharingSlide .bx-next{
+	right: -30px !important;
+}
+
+.alumniSharingSlideItem{
+	text-align:center;
+}
+
+.alumniSharingSlideItemInfo{
+	text-align:center;
+}
+
+.alumniSharingSlide .bx-wrapper img{
+	display: inline-block;
+}
+
+.alumniSharingSlideItemDetailsName{
+	color: #af0f20;
+	font-size: 20px;
+	font-weight: bold;
+	display:block;
+	padding-top:15px;
+	padding-bottom:15px;
+}
+
+.alumniSharingSlideItemDetailsProgram{
+	display:block;
+	line-height:25px;
+}
+
+.alumniSharingSlideItemDetailsWork{
+	color: #af0f20;
+	display:block;
+	line-height:25px;
+}
+
+/*IPAD*/
+
+@media only screen and (min-width: 992px) {
+
+}
+
+
+
+
+
+
+@media only screen and (max-width: 992px) {
+
+	
+	
+}
+
+
+@media only screen and (min-width: 768px) {
+	
+	
+}
+
+
+
+
+@media only screen and (max-width: 768px) {
+	 .businessCommentOuter{
+		 max-width:550px;
+	 }
+}
+
+@media only screen and (max-width: 450px) {
+	 .businessCommentOuter{
+		 max-width:400px;
+	 }
+}
+
+@media only screen and (max-width: 400px) {
+	 .businessCommentOuter{
+		 max-width:350px;
+	 }
+}
+
+
+/* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
+@media screen and (max-height: 450px) {
+    
+}
+
+
+@media only screen and (max-width: 768px){
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+

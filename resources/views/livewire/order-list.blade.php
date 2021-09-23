@@ -17,7 +17,7 @@
                             <th>Payment</th>
                             <th>Bento / Product</th>
                             <th>Total </th>
-                            <!-- <th>Code</th> -->
+                            <th>Code</th>
                             <th>Amount</th>
                             <!-- <th>Discount</th> -->
                             <th>Action</th>
@@ -75,7 +75,7 @@
 
             </td>
             <td>{{$order->items->sum('quantity')}}</td>
-            <!-- <td><code class="text-sm text-red-600">{{$order->extraction_code}}</code></td> -->
+            <td><code class="text-sm text-red-600">{{$order->extraction_code}}</code></td>
             <td>${{$order->real_amount}}
             <!-- <td>{{ $order->charges()->where('value','<=',0)->get()->sum('value') }}</td> -->
             <th>

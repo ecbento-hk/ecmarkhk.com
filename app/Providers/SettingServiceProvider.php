@@ -49,5 +49,9 @@ class SettingServiceProvider extends ServiceProvider
             return $menu->pluck('menu_date')->all();
         });
         config()->set('menu.date', $menu_date);
+
+        // $user_store = 54;
+        // config()->set('menu.store', $user_store);
+        
     }
 }

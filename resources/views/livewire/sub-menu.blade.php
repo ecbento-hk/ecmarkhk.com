@@ -1,7 +1,7 @@
 <div class="w-full">
 
 
-    @livewire('user-notify')
+    @livewire('user-notify',['location'=>$location?$location:null])
 
     <div class="py-4 bg-base-200 text-base-content w-full card shadow-lg rounded-box mb-8">
 
@@ -15,8 +15,9 @@
             @foreach ($items as $item)
 
             @php
-            if($item<=date('Y-m-d')){ continue; } $menuDate=$item; //$menuDate=$item->format("Y-m-d");
-                $payload = serialize(['menu_date'=>$menuDate]);
+            //if($item<=date('Y-m-d')){ continue; } 
+            $menuDate=$item; //$menuDate=$item->format("Y-m-d");
+                $payload = serialize(['menu_date'=>$menuDate,'location'=>$location]);
                 if(Auth::user()){
                 $quantity = Auth::user()->cartItem()->where('menu_date',$menuDate)->sum('quantity');
                 } else {

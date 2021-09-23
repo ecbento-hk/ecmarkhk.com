@@ -2,19 +2,19 @@
 	
 namespace App\Classes;
 
-use App\User;
-use App\Http\Api\V1\Model\Device\Device;
-use App\Http\Api\V1\Model\Message;
-use App\Http\Api\V1\Model\MessageHistory;
+use App\Models\Device\Device;
+use App\Models\Message;
+use App\Models\MessageHistory;
 
 class SMS {
 
-    public static function send(Message $config,array $input)
+    public static function send($content,array $input)
     {
         //TODO: complete this sms function
         //REMARK: it is a function for log message and let them control the message content or target
         // STEP 1. get message config
-        $content = $config->content;
+        // $content = $config->content;
+        // $content = $config->content;
 
         $toURL = "https://api3.hksmspro.com/service/smsapi.asmx/SendSMS";
         $post = array(
@@ -23,8 +23,9 @@ class SMS {
             "Telephone"=>$input['phone_no'],
             "UserDefineNo"=>$input['user_define_no'],
             "Hex"=>"",
-            "Message"=>$input['message'],
-            "Sender"=>$config->sender
+            // "Message"=>$input['message'],
+            "Message"=>$content,
+            "Sender"=>'ECBento'
         );
 
         $ch = curl_init();
@@ -41,14 +42,45 @@ class SMS {
         $result = curl_exec($ch);
         curl_close($ch);
 
-        logging('SMS MSG RESPONSE',$result);
+        // logging('SMS MSG RESPONSE',$result);
+        \Log::debug($result);
 
         $response = simplexml_load_string($result) or die("Error: Cannot create object");
+        $msg = [
+            0 => "Missing Values",
+            1 => "Message Sent",
+            10 => "Incorrect Username or Password",
+            20 => "Message content too long",
+            30 => "Message content too long",
+            40 => "Telephone number too long",
+            60 => "Incorrect Country Code",
+            70 => "Balance not enough",
+            80 => "Incorrect date time",
+            100 => "System error, please try again",
+        ];
+        $message = (int)$response->State;
+        try {
+            $message =  $msg[(int)$response->State];
+            $msgHistory = MessageHistory::create([
+                'message_id'=>1,
+                'from_type' => 'App\Admin',
+                'from_id' => 1,
+                'to_type' => 'App\User',
+                'to_id' => $input['phone_no'],
+                'target' => $input['user_define_no'],
+                'type' => 'sms',
+                'content' =>  $input['message'],
+            ]);
+            
+           
+        } catch (\Throwable $th) {
+            //throw $th;
+        }
         return [
             'state' => $response->State,
-            'message' => $this->msg[(int)$response->State]
+            'message' => $message
         ]; 
-    }
+    } 
 
     public function messageStatus(int $status){
         $msg = [

@@ -4,16 +4,16 @@
 ## Your order Confirmed!
 ## Hello, {{$order->user->name}} Your order has been confirmed. 
 ##
-### Order Detail:
-### Order No: SCH-DSC-{{$order->no}}
+### Order Location: {{$order->store->name}}
+### Order No: {{config('app.prefix')}}{{$order->no}}
 ### Payment: Stripe
 ### Order Date: {{$order->created_at}}
 
 @component('mail::table')
-| Menu Date   |      Product Name      |  Quantity |  Student |  Price |
+| Menu Date   |      Product Name      |  Quantity |  Extraction Code |  Price |
 |:------------|:----------------------:|-----------|----------|--------|
 @foreach($items as $item)
-|  {{date('Y-m-d',strtotime($item->menu_date))}} |  {{$item->product->title}} | {{$item->quantity}} | {{$item->remark}} | {{$item->price}} |
+|  {{date('Y-m-d',strtotime($item->menu_date))}} |  {{$item->product->title}} | {{$item->quantity}} | {{$item->extraction_code}} | {{$item->price}} |
 @endforeach
 
 @endcomponent

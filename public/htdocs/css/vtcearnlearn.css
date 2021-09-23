@@ -1,0 +1,585 @@
+
+/*Header*/
+
+/* Context*/
+
+.mainContent{
+	position: relative;
+}
+
+.mainBg{
+	position:absolute;
+	z-index:-1;
+	width:100%;
+}
+
+.mainBodyContainer{
+    padding: 30% 50px 35px 50px;
+	font-family: 'PT Sans', 'cwTeXHei', 'Noto Sans SC', Arial, Verdana, sans-serif;
+}
+
+.bodyTitle{
+	font-size:46px;
+	color:#ffffff;
+	text-shadow: 0px 0px 20px #000000;
+}
+
+
+
+.bodyContext{
+	min-height:500px;
+	background-color:#f4f4f4;
+	padding:30px;
+	overflow:auto;
+	padding-top: 15px;
+}
+
+.bodyContextMain{
+	background-color:#f4f4f4;
+	/*padding:15px;*/
+	padding-bottom: 50px;
+}
+
+.bodyContextSides{
+	
+}
+
+.bodyContextMain table{
+	width:100%;
+}
+
+.bodyContextMain ol{
+	padding-left:20px;
+	padding-bottom:10px;
+}
+
+.bodyContextMain .additional{
+	color:#b10f1f;
+}
+
+.mainTitle{
+	font-size:24px;
+	font-weight:bold;
+	padding-bottom:20px;
+	padding-top:35px;
+}
+
+.mainTitle.red{
+	color:#b10f1f;
+}
+
+.mainImage{
+	width:100%
+}
+
+/**custom tab css**/
+
+.ui-widget.ui-widget-content{
+	border:0px;
+	background-color: transparent;
+}
+
+.ui-widget-content{
+	border:0px;
+}
+
+.ui-tabs .ui-tabs-nav{
+	padding:0px;
+	border: 0px;
+	border-bottom: 0px solid #b10f1f;
+}
+
+.ui-tabs .ui-tabs-nav li{
+	margin:0px;
+	border:0px;
+	font-weight:bold;
+}
+
+.ui-tabs .ui-tabs-nav .ui-tabs-anchor{
+	padding:20px;
+	text-transform:uppercase;
+	color:#ffffff;
+}
+
+.ui-tabs .ui-tabs-panel{
+	padding: 0px 0px 20px 0px;
+}
+
+.ui-corner-all, .ui-corner-bottom, .ui-corner-right, .ui-corner-br{
+	border-bottom-right-radius: 0px;
+}
+
+.ui-corner-all, .ui-corner-bottom, .ui-corner-left, .ui-corner-bl{
+	border-bottom-left-radius: 0px;
+}
+
+.ui-corner-all, .ui-corner-top, .ui-corner-right, .ui-corner-tr{
+	border-top-right-radius: 0px;
+}
+
+.ui-corner-all, .ui-corner-top, .ui-corner-left, .ui-corner-tl{
+	border-top-left-radius: 0px;
+}
+
+.ui-tabs .ui-tabs-nav li.ui-tabs-active{
+	padding:0px;
+}
+
+.ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default, .ui-button, html .ui-button.ui-state-disabled:hover, html .ui-button.ui-state-disabled:active{
+	background-color: #151515;
+	
+}
+
+.ui-state-active, .ui-widget-content .ui-state-active, .ui-widget-header .ui-state-active, a.ui-button:active, .ui-button:active, .ui-button.ui-state-active:hover{
+	background-color: #b10f1f;
+	font-weight:bold;
+}
+
+
+
+
+.campus_tabs{
+	width:100%;
+}
+
+.campus_tabs ul{
+	width:100%;
+}
+
+.campus_tabs ul li{
+	width:25%;
+}
+
+.campus_tabs ul li a{
+	font-size:16px;
+	text-align:center;
+	width:100%;
+}
+
+.campus_tabs > div{
+	
+	
+}
+
+.tab_intro{
+	font-weight:bold;
+}
+
+.sideSubMenu{
+	
+}
+
+.sideSubMenuTitle{
+	font-size:14px;
+	font-weight:bold;
+	text-transform:uppercase;
+	color:#000000;
+	padding:15px;
+	border-bottom: 1px solid #d2d2d2;
+}
+
+.sideSubMenuContent{
+	padding:15px;
+	padding-bottom: 30px;
+}
+
+.sideSubMenuContent ul{
+	padding:0px;
+	margin:0px;
+	list-style-type: none;
+}
+
+.sideSubMenuContent ul li{
+	padding:0px;
+	margin:0px;
+}
+
+.sideSubMenuContent ul li a{
+	color:#000000;
+	padding:10px;
+	display:inline-block;
+	padding-left:30px;
+	background: url('../images/btnIconGray.png') no-repeat left center;
+}
+
+.sideSubMenuContent ul li a.active{
+	background: url('../images/btnIcon.png') no-repeat left center;
+}
+
+
+.campusList{
+	padding:5px 0px;
+	box-sizing: border-box;
+	display: flex;
+	flex-wrap: wrap;
+}
+
+.campusItem{
+	width:33.3%;
+	box-sizing: border-box;
+	padding:3px;
+}
+
+.campusItemImg{
+}
+
+.campusItemImg img{
+	width:100%;
+}
+
+.campusItemContent{
+	background-color:#ffffff;
+	padding:15px;
+}
+
+.campusItemTitle{
+	font-size:24px;
+	font-weight:bold;
+	padding-bottom:10px;
+}
+
+.campusItemDetails{
+	
+}
+
+.campusItemDetails a{
+	
+}
+
+.earnLearnTitle{
+	font-size:20px;
+	font-weight:bold;
+}
+
+.earnLearnSubTitle{
+	font-size:18px;
+	font-weight:bold;
+}
+
+.earnLearnList{
+	padding-top:20px;
+	padding-bottom:20px;
+	
+}
+
+.earnLearnList li{
+	line-height:30px;
+	font-weight:bold;
+	font-size:18px;
+}
+
+.earnLearnList li:nth-child(1){
+  color:#b00f1f;
+}
+.earnLearnList li:nth-child(2){
+  color:#ef9022;
+}
+.earnLearnList li:nth-child(3){
+  color:#22a272;
+}
+.earnLearnList li:nth-child(4){
+  color:#df0d30;
+}
+.earnLearnList li:nth-child(5){
+  color:#158ad0;
+}
+
+.earnLearnContent{
+	margin-top:20px;
+	margin-bottom:10px;
+}
+
+.earnLearnContent a.earnLearnDownload{
+	padding:30px;
+	color:#ffffff;
+	background-color:#585858;
+	text-transform:uppercase;
+	font-weight:bold;
+}
+
+.earnLearnContent a.earnLearnDownload:visited, .earnLearnContent a.earnLearnDownload:hover{
+	color:#ffffff;
+}
+
+.earnLearnContent a{
+	line-height:25px;
+}
+
+table.earnLearnTable{
+	width:100%;
+	margin-top:10px;
+	margin-bottom:20px;
+	background-color:#ffffff;
+border-spacing: 20px 5px;
+    border-collapse: inherit;
+}
+
+table.earnLearnTable th{
+	padding:10px;
+	text-align:center;
+	border-bottom:2px solid #AAAAAA;
+}
+
+table.earnLearnTable tr{
+	
+}
+
+table.earnLearnTable td{
+	padding:10px;
+	border-bottom:1px solid #AAAAAA;
+	
+}
+table.earnLearnTable tr td:first-child{
+	text-align:center;
+	width:25%;
+}
+
+table.earnLearnTable tr:last-child td{
+	border-bottom:0;
+	
+}
+
+table.earnLearnImgTable {
+	margin-top:20px;
+	margin-bottom:10px;
+}
+
+table.earnLearnImgTable th{
+	font-weight:bold;
+	font-size:18px;
+}
+
+table.earnLearnImgTable td img{
+	padding:10px;
+}
+
+table.earnLearnImgTable td{
+	text-align:center;
+	padding:10px;
+	width:33%;
+}
+
+.earnLearnImgTableTitle{
+	font-weight:bold;
+}
+
+
+.mainBodyContainer a, .mainBodyContainer a:visited, .mainBodyContainer  a:focus{
+	color:#000000;
+	text-decoration:underline;
+	display:inline-block;
+}
+
+.earnLearnVideoList{
+	width:100%;
+}
+
+.earnLearnVideoListItem{
+	float: left;
+    width: 33%;
+	padding-right: 10px;
+	position:relative;
+}
+
+.earnLearnVideoListItemImg{
+	position:relative;
+}
+
+.earnLearnVideoListItemImg::before{
+	 content: "";
+    display: block;
+    position: absolute;
+    width: 90%;
+    height: 90%;
+    background: url(../images/earnlearn/Study_VTC_Earn_and_Learn_V1.png) no-repeat scroll top center;
+    top: 5%;
+    left: 5%;
+    background-size: 100%;
+}
+
+.earnLearnVideoListItemImg::after{
+	content: "";
+    display: block;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: url(../images/playBtn.png) no-repeat scroll center center;
+    top: 0px;
+}
+
+.earnLearnVideoListItemImg img{
+	width:100%;
+}
+
+.earnLearnVideoListItemBtn{
+	position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+}
+
+.earnLearnVideoListItemBtn a{
+	width: 100%;
+    height: 100%;
+    display: block;
+	position: relative;
+    z-index: 2;
+}
+
+.earnLearnVideoListItemBtn::after {
+    content: "Play Movie";
+    display: inline-block;
+    position: absolute;
+    /* width: 20%; */
+    width: 120px;
+    color: #ffffff;
+    background-color: #000000;
+    bottom: 20px;
+    right: 20px;
+    padding: 5px;
+    text-align: center;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+.earnLearnSharing{
+	width:100%;
+	border: 10px solid #970613;
+}
+
+.earnLearnSharingImg{
+	width:33%;
+	float:left;
+}
+
+.earnLearnSharingImg img{
+	width:100%;
+	float:left;
+}
+
+.earnLearnSharingContent{
+	width:66%;
+	float:left;
+	padding:50px 20px;
+}
+
+.earnLearnSharingContentPara{
+	padding-bottom:20px;
+}
+
+.earnLearnSharingContentDetails{
+	text-align:right;
+	color:#970613;
+	font-weight:bold;
+}
+
+.earnLearnEmployers{
+	
+}
+
+.earnLearnEmployersList{
+	display: flex;
+    flex-flow: row wrap;
+    justify-content: flex-start;
+	
+}
+
+.earnLearnEmployersListItemTitle{
+	flex: 0 1 31%;
+	padding: 10px;
+	color:#ffffff;
+	font-weight:bold;
+	text-align:center;
+	background-color:#bebcbd;
+	margin-right:2%;
+	margin-bottom: 20px;
+	min-height: 125px;
+	display: flex;
+	justify-content: center;
+	flex-direction: column;
+	text-align: center;
+}
+
+.earnLearnEmployersListItem{
+	flex: 0 1 31%;
+	padding: 10px;
+	padding-right:10px;
+	background-color:#ffffff;
+	margin-right:2%;
+	margin-bottom: 20px;
+	min-height: 125px;
+	display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.earnLearnEmployersListItem img{
+	width:100%;
+	padding:10px;
+}
+
+
+
+/*IPAD*/
+
+@media only screen and (min-width: 992px) {
+
+}
+
+
+
+
+
+
+@media only screen and (max-width: 992px) {
+
+	
+	
+}
+
+
+@media only screen and (min-width: 768px) {
+	
+	
+}
+
+
+
+
+@media only screen and (max-width: 768px) {
+	
+}
+
+
+
+
+/* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
+@media screen and (max-height: 450px) {
+    
+}
+
+
+@media only screen and (max-width: 768px){
+
+
+}
+
+@media only screen and (max-width: 480px){
+
+	.earnLearnVideoListItemBtn::after{
+		right: 15px;
+		width: 100px;
+		bottom: 5px;
+
+	}
+
+}
+
+
+
+
+
+
+
+
+

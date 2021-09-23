@@ -1,0 +1,947 @@
+<?php
+require_once('../conn/db.php');
+require_once('check_status.php');
+header("Content-Type: text/html;charset=utf-8");   
+
+$token = md5(rand(1000,9999)); //you can use any encryption
+$_SESSION['token'] = $token; //store it as session variable
+?>
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>SB Admin - Tables</title>
+
+  <!-- Custom fonts for this template-->
+  <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+
+  <!-- Page level plugin CSS-->
+  <link href="vendor/datatables/dataTables.bootstrap4.css" rel="stylesheet">
+	<!-- Vendor CSS -->
+<link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.1.2/css/buttons.dataTables.min.css" />
+  <link rel="stylesheet" href="https://cdn.datatables.net/select/1.1.2/css/select.dataTables.min.css" />
+  <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.0.2/css/responsive.dataTables.min.css" />
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.7/css/select2.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.css" />
+  
+  <link rel="stylesheet" href="../plugin/jquery-ui-1.12.1/jquery-ui.min.css">
+  <!-- Custom styles for this template-->
+  <link href="css/sb-admin.css" rel="stylesheet">
+	<style>
+	td.details-control {
+		background: url(../resources/details_open.png) no-repeat center center;
+		cursor: pointer;
+	}
+	</style>
+</head>
+
+<body id="page-top">
+	
+  <nav class="navbar navbar-expand navbar-dark bg-dark static-top">
+
+    <a class="navbar-brand mr-1" href="index.php">IVE BA Admin Dashboard</a>
+
+    <button class="btn btn-link btn-sm text-white order-1 order-sm-0" id="sidebarToggle" href="#">
+      <i class="fas fa-bars"></i>
+    </button>
+
+    <!-- Navbar Search -->
+    <form class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0">
+      
+    </form>
+
+    <!-- Navbar -->
+    <ul class="navbar-nav ml-auto ml-md-0">
+      
+      <li class="nav-item dropdown no-arrow">
+        <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <i class="fas fa-user-circle fa-fw"></i>
+        </a>
+        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">Logout</a>
+        </div>
+      </li>
+    </ul>
+
+  </nav>
+
+  <div id="wrapper">
+
+    <!-- Sidebar -->
+    <?php
+	require_once('sideBar.php');
+	?>
+
+    <div id="content-wrapper">
+
+      <div class="container-fluid">
+
+        <!-- Breadcrumbs-->
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item">
+            <a href="#">Dashboard</a>
+          </li>
+          <li class="breadcrumb-item active">Tables</li>
+        </ol>
+
+		<?php
+				$sfes = $conn->prepare("SELECT * FROM `ba_programmes_topup`");
+				$sfes->execute();
+				$results = $sfes->fetchAll(PDO::FETCH_ASSOC);
+				$json = json_encode($results, JSON_NUMERIC_CHECK );
+		?>
+        <!-- DataTables Example -->
+        <div class="card mb-3">
+          <div class="card-header">
+            <i class="fas fa-table"></i>
+            Search Course</div>
+          <div class="card-body">
+            <div class="row">
+				<div class="col-xl-8 col-sm-8 mb-8" >
+					<select class="form-control" id="course_list">
+					<option value="-" disabled selected ></option>
+				  </select>
+				</div>
+				<div class="col-xl-4 col-sm-4 mb-4" >
+					<button type="button" class="program_add btn btn-primary">Add New</button>
+					<button type="button" class="program_delete btn btn-danger disabled">Delete</button>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-xl-12 col-sm-12 mb-12" >
+					
+					<form method="post" id="save_post_action" class="form-horizontal">
+					
+					
+					<div class="card mb-12">
+					  <div class="card-header">
+						<i class="fas fa-table"></i>
+						Programme</div>
+					  <div class="card-body programme">
+					
+					<div class="all form-group">
+						<div class="form-group">
+							<input type="hidden" name="ID" class="form-control" value="">
+							<label class="col-sm-12 control-label">Reg No</label>
+							<div class="col-sm-10">
+								<input type="text" name="RegNo" class="form-control" value="" required>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-sm-12 control-label">QR RegNo</label>
+							<div class="col-sm-10">
+								<input type="text" name="QR_RegNo" class="form-control" value="" required>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-sm-12 control-label">Contact Email Tel</label>
+							<div class="col-sm-10">
+								<input type="text" name="Contact_Email_Tel" class="form-control" value="" >
+							</div>
+						</div>
+						
+						<div class="form-group">
+							<label class="col-sm-12 control-label">Validity Period</label>
+							<div class="col-sm-10">
+								<input type="text" name="Validity_Period" class="form-control" value="" >
+							</div>
+						</div>
+						
+						<div class="form-group">
+							<label class="col-sm-12 control-label">Assessment</label>
+							<div class="col-sm-10">
+								<input type="text" name="Assessment" class="form-control" value="" >
+							</div>
+						</div>
+						
+						<div class="form-group">
+							<label class="col-sm-12 control-label">Study Mode</label>
+							<div class="col-sm-10">
+								<input type="text" name="Study_Mode" class="form-control" value="" >
+							</div>
+						</div>
+						
+						<div class="form-group">
+							<label class="col-sm-12 control-label">Duration</label>
+							<div class="col-sm-10">
+								<input type="text" name="Duration" class="form-control" value="" >
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-sm-12 control-label">Commencement</label>
+							<div class="col-sm-10">
+								<input type="text" name="Commencement" class="form-control" value="" >
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-sm-12 control-label">Remark1</label>
+							<div class="col-sm-10">
+								<input type="text" name="Remark1" class="form-control" value="" >
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-sm-12 control-label">Remark2</label>
+							<div class="col-sm-10">
+								<input type="text" name="Remark2" class="form-control" value="" >
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-sm-12 control-label">Download URL</label>
+							<div class="col-sm-10">
+								<input type="text" name="Download_URL" class="form-control" value="" >
+							</div>
+						</div>
+						
+						<div class="form-group">
+							<label class="col-sm-12 control-label">Image URL</label>
+							<div class="col-sm-10">
+								<input type="text" name="ImageURL" class="form-control" value="" >
+							</div>
+						</div>
+						
+						<div class="form-group">
+							<label class="col-sm-12 control-label">Thumbnail URL</label>
+							<div class="col-sm-10">
+								<input type="text" name="ImageURL_s" class="form-control" value="" >
+							</div>
+						</div>
+						
+						
+						<div class="form-group uploadPhoto">
+							<label class="col-sm-12 control-label">Upload Photo</label>
+							<div class="col-sm-10 uploadDiv" >
+								<button class='add_img' type='type'>Upload Photo</button>
+							</div>
+						</div>
+					</div>
+					<div class="programme_tabs form-group" id="programme_tabs">
+					
+						
+					
+						<ul>
+							<li><a href="#en">EN</a></li>
+							<li><a href="#tc">TC</a></li>
+							<li><a href="#sc">SC</a></li>
+						</ul>
+						
+						
+							
+							<div class="en"  id="en">
+							
+								<div class="form-group">
+									<label class="col-sm-12 control-label">Programme University Abb</label>
+									<div class="col-sm-10">
+										<input type="text" name="Programme_University_Abb" class="form-control" value="" required>
+									</div>
+								</div>
+							
+								<div class="form-group">
+									<label class="col-sm-12 control-label">Programme University EN</label>
+									<div class="col-sm-10">
+										<input type="text" name="Programme_University_EN" class="form-control" value="" required>
+									</div>
+								</div>
+								
+								
+								
+								<div class="form-group">
+									<label class="col-sm-12 control-label">Programme Name EN</label>
+									<div class="col-sm-10">
+										<input type="text" name="Programme_Name_EN" class="form-control" value="">
+									</div>
+								</div>
+								
+								<div class="form-group">
+									<label class="col-sm-12 control-label">Mode EN</label>
+									<div class="col-sm-10">
+										<input type="text" name="Mode_EN" class="form-control" value="">
+									</div>
+								</div>
+								
+								<div class="form-group">
+									<label class="col-sm-12 control-label">QF Level EN</label>
+									<div class="col-sm-10">
+										<input type="text" name="QF_Level_EN" class="form-control" value="">
+									</div>
+								</div>
+								
+								<div class="form-group">
+									<label class="col-sm-12 control-label">Hyperlink EN</label>
+									<div class="col-sm-10">
+										<input type="text" name="Hyperlink_EN" class="form-control" value="">
+									</div>
+								</div>
+								
+								<div class="form-group">
+									<label class="col-sm-12 control-label">Programme University Overview EN</label>
+									<div class="col-sm-10">
+										<textarea type="text" name="Programme_University_Overview_EN" class="form-control" rows="10"></textarea>
+									</div>
+								</div>
+								
+								<div class="form-group">
+									<label class="col-sm-12 control-label">Programme Overview EN</label>
+									<div class="col-sm-10">
+										<textarea type="text" name="Programme_Overview_EN" class="form-control" rows="10"></textarea>
+									</div>
+								</div>
+								
+								<div class="form-group">
+									<label class="col-sm-12 control-label">Programme Structure EN</label>
+									<div class="col-sm-10">
+										<textarea type="text" name="Programme_Structure_EN" class="form-control" rows="10"></textarea>
+									</div>
+								</div>
+								
+								<div class="form-group">
+									<label class="col-sm-12 control-label">Module EN</label>
+									<div class="col-sm-10">
+										<textarea type="text" name="Module_EN" class="form-control" rows="10"></textarea>
+									</div>
+								</div>
+								
+								<div class="form-group">
+									<label class="col-sm-12 control-label">External Recognition EN</label>
+									<div class="col-sm-10">
+										<textarea type="text" name="External_Recognition_EN" class="form-control" rows="10"></textarea>
+									</div>
+								</div>
+								
+								<div class="form-group">
+									<label class="col-sm-12 control-label">Study Location EN</label>
+									<div class="col-sm-10">
+										<textarea type="text" name="Study_Location_EN" class="form-control" rows="10"></textarea>
+									</div>
+								</div>
+								
+								<div class="form-group">
+									<label class="col-sm-12 control-label">Fee EN</label>
+									<div class="col-sm-10">
+										<textarea type="text" name="Fee_EN" class="form-control" rows="10"></textarea>
+									</div>
+								</div>
+								
+								
+								
+							</div>
+							
+							<div class="tc"  id="tc">
+								
+								<div class="form-group">
+									<label class="col-sm-12 control-label">Programme University TC</label>
+									<div class="col-sm-10">
+										<input type="text" name="Programme_University_TC" class="form-control" value="" >
+									</div>
+								</div>
+								
+								
+								
+								<div class="form-group">
+									<label class="col-sm-12 control-label">Programme Name TC</label>
+									<div class="col-sm-10">
+										<input type="text" name="Programme_Name_TC" class="form-control" value="">
+									</div>
+								</div>
+								
+								<div class="form-group">
+									<label class="col-sm-12 control-label">Mode TC</label>
+									<div class="col-sm-10">
+										<input type="text" name="Mode_TC" class="form-control" value="">
+									</div>
+								</div>
+								
+								<div class="form-group">
+									<label class="col-sm-12 control-label">QF Level TC</label>
+									<div class="col-sm-10">
+										<input type="text" name="QF_Level_TC" class="form-control" value="">
+									</div>
+								</div>
+								
+								<div class="form-group">
+									<label class="col-sm-12 control-label">Hyperlink TC</label>
+									<div class="col-sm-10">
+										<input type="text" name="Hyperlink_TC" class="form-control" value="">
+									</div>
+								</div>
+								
+								<div class="form-group">
+									<label class="col-sm-12 control-label">Programme University Overview TC</label>
+									<div class="col-sm-10">
+										<textarea type="text" name="Programme_University_Overview_TC" class="form-control" rows="10"></textarea>
+									</div>
+								</div>
+								
+								<div class="form-group">
+									<label class="col-sm-12 control-label">Programme Overview TC</label>
+									<div class="col-sm-10">
+										<textarea type="text" name="Programme_Overview_TC" class="form-control" rows="10"></textarea>
+									</div>
+								</div>
+								
+								<div class="form-group">
+									<label class="col-sm-12 control-label">Programme Structure TC</label>
+									<div class="col-sm-10">
+										<textarea type="text" name="Programme_Structure_TC" class="form-control" rows="10"></textarea>
+									</div>
+								</div>
+								
+								<div class="form-group">
+									<label class="col-sm-12 control-label">Module TC</label>
+									<div class="col-sm-10">
+										<textarea type="text" name="Module_TC" class="form-control" rows="10"></textarea>
+									</div>
+								</div>
+								
+								<div class="form-group">
+									<label class="col-sm-12 control-label">External Recognition TC</label>
+									<div class="col-sm-10">
+										<textarea type="text" name="External_Recognition_TC" class="form-control" rows="10"></textarea>
+									</div>
+								</div>
+								
+								<div class="form-group">
+									<label class="col-sm-12 control-label">Study Location TC</label>
+									<div class="col-sm-10">
+										<textarea type="text" name="Study_Location_TC" class="form-control" rows="10"></textarea>
+									</div>
+								</div>
+								
+								<div class="form-group">
+									<label class="col-sm-12 control-label">Fee TC</label>
+									<div class="col-sm-10">
+										<textarea type="text" name="Fee_TC" class="form-control" rows="10"></textarea>
+									</div>
+								</div>
+								
+							</div>
+							
+							<div class="sc"  id="sc">
+								
+								<div class="form-group">
+									<label class="col-sm-12 control-label">Programme University SC</label>
+									<div class="col-sm-10">
+										<input type="text" name="Programme_University_SC" class="form-control" value="" >
+									</div>
+								</div>
+								
+								
+								
+								<div class="form-group">
+									<label class="col-sm-12 control-label">Programme Name SC</label>
+									<div class="col-sm-10">
+										<input type="text" name="Programme_Name_SC" class="form-control" value="">
+									</div>
+								</div>
+								
+								<div class="form-group">
+									<label class="col-sm-12 control-label">Mode SC</label>
+									<div class="col-sm-10">
+										<input type="text" name="Mode_SC" class="form-control" value="">
+									</div>
+								</div>
+								
+								<div class="form-group">
+									<label class="col-sm-12 control-label">QF Level SC</label>
+									<div class="col-sm-10">
+										<input type="text" name="QF_Level_SC" class="form-control" value="">
+									</div>
+								</div>
+								
+								<div class="form-group">
+									<label class="col-sm-12 control-label">Hyperlink SC</label>
+									<div class="col-sm-10">
+										<input type="text" name="Hyperlink_SC" class="form-control" value="">
+									</div>
+								</div>
+								
+								<div class="form-group">
+									<label class="col-sm-12 control-label">Programme University Overview SC</label>
+									<div class="col-sm-10">
+										<textarea type="text" name="Programme_University_Overview_SC" class="form-control" rows="10"></textarea>
+									</div>
+								</div>
+								
+								<div class="form-group">
+									<label class="col-sm-12 control-label">Programme Overview SC</label>
+									<div class="col-sm-10">
+										<textarea type="text" name="Programme_Overview_SC" class="form-control" rows="10"></textarea>
+									</div>
+								</div>
+								
+								<div class="form-group">
+									<label class="col-sm-12 control-label">Programme Structure SC</label>
+									<div class="col-sm-10">
+										<textarea type="text" name="Programme_Structure_SC" class="form-control" rows="10"></textarea>
+									</div>
+								</div>
+								
+								<div class="form-group">
+									<label class="col-sm-12 control-label">Module SC</label>
+									<div class="col-sm-10">
+										<textarea type="text" name="Module_SC" class="form-control" rows="10"></textarea>
+									</div>
+								</div>
+								
+								<div class="form-group">
+									<label class="col-sm-12 control-label">External Recognition SC</label>
+									<div class="col-sm-10">
+										<textarea type="text" name="External_Recognition_SC" class="form-control" rows="10"></textarea>
+									</div>
+								</div>
+								
+								<div class="form-group">
+									<label class="col-sm-12 control-label">Study Location SC</label>
+									<div class="col-sm-10">
+										<textarea type="text" name="Study_Location_SC" class="form-control" rows="10"></textarea>
+									</div>
+								</div>
+								
+								<div class="form-group">
+									<label class="col-sm-12 control-label">Fee SC</label>
+									<div class="col-sm-10">
+										<textarea type="text" name="Fee_SC" class="form-control" rows="10"></textarea>
+									</div>
+								</div>
+							</div>
+						
+					</div>
+					
+					<div class="form-group" style="display:none;">
+					 <input id="program_save_submit" type="submit">
+					</div>
+					
+					<div class="form-group">
+						<button type="button" class="program_save btn btn-success">Save</button>
+					</div>
+					
+					</div>
+					</div>
+					</form>
+				</div>
+				
+			</div>
+			  
+          </div>
+          <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
+        </div>
+
+        <p class="small text-center text-muted my-5">
+        </p>
+
+      </div>
+      <!-- /.container-fluid -->
+
+      <!-- Sticky Footer -->
+      <footer class="sticky-footer">
+        <div class="container my-auto">
+          <div class="copyright text-center my-auto">
+            <span>Copyright © Your Website 2019</span>
+          </div>
+        </div>
+      </footer>
+
+    </div>
+    <!-- /.content-wrapper -->
+
+  </div>
+  <!-- /#wrapper -->
+
+  <!-- Scroll to Top Button-->
+  <a class="scroll-to-top rounded" href="#page-top">
+    <i class="fas fa-angle-up"></i>
+  </a>
+
+  <!-- Logout Modal-->
+  <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+          <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">×</span>
+          </button>
+        </div>
+        <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+        <div class="modal-footer">
+          <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+          <a class="btn btn-primary" href="login.php">Logout</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bootstrap core JavaScript-->
+  <script src="vendor/jquery/jquery.min.js"></script>
+  <script src="../plugin/jquery-ui-1.12.1/jquery-ui.min.js" ></script>
+  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Core plugin JavaScript-->
+  <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+
+  <!-- Page level plugin JavaScript-->
+  <script src="vendor/datatables/jquery.dataTables.js"></script>
+  <script src="vendor/datatables/dataTables.bootstrap4.js"></script>
+  
+  
+  <script src="https://cdn.datatables.net/buttons/1.1.2/js/dataTables.buttons.min.js" ></script>
+<script src="https://cdn.datatables.net/select/1.1.2/js/dataTables.select.min.js" ></script>
+
+<script src="https://cdn.datatables.net/responsive/2.0.2/js/dataTables.responsive.min.js" ></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.7/js/select2.js" ></script>>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.full.js" ></script>
+  <script src="../plugin/dataTables.altEditor.free.js"></script>
+
+  <!-- Custom scripts for all pages-->
+  <script src="js/sb-admin.min.js"></script>
+
+  <!-- Demo scripts for this page-->
+  <script>
+	
+	
+	
+	function format ( d ) {
+		// `d` is the original data object for the row
+		return '<table cellpadding="5" cellspacing="0" border="0" style="padding-left:50px;">'+
+			'<tr>'+
+				'<td>Company Name:</td>'+
+				'<td>'+d.Company_Name+'</td>'+
+			'</tr>'+
+			'<tr>'+
+				'<td>Nature Business:</td>'+
+				'<td>'+d.Nature_Business+'</td>'+
+			'</tr>'+
+			'<tr>'+
+				'<td>Extra info:</td>'+
+				'<td>'+ d.Web_URL +'</td>'+
+			'</tr>'+
+		'</table>';
+	}
+	
+	var categoryOptions = { "1" : "Professional Services", "2" : "Business and Management" , "3" : "Marketing and Promotion" };
+	$(document).ready(function() {
+	var data_field = JSON.parse($('#data_field').val());
+	
+	for (var i = 0; i < data_field.length; i++){
+		
+		$('#course_list').append($("<option></option>")
+                    .attr("value",data_field[i]['ID'])
+                    .text(data_field[i]['RegNo'] + '-' + data_field[i]['Programme_Name_EN'])); 
+	}
+	
+	$('.program_add').on('click', function(e) {
+		e.preventDefault();
+		$('.card-body.programme textarea').val('');
+		$('.card-body.programme input').val('');
+		$('#course_list').val('');
+		$('.program_delete').addClass('disabled');
+		$('.uploadDiv').html("<button class='add_img' type='type'>Upload Photo</button>");
+	});
+	
+	$('select#course_list').on('change', function() {
+	  //alert( this.value );
+	  var selected_id = this.value;
+	  var selected_data = data_field.filter(function(v){ 
+			return selected_id == v['ID'];
+		});
+	  //console.log(selected_data[0]);
+	  if (selected_data.length > 0){
+		var iData = selected_data[0];
+		for (var k in iData){
+			var textareafield = $('textarea[name=' + k + ']');
+			if (textareafield.length > 0){
+				textareafield.val(iData[k]);
+			}
+			
+			var inputfield = $('input[name=' + k + ']');
+			if (inputfield.length > 0){
+				inputfield.val(iData[k]);
+			}
+			
+			var selectfield = $('select[name=' + k + ']');
+			if (selectfield.length > 0){
+				selectfield.val(iData[k]);
+			}
+			
+		}
+		
+		var returnDate = "<button class='add_img' type='type' data-id='" + iData['ID'] + "'>Upload Photo</button>";	
+		var additional_data = "<table><tr>";
+		if (iData['ImageURL'] != '' && iData['ImageURL'] != null){
+			additional_data += "<td>Image </td><td><img src='" + iData['ImageURL'] + "' style='max-width:100%;'></td>";
+		}
+		if (iData['ImageURL_s'] != '' && iData['ImageURL_s'] != null){
+			additional_data += "<td>Thumbnail<br>Image</td><td><img src='" + iData['ImageURL_s'] + "' style='max-width:100%;'></td>";
+			
+		}
+		additional_data += "</tr></table>";
+		if (iData['ImageURL_s'] || iData['ImageURL']){
+			additional_data += "<button class='delete_img' data-url='" + iData['ImageURL'] +"' data-url2='" + iData['ImageURL_s'] +"'  data-id='" + iData['ID'] + "'>Delete Photos</button>";
+			returnDate = additional_data;
+		}
+		
+		$('.uploadDiv').html('');
+		$('.uploadDiv').append(returnDate);
+		
+		
+		$('.program_delete').removeClass('disabled');
+		
+	  }
+	  
+	});
+	  
+	$( "#programme_tabs" ).tabs();
+	
+	
+	$('body').on('click', 'button.program_save', function(e) {
+		e.preventDefault();
+		var id = $('input[name=ID]').val();
+		if ($('input[name=RegNo]').val() != '' && $('input[name=QR_RegNo]').val() != ''){
+			let required_warning = false;
+			let rowdata = {};
+			$('#save_post_action').find('input').each(function(e){
+				var key = $(this).attr('name');
+				rowdata[key] = $(this).val();
+				if ($(this).prop('required') && $(this).val().trim() == ''){
+					required_warning = true;
+				}
+			});
+			
+			$('#save_post_action').find('textarea').each(function(e){
+				var key = $(this).attr('name');
+				rowdata[key] = $(this).val();
+				if ($(this).prop('required') && $(this).val().trim() == ''){
+					required_warning = true;
+				}
+			});
+			
+			$('#save_post_action').find('select').each(function(e){
+				var key = $(this).attr('name');
+				rowdata[key] = $(this).val();
+				if ($(this).prop('required') && $(this).val().trim() == ''){
+					required_warning = true;
+				}
+			});
+			
+			if (required_warning){
+				$('#program_save_submit').click();
+			}else{
+			
+			if (id){
+				$.ajax({
+					url: 'action/edit_topup.php',
+					headers: { 'token': '<?php echo $token; ?>' },
+					type: 'POST',
+					data: rowdata,
+					dataType: "json",
+					success: function(data){
+						if (data.code == "200"){
+							alert('Programme Data Updated');
+							
+							data_field.map(function(item) {
+								if (item['ID'] == id){
+									for (const i in rowdata){
+									  item[i] = rowdata[i];
+									};
+								}
+							});
+							
+							$('#data_field').val(JSON.stringify(data_field));
+
+							
+							
+						} else {
+							console.log(data);
+						}
+					},
+					error: function(err){
+						console.log(err);
+					}
+				});
+				
+			}else{
+				$.ajax({
+					url: 'action/add_topup.php',
+					headers: { 'token': '<?php echo $token; ?>' },
+					type: 'POST',
+					data: rowdata,
+					dataType: "json",
+					success: function(data){
+						if (data.code == "200"){
+							alert('Programme Data Updated');
+							someFunctionToCallWhenPopUpCloses();
+						} else {
+							console.log(data);
+						}
+					},
+					error: function(err){
+						console.log(err);
+					}
+				});
+				
+			}
+			
+			}
+			
+			
+		}else{
+			alert('Insert Required Data.')
+		
+		}
+	});
+	
+	
+	$('body').on('click', 'button.program_delete', function(e) {
+		e.preventDefault();
+		if (!$('.program_delete').hasClass('disabled') ){
+			var id = $('input[name=ID]').val();
+			var rowdata = {'ID' : $('#course_list').val()};
+			if (id){
+				$.ajax({
+					url: 'action/delete_topup.php',
+					headers: { 'token': '<?php echo $token; ?>' },
+					type: 'POST',
+					data: rowdata,
+					dataType: "json",
+					success: function(data){
+						if (data.code == "200"){
+							alert('Programme Data Delete');
+							someFunctionToCallWhenPopUpCloses();
+						} else {
+							console.log(data);
+						}
+					},
+					error: function(err){
+						console.log(err);
+					}
+				});
+				
+			}else{
+				
+				alert('Please select to delete');
+				
+			}
+			
+			
+		}
+	});
+	
+	
+	$('body').on('click', 'button.add_img', function(e) {
+		e.preventDefault();
+		 var id = $(this).data('id');
+		  window.open('upload_img.php?id='+id+'&db=ba_programmes_topup', 'Upload Image', config='height=800,width=1000');
+		  
+	  });
+	  
+	  $('body').on('click', 'button.delete_img', function(e) {
+		  e.preventDefault();
+		  var id = $(this).data('id');
+		  var url = $(this).data('url');
+		  var url2 = $(this).data('url2');
+		  var db = "ba_programmes_topup";
+		  
+		if (confirm("Are you sure want to delete photo(& thumbnails)?")) {
+			/*
+			if (id){
+				$.ajax({
+				url:"action/image_handle.php",
+				headers: { 'token': '<?php echo $token; ?>' },
+				type: "POST",
+				data:{"image_url": url, "image_url_thumb": url2, "type": "delete_img", "id":id, "db":db },
+				dataType: "json",
+				success:function(data)
+				{
+
+				  if (data.status == "success"){
+						alert('Photo Delete');
+						
+					} else {
+						alert('delete fail');
+						
+					}
+				},
+				error: function(err) {
+				   console.log(JSON.stringify(err));
+						
+				},
+			  });
+			}
+			*/
+			$("input[name='ImageURL']").val("");
+			$("input[name='ImageURL_s']").val("");
+			$('.uploadDiv').html("<button class='add_img' type='type' data-id='" + id + "'>Upload Photo</button>");
+		  
+		  } else {
+			console.log('Cancel');
+		  }
+	  });
+	
+	
+	
+	});
+	  
+	  
+	function someFunctionToCallWhenPopUpCloses(){
+		window.location.reload();
+	}
+	function getParam(link, key){
+	var url_string = link || window.location.href;
+	var url = new URL(url_string);
+	var c = url.searchParams.get(key);
+	return c;
+	}
+	
+	var imageUrl = "";
+	var imageUrl_s = "";
+	function setAddImg(url){
+		if (url){
+			imageUrl = url;
+		}
+	}
+	
+	function setAddThumbImg(url){
+		if (url){
+			imageUrl_s = url;
+			
+			if (imageUrl && imageUrl_s){
+				var additional_data = "<table><tr>";
+				if (imageUrl != '' && imageUrl != null){
+					additional_data += "<td>Image </td><td><img src='" + imageUrl + "' style='max-width:100%;'></td>";
+				}
+				if (imageUrl_s != '' && imageUrl_s != null){
+					additional_data += "<td>Thumbnail<br>Image</td><td><img src='" + imageUrl_s + "' style='max-width:100%;'></td>";
+					
+				}
+				additional_data += "<table><tr>";
+				if (imageUrl_s || imageUrl){
+					additional_data += "<button class='delete_img' data-url='" + imageUrl +"' data-url2='" + imageUrl_s +"' >Delete Photos</button>";
+				}
+				returnDate = additional_data;
+				
+				$("input[name='ImageURL']").val(imageUrl);
+				$("input[name='ImageURL_s']").val(imageUrl_s);
+				
+				$('.uploadDiv').html('');
+				$('.uploadDiv').append(returnDate);
+			
+			imageUrl = "";
+			imageUrl_s = "";
+			}
+		}
+	}
+  </script>
+	<input type="hidden" id="data_field" name="data_field" value="<?php echo xss_chk($json); ?>">
+
+</body>
+
+</html>

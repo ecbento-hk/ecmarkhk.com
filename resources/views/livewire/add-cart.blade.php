@@ -67,57 +67,7 @@
                 <x-input.quantity wire:model="quantity" />
               </div>
             </div>
-            <div class="hidden w-full flex mt-6 items-center pb-5 border-b-2 border-base-300 mb-5">
-              <div class="flex items-center justify-start">
-                <span class="mr-4">{{__('Student')}}</span>
-                <div class="relative">
-
-                  <select wire:model="remark" required class="select pl-3 pr-10">
-                    <option>---</option>
-                    @if(count($students))
-                    @foreach($students as $student)
-
-                      @php 
-                      $ordered = \App\Models\CartItem::where([
-                        'user_id'=> auth()->user()->id,
-                        'menu_date' => $menu_product_date,
-                        ])->where('remark','like','%'.$student.'%')->exists();
-                      @endphp
-                    <option {{$ordered?'disabled':''}}>{{$student. ($ordered?'  ***Added':'') }}</del></option>
-                    
-                    @endforeach
-                    @endif
-                    <option>New Student</option>
-                  </select>
-                  <span class=" right-0 top-0 h-full w-10 text-center text-gray-600 pointer-events-none flex items-center justify-center">
-                  </span>
-                </div>
-              </div>
-            </div>
-            <div class="{{ $disabledRemark ? 'hidden' : '' }}">
-            <!-- <div class="text-red-400 w-full text-left text-gray-600 pointer-events-none flex ">
-              Class - Name
-            </div> -->
-            <div class="w-full flex mt-6 items-center pb-5 border-b-2 border-base-300 mb-5">
-          
-            
-             <div class="flex items-center justify-start">  
-              <span class="mr-10">{{__('New')}}</span>
-              <div class="relative">
-                  <input type="text" id="new_student_class" class="input mb-3" wire:model.defer="student.class" placeholder="Class">
-                  <input type="text" id="new_student_name"  class="input" wire:model.defer="student.name" placeholder="Name">
-                 
-              </div>
-            </div>
-          </div>
-          
-            <script>
-              $('#new_student').on('change',function(){
-                @this.new_student =$('#new_student').val();
-              });
-            </script>
-            </div>
-  
+        
 
           @if(session()->has('message'))
           <div class="alert alert-error mt-6 mb-6">

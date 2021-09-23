@@ -28,8 +28,8 @@ class Store extends Model implements Sortable
     ];
 
     protected $casts = [
-        'opening_time' => 'time',
-        'closing_time' => 'time',
+        // 'opening_time' => 'time',
+        // 'closing_time' => 'time',
         'excluded_weekday' => 'array',
     ];
 
