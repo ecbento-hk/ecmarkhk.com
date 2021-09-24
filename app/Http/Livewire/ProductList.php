@@ -23,7 +23,7 @@ class ProductList extends Component
     public $periodId;
     public $search = '';
     public $type;
-    public $location = 54;
+    public $location = 31;
     public $locationName;
     public $filter = null;
     public $tags = null;
