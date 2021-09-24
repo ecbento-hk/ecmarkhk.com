@@ -115,7 +115,7 @@
 
             <h3 class="col-span-12 font-semibold">{{__('Menu')}}:</h3>
             @if($products)
-            <div wire:loading wire:target="products">
+            <div wire:loading.remove wire:target="products">
             @foreach ($products as $product)
             <div class="col-span-6 md:col-span-4 lg:col-span-4 xl:col-span-3 md:flex pb-8 w-full indicator">
                 <div class="card bordered shadow-lg w-full rounded-box bg-base-200">
@@ -167,7 +167,7 @@
             </div>
             @endif
             @livewire('add-cart')
-            <div wire:loading>
+            <div wire:loading wire:target="products">
 
             Processing Menu...
 
