@@ -41,30 +41,7 @@ class AddCart extends Component
         // dd(123);
         // dd(Auth::user()->merchant->students);
         $this->product = Product::find(1);
-        if (Auth::user()) {
-            if (Auth::user()->merchant) {
-                try {
-                    $this->students = Auth::user()->merchant->students;
-                } catch (\Throwable $th) {
-                    \Log::debug(Auth::user());
-                    \Log::debug($th);
-                    $this->students = [];                    
-                }
-            } else {
-                try {
-                    UserMerchant::create([
-                        'user_id'       =>  Auth::user()->id,
-                        'merchant_id'   =>  34,
-                        'type'          => 'website',
-                    ]);
-                } catch (\Throwable $th) {
-                    //throw $th;
-                }
-                $this->students = [];
-            }
-        } else {
-            $this->students = [];
-        }
+        $this->students = [];
         // dd($this->students);
     }
 
@@ -131,14 +108,14 @@ class AddCart extends Component
             $user = User::find(Auth::id());
             $menu_product_id = $this->menu_product_id;
             $menu_product_date = $this->menu_product_date;
-            $product_id = $this->product->id;
+            // $product_id = $this->product->id;
             $location_id = 57;
 
-            $cart = $user->cartItem()->where([
-                'menu_product_id' => $menu_product_id,
-                'product_sku_id' => $this->product->skus()->first()->id,
-                'store_id' => $location_id,
-            ])->first();
+            // $cart = $user->cartItem()->where([
+            //     'menu_product_id' => $menu_product_id,
+            //     'product_sku_id' => $this->product->skus()->first()->id,
+            //     'store_id' => $location_id,
+            // ])->first();
             $success = true;
             $refreshPage = true;
 

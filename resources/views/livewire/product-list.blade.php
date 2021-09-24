@@ -56,13 +56,13 @@
 
             @php
             $bentos = auth()
-            ->user()
-            ->bentos()
-            ->where([
-            'status' => 'paid',
-            'menu_date' => $menu_date,
-            ])
-            ->get();
+                ->user()
+                ->bentos()
+                ->where([
+                'status' => 'paid',
+                'menu_date' => $menu_date,
+                ])
+                ->get();
             $codes = $bentos->groupBy('extraction_code');
             @endphp
 
@@ -87,7 +87,7 @@
                     </div>
                 </div>
             </div>
-            <div class="hidden md:flex col-span-12 w-full">
+            {{--<div class="hidden md:flex col-span-12 w-full">
                 <div class="w-full overflow-hidden">
                     <div class="grid grid-cols-12 gap-4 pb-4">
                         <h3 class="col-span-12 font-semibold">{{__('Ordered')}}:</h3>
@@ -107,7 +107,7 @@
                         @endforeach
                     </div>
                 </div>
-            </div>
+            </div>--}}
 
             @endif
             @endauth
