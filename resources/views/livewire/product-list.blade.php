@@ -116,7 +116,7 @@
             <h3 class="col-span-12 font-semibold">{{__('Menu')}}:</h3>
             @if($products)
             @foreach ($products as $product)
-            <div wire:loading.remove wire:target="products" class="col-span-6 md:col-span-4 lg:col-span-4 xl:col-span-3 md:flex pb-8 w-full indicator">
+            <div class="col-span-6 md:col-span-4 lg:col-span-4 xl:col-span-3 md:flex pb-8 w-full indicator">
                 <div class="card bordered shadow-lg w-full rounded-box bg-base-200">
                     <figure class="px-4 pt-4">
                         <img src="{{$product->image_file? $product->image_file : 'https://www.kenyons.com/wp-content/uploads/2017/04/default-image-620x600.jpg'}}" class="h-40 object-cover object-center rounded-box bg-cover bg-center">
