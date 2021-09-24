@@ -81,6 +81,7 @@
                                 </div>
                             </div>
                             <div class="text-sm"><code>{{ $code }}</code></div>
+                            <div class="text-sm"><code>Total: {{ count($orders) }}</code></div>
                             <a target="_blank" class="text-xs link link-primary" href="https://air.ecbento.com/qr/ecb{{$code}}">View Detail</a>
                         </div>
                         @endforeach
