@@ -167,7 +167,7 @@ class CheckoutCard extends Component
             $orderItem = $order->items()->create([
                 'product_sku_id' => $cartItem->product_sku_id,
                 'product_id' => $cartItem->product_id,
-                'store_id' => 57,
+                'store_id' => $itemStore,
                 'quantity' => $cartItem->quantity,
                 'extraction_code' => $extraction_code,
                 'extraction_start' => date('Y-m-d', strtotime($cartItem->menu_date)) . ' ' . $period->start,
