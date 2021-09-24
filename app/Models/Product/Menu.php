@@ -8,6 +8,11 @@ class Menu extends Model
 {
     public $guarded = [];
 
+    protected $casts = [
+        'menu_date' => 'date',
+        'end_date' => 'date',
+    ];
+
     public function products()
     {
         return $this->belongsToMany(\App\Models\Product\Product::class)

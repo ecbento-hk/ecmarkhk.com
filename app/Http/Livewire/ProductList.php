@@ -70,21 +70,22 @@ class ProductList extends Component
 
 
         $store = $this->location;
+        $period_id = $this->periodId->id;
+        // $menu = Menu::where([
+        //     'menu_date' => $date,
+        // ])->where('period_id',$period_id)
+        // ->whereHas('locations', function($query) use($store){
+        //     $query->where('store_id', $store)->whereNotNull('stock');
+        // })->active()->first();
 
-        $menu = Menu::where([
-            'menu_date' => $date,
-        ])->where('period_id',$this->periodId->id)
+        $menu = Menu::where('menu_date','<=',$date)
+        ->where('end_date','>=',$date)
+        ->whereNotNull('end_date')
+        ->where('period_id',$period_id)
         ->whereHas('locations', function($query) use($store){
             $query->where('store_id', $store)->whereNotNull('stock');
         })->active()->first();
 
-        // $menu = Menu::where('menu_date','<=',$date)
-        // ->where('end_date','>=',$date)
-        // ->whereNotNull('end_date')
-        // ->where('period_id',$period_id)
-        // ->whereHas('locations', function($query) use($store){
-        //     $query->where('store_id', $store)->whereNotNull('stock');
-        // })->active()->first();
         if ($menu) {
             $this->products = $menu->products()->get();
         } else {
@@ -141,6 +142,7 @@ class ProductList extends Component
 
     public function addToCart($productId,$menuDate)
     {
+        // dd(123);
         $this->emitTo('add-cart', 'addToCart', $productId, $menuDate);
     }
 

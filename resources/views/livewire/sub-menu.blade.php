@@ -18,19 +18,25 @@
             //if($item<=date('Y-m-d')){ continue; } 
                 $menuDate=$item; //$menuDate=$item->format("Y-m-d");
                 $payload = serialize(['menu_date'=>$menuDate,'location'=>$location]);
-                //if(Auth::user()){
-                //$quantity = Auth::user()->cartItem()->where('menu_date',$menuDate)->sum('quantity');
-                //} else {
+                if(Auth::user()){
+                $quantity = Auth::user()->cartItem()->where('menu_date',$menuDate)->sum('quantity');
+                } else {
                 $quantity = 0;
-                //}
+                }
                 @endphp
                 <li class="flex justify-between @if($menu_date==$menuDate) bg-gray-200 @endif text-sm @if($quantity>0) text-secondary @endif">
                     <a href="?menu={{base64_encode($payload)}}" class="flex justify-between">
                         <!-- wire:click="menuDateUpdate('{{$menuDate}}')" href="?menu={{base64_encode($payload)}}" -->
                         <span>
                             @php
-                           
-                            $orders = false;
+                            if(Auth::user()){
+                            $orders = auth()->user()->bentos()->where([
+                                'menu_date'=>$menuDate,
+                                'status' => 'paid'
+                            ])->exists();
+                            } else {
+                                $orders = false;
+                            }
 
                             @endphp
                             @if(!$orders)
