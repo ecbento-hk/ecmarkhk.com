@@ -23,6 +23,8 @@ class AddCart extends Component
         'class' => '',
         'name' => ''
     ];
+    public $store_id;
+    public $period_id;
     public $new_student = '';
     public $disabledButton = false;
     public $disabledRemark = false;
@@ -45,9 +47,11 @@ class AddCart extends Component
         // dd($this->students);
     }
 
-    public function addingProduct($productId, $menuDate = null)
+    public function addingProduct($productId, $store_id, $period_id, $menuDate = null)
     {
-        // dd($menuDate);
+        // dd($period_id);
+        $this->store_id = $store_id;
+        $this->period_id = $period_id;
         $this->addingToCart = true;
         $this->product = Product::find($productId);
         $this->title = $this->product->title;
@@ -109,7 +113,7 @@ class AddCart extends Component
             $menu_product_id = $this->menu_product_id;
             $menu_product_date = $this->menu_product_date;
             // $product_id = $this->product->id;
-            $location_id = 57;
+            $location_id = $this->store_id;
 
             // $cart = $user->cartItem()->where([
             //     'menu_product_id' => $menu_product_id,
@@ -153,7 +157,7 @@ class AddCart extends Component
                     'remark' => $this->remark,
                     'amount' => $this->quantity * $this->price,
                     'menu_date' => $menu_product_date,
-                    'period_id' => 18
+                    'period_id' => $this->period_id
                 ];
                 $user->cartItem()->create($newCart);
                 $message = 'Added to cart';

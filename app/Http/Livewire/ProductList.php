@@ -140,10 +140,10 @@ class ProductList extends Component
         $this->loadProduct();
     }
 
-    public function addToCart($productId,$menuDate)
+    public function addToCart($productId,$storeId,$periodId,$menuDate)
     {
         // dd(123);
-        $this->emitTo('add-cart', 'addToCart', $productId, $menuDate);
+        $this->emitTo('add-cart', 'addToCart', $productId, $storeId, $periodId, $menuDate);
     }
 
     public function render()

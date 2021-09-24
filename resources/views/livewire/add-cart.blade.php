@@ -85,7 +85,7 @@
           
             <div class="flex">
               <span class="title-font font-bold text-2xl py-2 pr-6 text-gray-900">${{$price}}</span>
-              <button {{ $disabledButton ? 'disabled' : '' }} wire:click="addToCart()" class="flex ml-auto text-white btn-primary btn border-0 py-2 px-6 mr-3 focus:outline-none">{{__('Add To Cart')}}</button>
+              <button wire:click="addToCart()" class="flex ml-auto text-white btn-primary btn border-0 py-2 px-6 mr-3 focus:outline-none">{{__('Add To Cart')}}</button>
               <button wire:click="$set('addingToCart',false)" class="px-3 py-2 btn btn-outline btn-secondary font-bold uppercase rounded-lg">{{__('Close')}}</button>
             </div>
 
