@@ -44,6 +44,7 @@ class UserNotify extends Component
             $locationId = $value;
             $location = Store::find($locationId);
             $user = User::find(Auth::user()->id);
+            $user->addresses()->delete();
             $user->addresses()->create([
                 'city'=>'HK',
                 'location_id' => $locationId,
