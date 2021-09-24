@@ -16,7 +16,7 @@ class ProductList extends Component
 {
     use WithPagination;
 
-    protected $products = [];
+    public $products = [];
     public $brand = 'ecbento';
     public $menu_date;
     public $period = [];
@@ -72,7 +72,7 @@ class ProductList extends Component
         $this->periodId = Period::find( $period_id );
         $store = $this->location;
         $this->locationName = Store::find($store)->name;
-        
+
         $menu = Menu::where('menu_date','<=',$this->menu_date)
         ->where('end_date','>=',$this->menu_date)
         ->whereNotNull('end_date')
@@ -87,6 +87,7 @@ class ProductList extends Component
             $this->filter = [];
         }
        
+        // dd($this->products);
         // $this->emit('$refresh');
     }
 
@@ -135,10 +136,7 @@ class ProductList extends Component
 
     public function render()
     {
-        return view('livewire.product-list', [
-            'products' => $this->products,
-            'tag' => $this->filter,
-            'menu_date' => $this->filter
-        ]);
+        // dd($this->products);
+        return view('livewire.product-list');
     }
 }

@@ -1,6 +1,6 @@
 <div class="w-full">
     <!-- Remove py-8 -->
-    <div wire:loading.remove class="">
+    <div class="">
 
         <div class="grid grid-cols-12 gap-6">
             <div class="col-span-12 pb-1 w-full">
@@ -114,7 +114,8 @@
 
 
             <h3 class="col-span-12 font-semibold">{{__('Menu')}}:</h3>
-            @if(count($products)>0)
+            @if($products)
+            <div wire:loading wire:target="products">
             @foreach ($products as $product)
             <div class="col-span-6 md:col-span-4 lg:col-span-4 xl:col-span-3 md:flex pb-8 w-full indicator">
                 <div class="card bordered shadow-lg w-full rounded-box bg-base-200">
@@ -130,7 +131,7 @@
                                 //$product->id;
                             }
                             $periodEnd = $periodId->preorder_end;
-                            $stock = $product->stock($product->pivot->id,$menu_date,$location,$periodEnd);
+                            $stock = 1;
                             @endphp
                         </span>
                         <h4 class="font-bold text-xs lg:text-md">
@@ -140,21 +141,7 @@
 
                     </div>
 
-                    {{-- <div class="hidden flex space-x-4 text-sm w-full px-6 pt-3 pb-6">
-                       
-                        <a aria-label="Stock" class="flex items-start text-gray-800 transition-colors duration-200 hover:text-deep-purple-accent-700 group">
-                            <div class="mr-2">
-                                <svg stroke="currentColor" class="w-4 h-5 text-gray-600 transition-colors duration-200 group-hover:text-deep-purple-accent-700" width="24" height="24" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="6" y="12" width="36" height="30" rx="2" fill="none" stroke="#333" stroke-width="4" stroke-linejoin="round"/><path d="M17.9498 24.0083L29.9498 24.0083" stroke="#333" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/><path d="M6 13L13 5H35L42 13" stroke="#333" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                            </div>
-                            <p class="font-semibold">{{$stock}}</p>
-                        </a>
-                        <a href="/" aria-label="Comment" class="flex items-start text-gray-800 transition-colors duration-200 hover:text-deep-purple-accent-700 group">
-                            <div class="mr-2">
-                                <svg width="24" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-4 h-5 text-gray-600 transition-colors duration-200 group-hover:text-deep-purple-accent-700" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4 6H44V36H29L24 41L19 36H4V6Z" fill="none" stroke="#333" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/><path d="M23 21H25.0025" stroke="#333" stroke-width="4" stroke-linecap="round"/><path d="M33.0011 21H35" stroke="#333" stroke-width="4" stroke-linecap="round"/><path d="M13.001 21H14.9999" stroke="#333" stroke-width="4" stroke-linecap="round"/></svg>
-                            </div>
-                            <p class="font-semibold">{{$product->sold_count}}</p>
-                        </a>
-                    </div> --}}
+
                     <div class="pb-4 px-5 w-full mt-3 justify-between">
                         <h3 class="text-md font-bold mb-3">
                             ${{$product->price}}
@@ -174,38 +161,20 @@
                     </div>
                 </div>
                 <!-- ordered -->
-                @auth
-                @php
-                $ordered = \App\Models\Order\OrderItem::where([
-                'user_id'=>auth()->user()->id,
-                'product_id'=>$product->id,
-                'status'=>'paid',
-                'menu_date'=>$menu_date,
-                ])->exists();
-                @endphp
-                @if($ordered)
-                <div class="indicator-item badge badge-info uppercase text-xs py-4" style="right:20px!important">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M5 13l4 4L19 7" />
-                    </svg>
-                </div>
-                @endif
-                @endauth
+                
             </div>
             @endforeach
+            </div>
             @endif
             @livewire('add-cart')
-            {{-- @if ($products)
-        <div class="col-span-12 px-4 py-8">
-            {{ $products->links() }}
-        </div>
-        @endif --}}
+            <div wire:loading>
+
+            Processing Menu...
+
+            </div>
+
     </div>
 
     </div>
-    <div wire:loading>
-
-    Processing Menu...
-
-    </div>
+  
 </div>
