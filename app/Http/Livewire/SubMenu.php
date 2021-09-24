@@ -48,6 +48,13 @@ class SubMenu extends Component
         $this->emit('$refresh');
     }
 
+    public function menuDateUpdate($date){
+        // dd($date);
+        $this->menu_date = $date;
+        $this->emitTo('product-list','changeMenuDate', $date);
+        $this->emit('$refresh');
+    }
+
     public function render()
     {
         $period = $this->period;

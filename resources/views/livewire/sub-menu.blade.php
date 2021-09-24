@@ -16,7 +16,7 @@
 
             @php
             //if($item<=date('Y-m-d')){ continue; } 
-            $menuDate=$item; //$menuDate=$item->format("Y-m-d");
+                $menuDate=$item; //$menuDate=$item->format("Y-m-d");
                 $payload = serialize(['menu_date'=>$menuDate,'location'=>$location]);
                 if(Auth::user()){
                 $quantity = Auth::user()->cartItem()->where('menu_date',$menuDate)->sum('quantity');
@@ -24,9 +24,9 @@
                 $quantity = 0;
                 }
                 @endphp
-
                 <li class="flex justify-between @if($menu_date==$menuDate) bg-gray-200 @endif text-sm @if($quantity>0) text-secondary @endif">
-                    <a href="?menu={{base64_encode($payload)}}" class="flex justify-between">
+                    <a wire:click="menuDateUpdate('{{$menuDate}}')" class="flex justify-between">
+                        <!-- href="?menu={{base64_encode($payload)}}" -->
                         <span>
                             @php
                             if(Auth::user()){

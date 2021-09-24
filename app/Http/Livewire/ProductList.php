@@ -30,7 +30,7 @@ class ProductList extends Component
     public $user_store, $storeid;
 
     protected $listeners = [
-        'brandUpdate' => 'changeBrand',
+        'changeMenuDate' => 'changeMenuDate',
         'startDate' => 'setStartDate',
         'updateLocation' => 'locationUpdate'
     ];
@@ -48,13 +48,15 @@ class ProductList extends Component
         $this->emit('$refresh');
     }
 
-    public function changeBrand(string $brand)
+    public function changeMenuDate(string $date)
     {
-        $this->loadProduct();
+        // dd($date);
+        $this->loadProduct($date);
+        // dd($this->products);
         $this->emitSelf('$refresh');
     }
 
-    public function loadProduct()
+    public function loadProduct($date = null)
     {
         // $this->reset(['products']);
         // $this->brand = $brand;
@@ -66,15 +68,16 @@ class ProductList extends Component
         //     $query->whereIn('store_id', [$store])->where('active',1)->whereNotNull('stock');
         // })->active()->first();
         $period_id = 2;
-        if(Auth::check()){
-            $period_id = auth()->user()->period_id;
+
+        if($date == null){
+            $date = $this->menu_date;
         }
         $this->periodId = Period::find( $period_id );
         $store = $this->location;
         $this->locationName = Store::find($store)->name;
 
-        $menu = Menu::where('menu_date','<=',$this->menu_date)
-        ->where('end_date','>=',$this->menu_date)
+        $menu = Menu::where('menu_date','<=',$date)
+        ->where('end_date','>=',$date)
         ->whereNotNull('end_date')
         ->where('period_id',$period_id)
         ->whereHas('locations', function($query) use($store){

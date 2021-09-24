@@ -60,7 +60,7 @@ class UserNotify extends Component
             $this->emitTo('sub-menu','updateLocation',$value);
             $this->emitTo('product-list','updateLocation',$value);
         }
-        // $this->storeid = $value;
+        $this->storeid = $value;
         // config()->set('menu.store', $value);   
         // $payload = serialize(['location'=>$value]);
         // return redirect()->route('welcome',[
