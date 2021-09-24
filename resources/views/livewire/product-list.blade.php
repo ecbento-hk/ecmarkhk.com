@@ -165,9 +165,9 @@
             @endforeach
             @endif
             @livewire('add-cart')
-            <div class="col-span-12" wire:loading wire:target="products">
+            <div class="col-span-12 hidden" wire:loading.class.remove="hidden" wire:target="products">
 
-            Processing Menu...
+            {{__('Loading Menu')}}...
 
             </div>
 
