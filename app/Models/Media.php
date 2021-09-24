@@ -28,13 +28,13 @@ class Media extends Model
     {
 
         $link = 'https://air.ecbento.com' . Storage::url($this->path . $this->file_name);
-        $headers = get_headers($link);
-        $exists = stripos($headers[0],"200 OK")?true:false;
-        if ($exists) {
-            return $link;
-        } else {
-            return str_replace('air.ecbento.com','supplier.ecbento.com',$link);
-        }
+        // $headers = get_headers($link);
+        // $exists = stripos($headers[0],"200 OK")?true:false;
+        // if ($exists) {
+        //     return $link;
+        // } else {
+        // }
+        return str_replace('air.ecbento.com','supplier.ecbento.com',$link);
         return $link;
     }
 

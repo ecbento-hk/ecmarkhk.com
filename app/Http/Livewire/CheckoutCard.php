@@ -120,7 +120,8 @@ class CheckoutCard extends Component
         // session()->flash('message', 'Post successfully updated.');
         $this->cartItems = Auth::user()->cartItem()->get();
         $this->payments  = Payment::whereIn('id', [5])->get();
-        $this->coupons   = Coupon::where('active', 1)->where('value', '>', 0)->inRandomOrder()->limit(10)->get();
+        // $this->coupons   = Coupon::where('active', 1)->where('value', '>', 0)->inRandomOrder()->limit(10)->get();
+        $this->coupons   = [];
     }
 
     public function createOrder($payment){

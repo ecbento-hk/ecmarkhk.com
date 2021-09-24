@@ -71,45 +71,7 @@
   <h3 class="text-2xl">{{__('Checkout Now')}}</h3>
   <form wire:submit.prevent="submit">
     <div class="my-4 mt-6 -mx-2 mb-6 lg:mb-0 lg:flex text-sm">
-      <div class="hidden lg:px-2 lg:w-1/2">
-        <div class="p-4 bg-base-300 rounded-lg">
-          <h1 class="ml-2 font-bold uppercase">Coupon Code</h1>
-        </div>
-        <div class="p-4">
-          <p class="mb-4 italic">If you have a coupon code, please enter it in the box below</p>
-          <div class="grid grid-cols-4 gap-4">
-            @foreach ($coupons as $coupon)
-            <div wire:click="$emit('coupon_choosed','{{$coupon->id}}')" class="{{ ($selected_coupon==$coupon->id)?'bg-primary text-white':'bg-gray-300 text-gray-400' }} text-center text-md cursor-pointer hover:shadow-lg shadow-md font-bold p-2 rounded-lg">
-              ${{$coupon->value}}
-            </div>
-            @endforeach
-          </div>
-        </div>
 
-        <div class="p-4 mt-6 bg-base-300 rounded-lg">
-          <h1 class="ml-2 font-bold uppercase">{{__('Shipping Option')}}</h1>
-        </div>
-        <div class="p-4">
-          <p class="mb-4 italic">If you have a coupon code, please enter it in the box below</p>
-          <div class="grid grid-cols-2 gap-4">
-            <div wire:click="$emit('shipping_choosed','{{$coupon->id}}')" class="{{ ($selected_coupon==$coupon->id)?'bg-primary text-white':'bg-gray-300 text-gray-400' }} text-center text-md cursor-pointer hover:shadow-lg shadow-md font-bold p-2 rounded-lg">
-              Self Pick-Up
-            </div>
-            <div wire:click="$emit('shipping_choosed','{{$coupon->id}}')" class="{{ ($selected_coupon==$coupon->id)?'bg-primary text-white':'bg-gray-300 text-gray-400' }} text-center text-md cursor-pointer hover:shadow-lg shadow-md font-bold p-2 rounded-lg">
-              Delivery
-            </div>
-          </div>
-        </div>
-
-        <div class="p-4 mt-6 bg-base-300 rounded-lg">
-          <h1 class="ml-2 font-bold uppercase">{{__('Instruction for seller')}}</h1>
-        </div>
-
-        <div class="p-4">
-          <p class="mb-4 italic">If you have some information for the seller you can leave them in the box below</p>
-          <textarea class="w-full h-24 p-2 bg-base-100 rounded"></textarea>
-        </div>
-      </div>
       <div class="lg:px-2 lg:w-1/2">
         <div class="p-4 bg-base-300 rounded-lg">
           <h1 class="ml-2 font-bold uppercase">{{__('Payment Method')}}</h1>
@@ -143,7 +105,7 @@
           </div>
           <div class="p-4 grid grid-cols-3 gap-4">
             <input id="cc" type="text" x-data="$('#cc').inputmask('9999-9999-9999-9999');" class="col-span-3" wire:model="number" placeholder="Card Number">
-            <select wire:model="exp_month" placeholder="exp_month">
+            <select wire:model.defer="exp_month" placeholder="exp_month">
               <option value="MM">MM</option>
               <option value="01">01</option>
               <option value="02">02</option>
@@ -158,7 +120,7 @@
               <option value="11">11</option>
               <option value="12">12</option>
             </select>
-            <select wire:model="exp_year" placeholder="exp_year">
+            <select wire:model.defer="exp_year" placeholder="exp_year">
               <option value="YYYY">YYYY</option>
               <option value="2021">2021</option>
               <option value="2022">2022</option>
@@ -181,7 +143,7 @@
               <option value="2039">2039</option>
               <option value="2040">2040</option>
             </select>
-            <input type="text" id="cvc" x-data="$('#cvc').inputmask('999');" wire:model="cvc" placeholder="cvc">
+            <input type="text" id="cvc" x-data="$('#cvc').inputmask('999');" wire:model..defer="cvc" placeholder="cvc">
           </div>
 
           <script>
