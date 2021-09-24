@@ -25,18 +25,12 @@
                 }
                 @endphp
                 <li class="flex justify-between @if($menu_date==$menuDate) bg-gray-200 @endif text-sm @if($quantity>0) text-secondary @endif">
-                    <a wire:click="menuDateUpdate('{{$menuDate}}')" class="flex justify-between">
-                        <!-- href="?menu={{base64_encode($payload)}}" -->
+                    <a href="?menu={{base64_encode($payload)}}" class="flex justify-between">
+                        <!-- wire:click="menuDateUpdate('{{$menuDate}}')" href="?menu={{base64_encode($payload)}}" -->
                         <span>
                             @php
-                            if(Auth::user()){
-                            $orders = auth()->user()->bentos()->where([
-                                'menu_date'=>$menuDate,
-                                'status' => 'paid'
-                            ])->exists();
-                            } else {
-                                $orders = false;
-                            }
+                           
+                            $orders = false;
 
                             @endphp
                             @if(!$orders)

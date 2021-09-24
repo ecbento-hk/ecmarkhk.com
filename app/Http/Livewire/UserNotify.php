@@ -56,16 +56,17 @@ class UserNotify extends Component
                 'contact_phone'=>$user->phone_no,
                 'last_used_at'=>date('Y-m-d H:i:s'),
             ]);
-        } else {
-            $this->emitTo('sub-menu','updateLocation',$value);
-            $this->emitTo('product-list','updateLocation',$value);
-        }
+        } 
+        // else {
+            // $this->emitTo('sub-menu','updateLocation',$value);
+            // $this->emitTo('product-list','updateLocation',$value);
+        // }
         $this->storeid = $value;
         // config()->set('menu.store', $value);   
-        // $payload = serialize(['location'=>$value]);
-        // return redirect()->route('welcome',[
-        //     'menu' => base64_encode($payload)
-        // ]);
+        $payload = serialize(['location'=>$value]);
+        return redirect()->route('welcome',[
+            'menu' => base64_encode($payload)
+        ]);
         // dd(url()->current());
         // return redirect(Request::url());
     }

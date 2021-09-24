@@ -50,7 +50,7 @@ class ProductList extends Component
 
     public function changeMenuDate(string $date)
     {
-        // dd($date);
+        dd($date);
         $this->loadProduct($date);
         // dd($this->products);
         $this->emitSelf('$refresh');
@@ -61,28 +61,30 @@ class ProductList extends Component
         // $this->reset(['products']);
         // $this->brand = $brand;
 
-        // $menu = Menu::where([
-        //     'menu_date' => $this->menu_date,
-        // ])->whereIn('period_id',$period_id)
-        // ->whereHas('locations', function($query) use($store){
-        //     $query->whereIn('store_id', [$store])->where('active',1)->whereNotNull('stock');
-        // })->active()->first();
+        
         $period_id = 2;
 
         if($date == null){
             $date = $this->menu_date;
         }
+
         $this->periodId = Period::find( $period_id );
         $store = $this->location;
-        $this->locationName = Store::find($store)->name;
 
-        $menu = Menu::where('menu_date','<=',$date)
-        ->where('end_date','>=',$date)
-        ->whereNotNull('end_date')
-        ->where('period_id',$period_id)
+        $menu = Menu::where([
+            'menu_date' => $date,
+        ])->where('period_id',$period_id)
         ->whereHas('locations', function($query) use($store){
             $query->where('store_id', $store)->whereNotNull('stock');
         })->active()->first();
+
+        // $menu = Menu::where('menu_date','<=',$date)
+        // ->where('end_date','>=',$date)
+        // ->whereNotNull('end_date')
+        // ->where('period_id',$period_id)
+        // ->whereHas('locations', function($query) use($store){
+        //     $query->where('store_id', $store)->whereNotNull('stock');
+        // })->active()->first();
         if ($menu) {
             $this->products = $menu->products()->get();
         } else {
@@ -125,6 +127,8 @@ class ProductList extends Component
         } else {
             $this->storeid = $this->location;
         }
+
+        $this->locationName = Store::find($this->storeid)->name;
 
         $this->filter = $filter;
         $this->type = $type;
