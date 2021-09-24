@@ -46,7 +46,7 @@ class SettingServiceProvider extends ServiceProvider
         //         ]);
         //     })->get();
         // }
-        $endDate = Menu::where('period_id',17)->where('end_date','>=',date('Y-m-d'))->get()->max('end_date');
+        // $endDate = Menu::where('period_id',17)->where('end_date','>=',date('Y-m-d'))->get()->max('end_date');
 
         // $menu_date = $cache->remember('menu_date', 60, function() use ($menu){
         //     // Laravel >= 5.2, use 'lists' instead of 'pluck' for Laravel <= 5.1
@@ -54,13 +54,14 @@ class SettingServiceProvider extends ServiceProvider
         // });
         $menu_date = [];
         $begin = new DateTime('now');
-        $end = new DateTime($endDate);
-        $end->modify('+1 day');
+        $end = new DateTime('now');
+        $end = $end->modify('+14 day');
+        // $end->modify('+1 day');
         // dd($end);
         for($i = $begin; $i < $end; $i->modify('+1 day')){
             $menu_date[] = $i->format("Y-m-d");
         }
-
+        // dd($begin);
         config()->set('menu.date', $menu_date);
 
         // $user_store = 54;

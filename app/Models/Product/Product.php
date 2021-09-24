@@ -155,24 +155,27 @@ class Product extends Model
         return $this->getTranslation('title', 'zh-hk');
         // return route('images.product', ['slug' => $this->slug]);
     }
-    public function stock($menuId,$menuDate,$location)
+    public function stock($menuId,$menuDate,$location,$perorderEnd)
     {
         $stock = 0;
-        $locationStock = MenuLocationStock::where([
-                            'menu_product_id' => $menuId,
-                            'product_id'     => $this->id,
-                            'store_id'       => $location,
-                            'active'         => 1
-                        ])->first();
-        if($locationStock){
-            $menuDate = $menuDate . ' ' .$locationStock->menu->period->preorder_end;
-            // dd($menuDate);
-            if($menuDate > date('Y-m-d H:i:s')){
-                $stock = $locationStock->menuProduct->stock;
-            } else {
+        $menuDate = $menuDate . ' ' .$perorderEnd;
+        if($menuDate > date('Y-m-d H:i:s')){
+        } else {
+            try {
+                
+                $locationStock = MenuLocationStock::where([
+                    'menu_product_id' => $menuId,
+                    'product_id'     => $this->id,
+                    'store_id'       => $location,
+                    'active'         => 1
+                ])->first();
                 $stock = $locationStock->real_stock;
+
+            } catch (\Throwable $th) {
+                //throw $th;
             }
         }
+
         return $stock;
     }
     // {

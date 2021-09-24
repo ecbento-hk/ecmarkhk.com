@@ -3,6 +3,7 @@
 namespace App\Http\Livewire;
 
 use App\Http\Resources\ProductResource;
+use App\Models\Period;
 use App\Models\Product\Menu;
 use App\Models\Product\Product;
 use App\Models\UserAddress;
@@ -18,6 +19,7 @@ class ProductList extends Component
     public $brand = 'ecbento';
     public $menu_date;
     public $period = [];
+    public $periodId;
     public $search = '';
     public $type;
     public $location = 54;
@@ -97,7 +99,8 @@ class ProductList extends Component
 
         $this->filter = $filter;
         $this->type = $type;
-        $this->tags = \DB::table('taggables')->get();
+        // $this->tags = \DB::table('taggables')->get();
+        $this->tags = [];
         $this->loadProduct($this->brand);
     }
 
@@ -108,7 +111,11 @@ class ProductList extends Component
 
     public function render()
     {
-        $period_id = [17];
+        $period_id = 2;
+        if(Auth::check()){
+            $period_id = auth()->user()->period_id;
+        }
+        $this->periodId = Period::find( $period_id );
         $store = $this->location;
 
         // $menu = Menu::where([
@@ -117,22 +124,20 @@ class ProductList extends Component
         // ->whereHas('locations', function($query) use($store){
         //     $query->whereIn('store_id', [$store])->where('active',1)->whereNotNull('stock');
         // })->active()->first();
-        
+
         $menu = Menu::where('menu_date','<=',$this->menu_date)
         ->where('end_date','>=',$this->menu_date)
         ->whereNotNull('end_date')
-        ->whereIn('period_id',$period_id)
+        ->whereIn('period_id',[$period_id])
         ->whereHas('locations', function($query) use($store){
-                $query->whereIn('store_id', [$store])->where('active',1)->whereNotNull('stock');
-            })->active()->first();
+            $query->where('store_id', $store)->where('active',1)->whereNotNull('stock');
+        })->active()->first();
         if ($menu) {
-            $this->products = ProductResource::collection($menu->products()->get());
-            // dd($this->products);
+            $this->products = $menu->products()->get();
         } else {
             $this->products = [];
             $this->filter = [];
         }
-
         
         return view('livewire.product-list', [
             'products' => $this->products,

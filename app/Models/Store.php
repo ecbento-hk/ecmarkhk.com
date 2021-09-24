@@ -79,7 +79,8 @@ class Store extends Model implements Sortable
             if($this->code == 'EC-ANYWHERE'){
                 return $this->name;
             }
-            return $this->name.', '.ucfirst($this->area->name).', '.ucfirst($this->area->country->name);
+            return $this->name;
+            // return $this->name.', '.ucfirst($this->area->name).', '.ucfirst($this->area->country->name);
         } else {
             return '---';
         }

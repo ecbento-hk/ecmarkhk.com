@@ -1,4 +1,4 @@
-<div class="w-full">
+<div wire:loading.remove class="w-full">
     <!-- Remove py-8 -->
     <div class="">
 
@@ -129,7 +129,8 @@
                             } catch (\Throwable $th) {
                             $product->id;
                             }
-                            $stock = $product->stock($product->pivot->id,$menu_date,$location);
+                            $periodEnd = $periodId->preorder_end;
+                            $stock = $product->stock($product->pivot->id,$menu_date,$location,$periodEnd);
                             @endphp
                         </span>
                         <h4 class="font-bold text-xs lg:text-md">
@@ -139,7 +140,7 @@
 
                     </div>
 
-                    <div class="flex space-x-4 text-sm w-full px-6 pt-3 pb-6">
+                    {{-- <div class="hidden flex space-x-4 text-sm w-full px-6 pt-3 pb-6">
                        
                         <a aria-label="Stock" class="flex items-start text-gray-800 transition-colors duration-200 hover:text-deep-purple-accent-700 group">
                             <div class="mr-2">
@@ -153,7 +154,7 @@
                             </div>
                             <p class="font-semibold">{{$product->sold_count}}</p>
                         </a>
-                    </div>
+                    </div> --}}
                     <div class="pb-4 px-5 w-full mt-3 justify-between">
                         <h3 class="text-md font-bold mb-3">
                             ${{$product->price}}
