@@ -1,6 +1,6 @@
-<div wire:loading.remove class="w-full">
+<div class="w-full">
     <!-- Remove py-8 -->
-    <div class="">
+    <div wire:loading.remove class="">
 
         <div class="grid grid-cols-12 gap-6">
             <div class="col-span-12 pb-1 w-full">
@@ -46,7 +46,7 @@
                         <path d="M24 22C26.7614 22 29 19.7614 29 17C29 14.2386 26.7614 12 24 12C21.2386 12 19 14.2386 19 17C19 19.7614 21.2386 22 24 22Z" fill="none" stroke="#2196f3" stroke-width="4" stroke-linejoin="round" />
                     </svg>
                     <label class="animate-pulse font-bold">                          
-                        {{\App\Models\Store::find($location)->name}}
+                    {{$locationName}}
                     </label>
                 </div>
             </div>
@@ -125,9 +125,9 @@
                         <span class="menu-title text-opacity-50 text-xs text-gray-800">
                             @php
                             try {
-                            $product->brand->name;
+                                //$product->brand->name;
                             } catch (\Throwable $th) {
-                            $product->id;
+                                //$product->id;
                             }
                             $periodEnd = $periodId->preorder_end;
                             $stock = $product->stock($product->pivot->id,$menu_date,$location,$periodEnd);
@@ -202,5 +202,10 @@
         @endif --}}
     </div>
 
-</div>
+    </div>
+    <div wire:loading>
+
+    Processing Menu...
+
+    </div>
 </div>
