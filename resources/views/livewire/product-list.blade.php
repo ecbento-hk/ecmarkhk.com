@@ -167,7 +167,7 @@
             </div>
             @endif
             @livewire('add-cart')
-            <div wire:loading wire:target="products">
+            <div class="col-span-12" wire:loading wire:target="products">
 
             Processing Menu...
 
