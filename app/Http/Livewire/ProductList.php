@@ -62,18 +62,18 @@ class ProductList extends Component
         // $this->brand = $brand;
 
         
-        $period_id = 2;
+   
 
         if($date == null){
             $date = $this->menu_date;
         }
 
-        $this->periodId = Period::find( $period_id );
+
         $store = $this->location;
 
         $menu = Menu::where([
             'menu_date' => $date,
-        ])->where('period_id',$period_id)
+        ])->where('period_id',$this->period_id)
         ->whereHas('locations', function($query) use($store){
             $query->where('store_id', $store)->whereNotNull('stock');
         })->active()->first();
@@ -98,6 +98,9 @@ class ProductList extends Component
 
     public function mount($type = 'normal', $filter = null)
     {
+        $period_id = 17;
+        $this->periodId = Period::find( $period_id );
+
         $this->period = config('menu.date');
         try {
             $this->menu_date = current($this->period);
