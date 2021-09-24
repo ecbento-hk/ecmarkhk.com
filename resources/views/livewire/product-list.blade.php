@@ -1,4 +1,4 @@
-<div class="w-full">
+<div class="w-full mb-16">
     <!-- Remove py-8 -->
     <div class="">
 

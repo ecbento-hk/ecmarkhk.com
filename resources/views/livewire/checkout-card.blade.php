@@ -1,4 +1,4 @@
-<div>
+<div class="mb-16">
 
   <h3 class="text-2xl">{{__('Your Cart')}}</h3>
   <hr class="pb-6 mt-6">
