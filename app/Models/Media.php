@@ -26,7 +26,6 @@ class Media extends Model
 
     public function getUrlAttribute()
     {
-
         $link = 'https://air.ecbento.com' . Storage::url($this->path . $this->file_name);
         // $headers = get_headers($link);
         // $exists = stripos($headers[0],"200 OK")?true:false;
