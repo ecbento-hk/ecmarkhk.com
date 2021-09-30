@@ -232,6 +232,23 @@
 
         </div>
 
+      <div class="p-4 bg-base-300 rounded-lg">
+          <h1 class="ml-2 font-bold uppercase">{{__('Remark')}}</h1>
+        </div>
+        <div class="p-4 grid grid-cols-3 gap-4">
+         
+                      
+            <div class="form-control">
+              <label class="label">
+                <span class="label-text">如外賣：請填上地址</span>
+              </label> 
+              <input type="text" wire:model="address" placeholder="如外賣：請填上地址" class="input input-bordered">
+            </div>
+
+
+
+        </div>
+
 
         <div class="p-4 mt-6 bg-base-300 rounded-lg">
           <h1 class="ml-2 font-bold uppercase">{{__('Order Details')}}</h1>

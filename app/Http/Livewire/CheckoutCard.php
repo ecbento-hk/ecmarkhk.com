@@ -21,6 +21,7 @@ use Omnipay\Common\CreditCard;
 class CheckoutCard extends Component
 {
     public $cartItems;
+    public $address;
     public $checkingOut,$loading = false;
     public $done = false;
     public $procced = 'Proceed to checkout';
@@ -181,7 +182,7 @@ class CheckoutCard extends Component
                 'machine_id' => $machine ? $machine->machine_id : 1,
                 'type' => (date('H:i:s') <= $period->preorder_end) ? 'preorder' : 'normal',
                 'giveback' => $giveback,
-                'remark' => $cartItem->remark. '-'. $this->selected_shipping
+                'remark' => $this->selected_shipping. '-' .$this->address
             ]);
             $orderItem->save();
 
