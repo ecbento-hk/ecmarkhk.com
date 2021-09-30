@@ -23,7 +23,7 @@ class ProductList extends Component
     public $periodId;
     public $search = '';
     public $type;
-    public $location = 31;
+    public $location = 54;
     public $locationName;
     public $filter = null;
     public $tags = null;
@@ -99,7 +99,7 @@ class ProductList extends Component
 
     public function mount($type = 'normal', $filter = null)
     {
-        $period_id = 17;
+        $period_id = 2;
         $this->periodId = Period::find( $period_id );
 
         $this->period = config('menu.date');
