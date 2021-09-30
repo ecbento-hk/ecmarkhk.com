@@ -118,9 +118,7 @@
 
 
             <h3 class="col-span-12 font-semibold">{{__('Menu')}}:</h3>
-            @if(date('Y-m-d H:i:s') >= $menu_date.' 14:50:00')
-                Preorder End!!!!
-            @else 
+           
 
             @if($products)
             @foreach ($products as $product)
@@ -158,7 +156,11 @@
                         <button disabled class="btn btn-primary btn-block btn-sm text-sm m-0 rounded-lg">{{__('Sold Out')}}</button>
                         @else
                             @auth
+                            @if(date('Y-m-d H:i:s') >= $menu_date.' 14:50:00')
+                            <button disabled class="btn btn-primary btn-block btn-sm text-sm m-0 rounded-lg">{{__('Sold Out')}}</button>
+                            @else 
                             <button wire:click="addToCart({{$product->id}}, {{$storeid}}, {{$periodId->id}}, '{{$menu_date}}')" class="btn btn-primary btn-block btn-sm text-sm m-0 rounded-lg">{{__('Add To Cart')}}</button>
+                                @endif
                             @else
                             <a href="{{route('login')}}" class="btn btn-primary btn-block btn-sm text-sm m-0 rounded-lg">{{__('Add To Cart')}}</a>
                             @endauth
@@ -173,7 +175,7 @@
             @endforeach
             @endif
 
-            @endif
+         
 
 
             @livewire('add-cart')
