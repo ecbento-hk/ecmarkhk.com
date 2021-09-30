@@ -11,6 +11,7 @@ use App\Models\Order\Order;
 use App\Models\Payment;
 use App\Models\Period;
 use App\Models\StoreMachine;
+use App\Models\UserCoupon;
 use App\Models\UserPayment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -96,10 +97,10 @@ class CheckoutCard extends Component
         $this->selected_payment = $payment;
     }
 
-    public function couponChoosed(Coupon $coupon)
+    public function couponChoosed(UserCoupon $coupon)
     {
         $this->selected_coupon = $coupon->id;
-        $this->selected_coupon_price = $coupon->value;
+        $this->selected_coupon_price = $coupon->value?$coupon->value:$coupon->coupon->value;
     }
     
     public function shippingChoosed($method)
@@ -120,7 +121,7 @@ class CheckoutCard extends Component
         // session()->flash('message', 'Post successfully updated.');
         $this->cartItems = Auth::user()->cartItem()->get();
         $this->payments  = Payment::whereIn('id', [5])->get();
-        $this->coupons   = Coupon::where('active', 1)->whereDate('expired_at','>=',date('Y-m-d'))->where('value', '>', 0)->inRandomOrder()->limit(10)->get();
+        $this->coupons   = Auth::user()->coupons()->where('status', 'available')->whereDate('expired_at','>=',date('Y-m-d'))->inRandomOrder()->limit(10)->get();
         // $this->coupons   = [];
     }
 
@@ -180,7 +181,7 @@ class CheckoutCard extends Component
                 'machine_id' => $machine ? $machine->machine_id : 1,
                 'type' => (date('H:i:s') <= $period->preorder_end) ? 'preorder' : 'normal',
                 'giveback' => $giveback,
-                'remark' => $cartItem->remark
+                'remark' => $cartItem->remark. '-'. $this->selected_shipping
             ]);
             $orderItem->save();
 
