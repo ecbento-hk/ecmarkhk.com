@@ -40,16 +40,22 @@
     <p>Copyright © {{date('Y')}} - All right reserved by {{config('app.company')}}</p>
   </div> 
   <div>
-    <span class="footer-title">Pages</span> 
+    <span class="footer-title">{{__('Pages')}}</span> 
+    <div class="grid grid-flow-col gap-4">
+      <a href="{{route('about-us')}}" class="link link-hover">About Us</a>
+      <a href="{{route('t&c')}}" class="link link-hover">Terms And Conditions</a>
+      <a href="{{route('privacy-policy')}}" class="link link-hover">Privacy Policy</a>
+    </div>
+  </div>
+  <div>
+    <span class="footer-title">{{__('Languages')}}</span> 
     <div class="grid grid-flow-col gap-4">
       <a href="{{route('lang.switch',['lang'=>'en'])}}" class="link link-hover">English</a>
       <a href="{{route('lang.switch',['lang'=>'zh-hk'])}}" class="link link-hover">繁體</a>
       <a href="{{route('lang.switch',['lang'=>'zh-cn'])}}" class="link link-hover">簡體</a>
-      <a href="{{route('about-us')}}" class="link link-hover">About Us</a>
-    <a href="{{route('t&c')}}" class="link link-hover">Terms And Conditions</a>
-    <a href="{{route('privacy-policy')}}" class="link link-hover">Privacy Policy</a>
     <!-- <a href="{{route('contact-us')}}" class="link link-hover">Contact Us</a> -->
     </div>
+    
   </div>
   </div>
 </footer>

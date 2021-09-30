@@ -75,7 +75,7 @@
                     <div class="grid grid-cols-12 gap-4 pb-4">
                         <h3 class="col-span-12 font-semibold">{{__('Extraction Code')}}:</h3>
                         @foreach ($codes as $code => $orders)
-                        <div class="stat shadow rounded-box bg-base-200 col-span-6 md:col-span-4">
+                        <div class="stat shadow rounded-box bg-base-100 col-span-6 md:col-span-4">
                             <div class="stat-figure text-info">
                                 <div class="avatar">
                                     <div class="w-16 h-16 p-1 bg-base-100">

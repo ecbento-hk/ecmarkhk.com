@@ -21,7 +21,7 @@
 
 </head>
 
-<body data-theme="light" class="antialiased bg-base-100">
+<body data-theme="light" class="antialiased bg-gray-100">
 
     <div class="text-base-content relative flex justify-center min-h-screen sm:items-center sm:pt-0 px-4 lg:px-0">
 

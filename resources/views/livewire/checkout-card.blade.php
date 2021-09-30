@@ -168,7 +168,7 @@
           </div> -->
 
           <div class="shadow stats cursor-pointer">
-            <div wire:click="updateCardPayment('{{$card->id}}')" class="{{ ($selected_card==$card->id) ? 'bg-primary text-white':'bg-gray-100 text-gray-400' }} stat">
+            <div wire:click="updateCardPayment('{{$card->id}}')" class="{{ ($selected_card==$card->id) ? 'bg-primary text-white':'bg-base-100 text-gray-400' }} stat">
               <div class="stat-title">{{__('Credit Card')}}</div> 
               <div class="stat-value">{{substr($card->name, -4)}}</div> 
               <div class="stat-desc">{{__('Last 4 Characters')}}</div>
@@ -180,6 +180,22 @@
         </div>
 
         @endif
+
+        <div class="p-4 mt-6 bg-base-300 rounded-lg">
+          <h1 class="ml-2 font-bold uppercase">{{__('Choose Coupon')}}</h1>
+        </div>
+        <div class="p-4 grid grid-cols-3 gap-4">
+          @foreach($coupons as $coupon)
+          <div class="shadow stats font-black cursor-pointer">
+            <div wire:click="couponChoosed('{{$coupon->id}}')" class="{{ ($selected_coupon==$coupon->id) ? 'bg-primary text-white':'bg-base-100 text-gray-500' }} stat">
+              <div class="stat-title text-2xl">HKD ${{$coupon->value}}</div> 
+            </div>
+          </div>
+
+
+          @endforeach
+        </div>
+
       </div>
 
       <div class="lg:px-2 lg:w-1/2">
