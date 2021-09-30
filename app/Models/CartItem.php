@@ -28,6 +28,10 @@ class CartItem extends Model
         return $this->belongsTo(Product::class);
     }
  
+    public function store(){
+        return $this->belongsTo(Store::class);
+    }
+ 
     public function menuProduct(){
         return $this->belongsTo(MenuProduct::class);
     }
