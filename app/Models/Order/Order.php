@@ -6,6 +6,7 @@ use App\Classes\Offer;
 use App\Classes\SMS;
 use App\Mail\OrderCreated;
 use App\Models\Message;
+use App\Models\Store;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Mail;
@@ -275,6 +276,10 @@ class Order extends Model
     public function getRealAmountAttribute($value)
     {
         return ($value < 0) ? 0 : $value;
+    }
+
+    public function store(){
+        return $this->belongsTo(Store::class);
     }
 
     public function device()
