@@ -50,7 +50,7 @@ class ProductList extends Component
 
     public function changeMenuDate(string $date)
     {
-        dd($date);
+        // dd($date);
         $this->loadProduct($date);
         // dd($this->products);
         $this->emitSelf('$refresh');
@@ -83,7 +83,6 @@ class ProductList extends Component
         ->whereHas('locations', function($query) use($store){
             $query->where('store_id', $store)->whereNotNull('stock');
         })->active()->first();
-
         if ($menu) {
             $this->products = $menu->products()->get();
         } else {
@@ -126,6 +125,9 @@ class ProductList extends Component
         if(Auth::check()){
             $this->user_store = UserAddress::where('user_id',Auth::user()->id)->orderBy('created_at','desc')->first();
             $this->storeid = $this->user_store->location_id;
+            if($this->storeid !== $this->location){
+                $this->storeid = $this->location;
+            }
         } else {
             $this->storeid = $this->location;
         }

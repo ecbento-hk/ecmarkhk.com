@@ -66,6 +66,10 @@
                 <span class="mr-3">{{__('Quantity')}}</span>
                 <x-input.quantity wire:model="quantity" />
               </div>
+              <div class="flex items-center">
+                <span class="mr-3">{{__('Remark')}}</span>
+                <input type="text" class="input" placeholder="如外賣：請輸入地址">
+              </div>
             </div>
         
 

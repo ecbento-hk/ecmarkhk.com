@@ -81,17 +81,17 @@
           @php
           $userCards = auth()->user()->payments()->where(['brand'=>'STRIPE'])->get();
           @endphp
-          <div class="grid grid-cols-3 grid-rows-3 gap-4">
+          <div class="grid grid-cols-3 grid-rows-1 gap-4">
             @if(count($userCards)>0)
             @foreach ($payments as $payment)
-            <div wire:click="$emit('payment_method','{{$payment->code}}')" class="{{ ($selected_payment==$payment->code)?'bg-primary text-white':'bg-gray-100 text-gray-400' }} text-center text-md cursor-pointer hover:shadow-lg shadow-md font-bold p-2 rounded-lg">
+            <div wire:click="$emit('payment_method','{{$payment->code}}')" class="{{ ($selected_payment==$payment->code)?'bg-primary text-white':'bg-base-100 text-gray-400' }} text-center text-lg cursor-pointer hover:shadow-lg shadow-md font-bold p-2 rounded-lg">
               <!-- {{$payment->title}} -->
               {{__('Credit Card')}}
             </div>
             @endforeach
             @endif
 
-            <div wire:click="$emit('payment_method','new')" class="{{ ($selected_payment=='new')?'bg-primary text-white':'bg-gray-100 text-gray-400' }} text-center text-md cursor-pointer hover:shadow-lg shadow-md font-bold p-2 rounded-lg">
+            <div wire:click="$emit('payment_method','new')" class="{{ ($selected_payment=='new')?'bg-primary text-white':'bg-base-100 text-gray-400' }} text-center text-lg cursor-pointer hover:shadow-lg shadow-md font-bold p-2 rounded-lg">
             {{__('New Credit Cards')}}
             </div>
 
@@ -188,7 +188,9 @@
           @foreach($coupons as $coupon)
           <div class="shadow stats font-black cursor-pointer">
             <div wire:click="couponChoosed('{{$coupon->id}}')" class="{{ ($selected_coupon==$coupon->id) ? 'bg-primary text-white':'bg-base-100 text-gray-500' }} stat">
-              <div class="stat-title text-2xl">HKD ${{$coupon->value}}</div> 
+              <div class="stat-title">{{$coupon->coupon->name}}</div> 
+              <div class="stat-value text-lg">HKD ${{$coupon->value?$coupon->value:$coupon->coupon->value}}</div> 
+              <div class="stat-desc">{{date('Y-m-d',strtotime($coupon->expired_at))}}</div>
             </div>
           </div>
 
@@ -201,7 +203,37 @@
       <div class="lg:px-2 lg:w-1/2">
 
 
-        <div class="p-4 bg-base-300 rounded-lg">
+      <div class="p-4 bg-base-300 rounded-lg">
+          <h1 class="ml-2 font-bold uppercase">{{__('提取時段')}}</h1>
+        </div>
+        <div class="p-4 grid grid-cols-3 gap-4">
+         
+          <div class="shadow stats font-black cursor-pointer">
+            <div wire:click="shippingChoosed('1230-1300')" class="{{ ($selected_shipping=='1230-1300') ? 'bg-primary text-white':'bg-base-100 text-gray-500' }} stat">
+              <div class="stat-title">提取時間</div> 
+              <div class="stat-value text-lg">12:30 - 13:00</div> 
+              <div class="stat-desc"></div>
+            </div>
+          </div>
+          <div class="shadow stats font-black cursor-pointer">
+            <div wire:click="shippingChoosed('1300-1330')" class="{{ ($selected_shipping=='1300-1330') ? 'bg-primary text-white':'bg-base-100 text-gray-500' }} stat">
+              <div class="stat-title">提取時間</div> 
+              <div class="stat-value text-lg">13:00 - 13:30</div> 
+              <div class="stat-desc"></div>
+            </div>
+          </div>
+          <div class="shadow stats font-black cursor-pointer">
+            <div wire:click="shippingChoosed('1330-1400')" class="{{ ($selected_shipping=='1330-1400') ? 'bg-primary text-white':'bg-base-100 text-gray-500' }} stat">
+              <div class="stat-title">提取時間</div> 
+              <div class="stat-value text-lg">13:30 - 14:00</div> 
+              <div class="stat-desc"></div>
+            </div>
+          </div>
+
+        </div>
+
+
+        <div class="p-4 mt-6 bg-base-300 rounded-lg">
           <h1 class="ml-2 font-bold uppercase">{{__('Order Details')}}</h1>
         </div>
         <div class="p-4">
@@ -263,6 +295,21 @@
           @endif
 
 
+        <!-- <div class="p-6 w-full card bordered">
+          <div class="form-control">
+            <label class="cursor-pointer label">
+              <span class="label-text">
+謹此聲明本人已年滿18歲。
+I declare that I am over 18 years old.
+          請注意，按「確認付款」後，你的交易便不能取消。
+              </span> 
+              <input type="checkbox" checked="checked" class="checkbox checkbox-accent">
+            </label>
+          </div>
+        </div> -->
+
+
+
           <button {{
                 $done==true ?'type="submit"':'disabled'
               }} wire:loading.class="loading" class="flex justify-center w-full mt-6 mb-16 md:mb-0 font-medium uppercase btn btn-primary rounded-lg">
@@ -270,6 +317,9 @@
             <span class="ml-2 mt-5px text-xl hidden" wire:loading.class.remove="hidden">{{__('Loading')}}</span>
           </button>
 
+          <small>
+          本人點擊「支付及完成結帳」，即代表本人已同意本人的購買將受  一般條款及細則  及  私隱政策  的約束。
+          </small>
         </div>
       </div>
 
