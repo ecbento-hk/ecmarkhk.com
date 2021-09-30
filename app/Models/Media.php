@@ -33,7 +33,7 @@ class Media extends Model
         //     return $link;
         // } else {
         // }
-        return str_replace('air.ecbento.com','supplier.ecbento.com',$link);
+        // return str_replace('air.ecbento.com','supplier.ecbento.com',$link);
         return $link;
     }
 

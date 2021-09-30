@@ -287,9 +287,9 @@ class ProductResource extends JsonResource
             // }
             // $cropedImage = route('images.product',['slug'=>$this->slug]).'?v='.date('Ymd');
             $cropedImage = route('images.product',['slug'=>$this->slug]);
-            if(strpos($this->code,"SUP-")!== false){
-                $cropedImage = str_replace("https://air.ecbento.com/","https://supplier.ecbento.com/",$this->image_file);
-            }
+            // if(strpos($this->code,"SUP-")!== false){
+            //     $cropedImage = str_replace("https://air.ecbento.com/","https://supplier.ecbento.com/",$this->image_file);
+            // }
 
         } catch (\Throwable $th) {
             $cropedImage = $this->image_file;
