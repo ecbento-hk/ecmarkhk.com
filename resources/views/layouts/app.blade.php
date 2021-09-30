@@ -30,7 +30,7 @@
             <div class="navbar mb-2 pt-0 text-base-content rounded-box">
                 <div class="flex flex-1">
                     <div class="pt-0 mt-0">
-                        <x-jet-authentication-card-logo class="py-4 px-4 rounded-b-box bg-primary" />
+                        <x-jet-authentication-card-logo class="w-64" />
                     </div>
                 </div>
                 <div class="flex-none hidden px-2mx-2 lg:flex">
