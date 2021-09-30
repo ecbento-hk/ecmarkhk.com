@@ -14,6 +14,8 @@
 
             @foreach ($items as $item)
 
+              
+
             @php
             //if($item<=date('Y-m-d')){ continue; } 
                 $menuDate=$item; //$menuDate=$item->format("Y-m-d");
@@ -24,6 +26,10 @@
                 $quantity = 0;
                 }
                 @endphp
+
+                @if(date('N',strtotime($menuDate))>=6)
+                @continue
+                @endif
                 <li class="flex justify-between @if($menu_date==$menuDate) bg-gray-200 @endif text-sm @if($quantity>0) text-secondary @endif">
                     <a href="?menu={{base64_encode($payload)}}" class="flex justify-between">
                         <!-- wire:click="menuDateUpdate('{{$menuDate}}')" href="?menu={{base64_encode($payload)}}" -->
