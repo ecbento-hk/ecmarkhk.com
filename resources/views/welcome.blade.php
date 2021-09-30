@@ -6,6 +6,9 @@
 
 
         <div class="grid grid-cols-12 gap-6">
+            <div class="col-span-12">
+                線上訂餐網站
+            </div>
             @if(session('errors'))
             <div class="col-span-12">
                 <div class="flex justify-center mt-6 mb-0">
