@@ -118,6 +118,10 @@
 
 
             <h3 class="col-span-12 font-semibold">{{__('Menu')}}:</h3>
+            @if(date('Y-m-d H:i:s') >= $menu_date.' 14:50:00')
+                Preorder End!!!!
+            @else 
+
             @if($products)
             @foreach ($products as $product)
             <div class="col-span-6 md:col-span-4 lg:col-span-4 xl:col-span-3 md:flex pb-8 w-full indicator">
@@ -168,6 +172,10 @@
             </div>
             @endforeach
             @endif
+
+            @endif
+
+
             @livewire('add-cart')
             <!-- <div class="col-span-12 hidden font-bold" wire:loading.class.remove="hidden">
             {{__('Loading Menu')}}...
