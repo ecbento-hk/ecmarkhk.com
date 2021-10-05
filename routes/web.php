@@ -21,8 +21,13 @@ use Illuminate\Support\Facades\Session;
 
 Route::get('/', function () {
     // abort(404);
-    return view('welcome');
+    return view('location');
 })->name('welcome');
+
+Route::get('/menu', function () {
+    // abort(404);
+    return view('welcome');
+})->name('menu');
 
 Route::get('/lang/{lang}', function ($lang) {
     // abort(404);

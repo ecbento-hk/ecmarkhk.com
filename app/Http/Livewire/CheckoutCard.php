@@ -180,7 +180,7 @@ class CheckoutCard extends Component
                 'machine_id' => $machine ? $machine->machine_id : 1,
                 'type' => (date('H:i:s') <= $period->preorder_end) ? 'preorder' : 'normal',
                 'giveback' => $giveback,
-                'remark' => $cartItem->remark
+                'remark' => $cartItem->menu_product_id
             ]);
             $orderItem->save();
 

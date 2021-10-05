@@ -13,6 +13,7 @@ use Spatie\Activitylog\Traits\LogsActivity;
 class MenuLocationStock extends Model
 {
     public $guarded = [];
+    public $table = 'menu_location_stocks';
 
     public function menuProduct()
     {

@@ -10,9 +10,8 @@ use App\Http\Api\V1\Model\Payment;
 use OptimistDigital\NovaNotesField\Traits\HasNotes;
 use App\OrderRefund;
 use Spatie\Activitylog\Traits\LogsActivity;
-use App\Menu;
-use App\MenuProduct;
-use App\MenuLocationStock;
+use App\Models\Product\Menu;
+use App\Models\Product\MenuLocationStock;
 use App\Models\User;
 
 class OrderItem extends Model
@@ -77,58 +76,50 @@ class OrderItem extends Model
 
         static::creating(function ($model) {
             // Create default sku 
-            if ($model->status == 'paid') {
+            // if ($model->status == 'paid') {
+            //     $menu = Menu::find($model->remark);
+            //     // $menu = $model->remark; //remark == menu_id
 
-                $menu = Menu::where([
-                    'menu_date' => $model->menu_date,
-                    'period_id' => (($model->period == 'lunch') ? 2 : 3),
-                    'active'    => 1
-                ])->first();
+            //     if ($menu) {
+            //         $menuProduct = MenuLocationStock::where([
+            //             'menu_id' => $menu,
+            //             'store_id' => $model->store_id,
+            //             'product_id' => $model->product_id,
+            //         ])->first();
 
-                if ($menu) {
-                    $menuProduct = MenuLocationStock::where([
-                        'menu_id' => $menu->id,
-                        'store_id' => $model->store_id,
-                        'product_id' => $model->product_id,
-                    ])->first();
+            //         $total = OrderItem::where([
+            //             'product_id' => $model->product_id,
+            //             'menu_date' => $model->menu_date,
+            //             'store_id' => $model->store_id,
+            //             'period' => $model->period,
+            //             'status' => 'paid'
+            //         ])->sum('quantity');
 
-                    $total = OrderItem::where([
-                        'product_id' => $model->product_id,
-                        'menu_date' => $model->menu_date,
-                        'store_id' => $model->store_id,
-                        'period' => $model->period,
-                        'status' => 'paid'
-                    ])->sum('quantity');
+            //         // dd($menuProduct);
+            //         // remindAdmin('有人落order:#'.$model->product_id.' x'.$total);
 
+            //         if($menuProduct){
+            //             $menuProduct->update([
+            //                 'sold' => $total,
+            //             ]);  
+            //         }
 
-                    // if($total){
-                    //     if($menuProduct){
-                    //         $menuProduct->update([
-                    //             'sold' => $total,
-                    //         ]);  
-                    //     }
-
-                    // }
-
-                }
-            }
+            //     }
+            // }
             // remindAdmin('有人落order:#'.Product::find($model->product_id)->title.' x'.$model->status);
 
         });
-        static::updating(function ($model) {
+        static::updated(function ($model) {
             // Create default sku 
             // remindAdmin('有人落order:#'.$model->product_id.'x1, status:'.$model->status);
 
             if ($model->status == 'paid') {
-                $menu = Menu::where([
-                    'menu_date' => $model->menu_date,
-                    'period_id' => (($model->period == 'lunch') ? 2 : 3),
-                    'active'    => 1
-                ])->first();
-
+                $menu = Menu::find($model->remark);
+                // $menu = $model->remark; //remark == menu_id
+                // dd($menu);
                 if ($menu) {
                     $menuProduct = MenuLocationStock::where([
-                        'menu_id' => $menu->id,
+                        'menu_id' => $menu,
                         'store_id' => $model->store_id,
                         'product_id' => $model->product_id,
                     ])->first();
@@ -141,13 +132,14 @@ class OrderItem extends Model
                         'status' => 'paid'
                     ])->sum('quantity');
 
+                    // dd($menuProduct);
                     // remindAdmin('有人落order:#'.$model->product_id.' x'.$total);
 
-                    // if($menuProduct){
-                    //     $menuProduct->update([
-                    //         'sold' => $total,
-                    //     ]);  
-                    // }
+                    if($menuProduct){
+                        $menuProduct->update([
+                            'sold' => $total,
+                        ]);  
+                    }
 
                 }
             }
@@ -157,7 +149,7 @@ class OrderItem extends Model
     public function setShipStatusAttribute($value)
     {
         if ($this->order_id > 200000) {
-            fcm_remind($value, $this->order_id, $this->product);
+            // fcm_remind($value, $this->order_id, $this->product);
         }
 
         $this->attributes['ship_status'] = $value;
@@ -165,57 +157,54 @@ class OrderItem extends Model
 
     public function setStatusAttribute($value)
     {
-        switch ($value) {
-            case 'request_refund':
-                //Create Order refund record
-                OrderRefund::create([
-                    'order_id' => $this->attributes['order_id'],
-                    'order_item_id' => $this->attributes['id'],
-                    'user_id' => $this->attributes['user_id'],
-                    'payment_id' => Payment::where('code', $this->order->payment_method)->first()->id,
-                    'payment_method' => $this->order->payment_method,
-                    'refund_value' => $this->attributes['price'],
-                    'refunded' => 0,
-                    'image' => '',
-                    'comment' => 'By Backend',
-                ]);
-                break;
-            case 'paid':
+        // switch ($value) {
+        //     case 'request_refund':
+        //         //Create Order refund record
+        //         OrderRefund::create([
+        //             'order_id' => $this->attributes['order_id'],
+        //             'order_item_id' => $this->attributes['id'],
+        //             'user_id' => $this->attributes['user_id'],
+        //             'payment_id' => Payment::where('code', $this->order->payment_method)->first()->id,
+        //             'payment_method' => $this->order->payment_method,
+        //             'refund_value' => $this->attributes['price'],
+        //             'refunded' => 0,
+        //             'image' => '',
+        //             'comment' => 'By Backend',
+        //         ]);
+        //         break;
+        //     case 'paid':
 
-                break;
-        }
+        //         break;
+        // }
 
-        $menu = Menu::where([
-            'menu_date' => $this->attributes['menu_date'],
-            'period_id' => (($this->attributes['period'] == 'lunch') ? 2 : 3),
-            'active'    => 1
-        ])->first();
-        \Log::info($menu);
+        // if ($value == 'paid') {
+        //     $menu = Menu::find($this->remark);
+        //     // $menu = $model->remark; //remark == menu_id
+        //     // dd($menu);
+        //     if ($menu) {
+        //         $menuProduct = MenuLocationStock::where([
+        //             'menu_id' => $menu,
+        //             'store_id' => $this->store_id,
+        //             'product_id' => $this->product_id,
+        //         ])->first();
 
-        if ($menu) {
-            $menuProduct = MenuLocationStock::where([
-                'menu_id' => $menu->id,
-                'store_id' => $this->attributes['store_id'],
-                'product_id' => $this->attributes['product_id'],
-            ])->first();
-            \Log::info($menuProduct);
+        //         $total = OrderItem::where([
+        //             'product_id' => $this->product_id,
+        //             'menu_date' => $this->menu_date,
+        //             'store_id' => $this->store_id,
+        //             'period' => $this->period,
+        //             'status' => 'paid'
+        //         ])->sum('quantity');
 
-            $total = OrderItem::where([
-                'product_id' => $this->attributes['product_id'],
-                'menu_date' => $this->attributes['menu_date'],
-                'store_id' => $this->attributes['store_id'],
-                'period' => $this->attributes['period'],
-                'status' => 'paid'
-            ])->sum('quantity');
-            if ($total) {
+           
+        //         if($menuProduct){
+        //             $menuProduct->update([
+        //                 'sold' => $total,
+        //             ]);  
+        //         }
 
-                // if($menuProduct){
-                //     $menuProduct->update([
-                //         'sold' => $total,
-                //     ]);  
-                // }   
-            }
-        }
+        //     }
+        // }
 
         $this->attributes['status'] = $value;
     }

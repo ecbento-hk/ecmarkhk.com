@@ -16,11 +16,13 @@ class UserNotify extends Component
     {
         $this->stores = Store::where('active',1)->whereIn('id',[58,31])->get();
         if(Auth::check()){
-        $this->user_store = UserAddress::where('user_id',Auth::user()->id)->orderBy('created_at','desc')->first();
-        $this->storeid = $this->user_store->location_id;
+        // $this->user_store = UserAddress::where('user_id',Auth::user()->id)->orderBy('created_at','desc')->first();
+        // $this->storeid = $this->user_store->location_id;
+
+        $this->storeid = $location;
+
         } else {
             $this->storeid = 54;
-
             if($location!==null){
                 $this->storeid = $location;
             }
@@ -65,7 +67,7 @@ class UserNotify extends Component
         $this->storeid = $value;
         // config()->set('menu.store', $value);   
         $payload = serialize(['location'=>$value]);
-        return redirect()->route('welcome',[
+        return redirect()->route('menu',[
             'menu' => base64_encode($payload)
         ]);
         // dd(url()->current());

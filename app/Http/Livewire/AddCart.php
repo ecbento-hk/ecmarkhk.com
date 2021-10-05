@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire;
 
+use App\Models\Product\MenuLocationStock;
 use App\Models\Product\Product;
 use App\Models\User;
 use App\Models\UserMerchant;
@@ -47,7 +48,7 @@ class AddCart extends Component
         // dd($this->students);
     }
 
-    public function addingProduct($productId, $store_id, $period_id, $menuDate = null)
+    public function addingProduct($productId, $store_id, $period_id, $menuDate = null, $menuProductId = null)
     {
         // dd($period_id);
         $this->store_id = $store_id;
@@ -59,7 +60,8 @@ class AddCart extends Component
         $this->image = $this->product->image_file ? $this->product->image_file : 'https://www.kenyons.com/wp-content/uploads/2017/04/default-image-620x600.jpg';
         $this->price = $this->product->price;
 
-        $this->menu_product_id = $this->product->id;
+        // dd($menuId);
+        $this->menu_product_id = $menuProductId?$menuProductId:$this->product->id;
         if ($menuDate) {
             $this->menu_product_date = $menuDate;
         } else {
@@ -108,6 +110,8 @@ class AddCart extends Component
                 return redirect()->route('login');
             }
 
+           
+
 
             $user = User::find(Auth::id());
             $menu_product_id = $this->menu_product_id;
@@ -145,6 +149,43 @@ class AddCart extends Component
             //         }
             //     }
             // }
+
+           
+            
+            if($user->cartItem()->count()>=2){
+                $sold = \App\Models\Order\OrderItem::where([
+                    'store_id' => $location_id,
+                    'menu_date' => $menu_product_date,
+                    'product_id' => $this->product->id
+                ])->sum('quantity');
+                try {
+                    
+                    $menuStock = MenuLocationStock::where([
+                        'menu_id' => $this->menu_product_id,
+                        'product_id' => $this->product->id
+                    ])->first();
+                    // dd($menuStock);
+                    $stock = $menuStock->stock;
+                } catch (\Throwable $th) {
+                    $stock = 0;
+                }
+                // dd();
+                if(intval($sold) >= $stock){
+                    if($refreshPage){
+                        session()->flash('message', 'Max 2 Items in cart. Please checkout first.');
+                        $this->emit('$refresh');
+                        return redirect()->back();
+                    }
+                }
+            }
+
+             if($user->cartItem()->count()>=2){
+                if($refreshPage){
+                    session()->flash('message', 'Max 2 Items in cart. Please checkout first.');
+                    $this->emit('$refresh');
+                    return redirect()->back();
+                }
+            }
 
             // if (!$cart) {
                 $newCart = [
