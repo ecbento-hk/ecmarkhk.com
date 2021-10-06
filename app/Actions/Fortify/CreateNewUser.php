@@ -23,14 +23,18 @@ class CreateNewUser implements CreatesNewUsers
      */
     public function create(array $input)
     {
-       
+        $customMessages = [
+            'required' => __('The :attribute field is required.'),
+            'unique'   => __('The :attribute field is required.')
+        ];
+    
         Validator::make($input, [
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'phone_no' => ['required','unique:users'],
             'password' => $this->passwordRules(),
             'terms' => Jetstream::hasTermsAndPrivacyPolicyFeature() ? ['required', 'accepted'] : '',
-        ])->validate();
+        ],$customMessages)->validate();
 
         // dd($input);
         return DB::transaction(function () use ($input) {
