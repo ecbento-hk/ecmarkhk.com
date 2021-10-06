@@ -37,7 +37,7 @@ class CreateNewUser implements CreatesNewUsers
             return tap(User::create([
                 'name' => $input['name'],
                 'email' => $input['email'],
-                'phone_no' => $input['phone'],
+                'phone_no' => $input['phone_no'],
                 'password' => Hash::make($input['password']),
             ]), function (User $user) use ($input){
                 //ECMart dun need teams
