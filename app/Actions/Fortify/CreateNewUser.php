@@ -25,7 +25,7 @@ class CreateNewUser implements CreatesNewUsers
     {
         $customMessages = [
             'required' => __('The :attribute field is required.'),
-            'unique'   => __('The :attribute field is required.')
+            'unique'   => __('The :attribute has already been taken.')
         ];
     
         Validator::make($input, [
