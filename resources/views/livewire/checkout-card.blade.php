@@ -74,6 +74,28 @@
 
       <div class="lg:px-2 lg:w-1/2">
         <div class="p-4 bg-base-300 rounded-lg">
+          <h1 class="ml-2 font-bold uppercase">{{__('Coupon')}}</h1>
+        </div>
+        <div class="p-4">
+          <!-- <p class="mb-4 italic">Please choose a coupon to pay your order.</p> -->
+          @php
+          $userCoupon = auth()->user()->coupon()->where(['coupon_id'=>'68'])->get();
+          @endphp
+          <div class="grid grid-cols-3 grid-rows-1 gap-4">
+            @if(count($userCoupon)>0)
+            @foreach ($userCoupon as $coupon)
+            <div wire:click="$emit('coupon_choosed','{{$coupon->code}}')" class="{{ ($selected_coupon==$coupon->id)?'bg-primary text-white':'bg-base-100 text-gray-400' }} text-center text-lg cursor-pointer hover:shadow-lg shadow-md font-bold p-2 rounded-lg">
+              {{$coupon->coupon->value}}
+            </div>
+            @endforeach
+            @endif
+          </div>
+
+
+        </div>
+        
+
+        <div class="p-4 bg-base-300 rounded-lg">
           <h1 class="ml-2 font-bold uppercase">{{__('Payment Method')}}</h1>
         </div>
         <div class="p-4">
@@ -99,6 +121,7 @@
 
 
         </div>
+
         <div class="@if($selected_payment !== 'new') hidden @endif">
           <div class="p-4 mt-6 bg-base-300 rounded-lg">
             <h1 class="ml-2 font-bold uppercase">New Credit Card : {{ $number }}</h1>
