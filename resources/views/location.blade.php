@@ -16,30 +16,34 @@
     <div class="grid max-w-screen-md gap-10 md:grid-cols-2 sm:mx-auto">
       @foreach(\App\Models\Store::where('active',1)->whereIn('id',[58,31])->get() as $store)
       <div>
-        <div class="p-8 bg-base-300 rounded">
-          <div class="mb-4 text-center">
-            <p class="text-xl font-medium tracking-wide text-gray-900">
-              {{$store->name}}
-            </p>
-            <div class="flex items-center justify-center">
-              <p class="text-lg text-gray-500">{{ date('Y-m-d') }}</p>
-            </div>
-          </div>
+
           @php
 
           $payload = ['location'=>$store->id];
           $filter = isset($_GET['menu'])?$_GET['menu']:null;
+          $menuDate = date('Y-m-d');
           if($filter){
             $filter = base64_decode($filter);
             $menuFilter = unserialize($filter);
             if(isset($menuFilter['menu_date'])){
                 $filter = $menuFilter['menu_date'];
                 $payload['menu_date'] = $filter;
+                $menuDate = $filter;
             }
           }
-         
+
 
           @endphp
+
+        <div class="p-8 bg-base-300 rounded">
+          <div class="mb-4 text-center">
+            <p class="text-xl font-medium tracking-wide text-gray-900">
+              {{$store->name}}
+            </p>
+            <div class="flex items-center justify-center">
+              <p class="text-lg text-gray-500">{{ $menuDate }}</p>
+            </div>
+          </div>
           <a href="{{route('menu',[
             'menu' => base64_encode(serialize($payload))
             ])}}" class="inline-flex items-center justify-center w-full h-12 px-6 font-medium tracking-wide transition duration-200 btn btn-primary focus:shadow-outline focus:outline-none">
