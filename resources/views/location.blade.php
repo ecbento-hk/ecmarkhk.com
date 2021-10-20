@@ -25,9 +25,23 @@
               <p class="text-lg text-gray-500">{{ date('Y-m-d') }}</p>
             </div>
           </div>
-        
+          @php
+
+          $payload = ['location'=>$store->id];
+          $filter = isset($_GET['menu'])?$_GET['menu']:null;
+          if($filter){
+            $filter = base64_decode($filter);
+            $menuFilter = unserialize($filter);
+            if(isset($menuFilter['menu_date'])){
+                $filter = $menuFilter['menu_date'];
+                $payload['menu_date'] = $filter;
+            }
+          }
+         
+
+          @endphp
           <a href="{{route('menu',[
-            'menu' => base64_encode(serialize(['location'=>$store->id]))
+            'menu' => base64_encode(serialize($payload))
             ])}}" class="inline-flex items-center justify-center w-full h-12 px-6 font-medium tracking-wide transition duration-200 btn btn-primary focus:shadow-outline focus:outline-none">
             {{__('Order Now')}}
           </a>
