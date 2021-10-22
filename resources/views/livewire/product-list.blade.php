@@ -135,7 +135,7 @@
                             <button disabled class="btn btn-primary btn-block btn-sm text-sm m-0 rounded-lg">{{__('Sold Out')}}</button>
                             @else
 
-                            @if(date('Y-m-d H:i:s') >= date('Y-m-d ').$periodEnd)
+                            @if($menu_date.date(' H:i:s') >= date('Y-m-d ').$periodEnd)
                             <button disabled class="btn btn-primary btn-block btn-sm text-sm m-0 rounded-lg">{{__('Sold Out')}}</button>
                             @else
                                 @auth
