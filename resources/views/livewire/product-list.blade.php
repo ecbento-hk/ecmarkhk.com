@@ -130,7 +130,6 @@
                             <h3 class="text-md font-bold mb-3">
                                 ${{$product->price}}
                             </h3> 
-                            {{$periodEnd}}
 
                             @if($stock<=$sold)
                             <button disabled class="btn btn-primary btn-block btn-sm text-sm m-0 rounded-lg">{{__('Sold Out')}}</button>
