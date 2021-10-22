@@ -129,7 +129,8 @@
                         <div class="pb-4 px-5 w-full mt-3 justify-between">
                             <h3 class="text-md font-bold mb-3">
                                 ${{$product->price}}
-                            </h3>
+                            </h3> 
+                            {{$periodEnd}}
 
                             @if($stock<=$sold)
                             <button disabled class="btn btn-primary btn-block btn-sm text-sm m-0 rounded-lg">{{__('Sold Out')}}</button>
