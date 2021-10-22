@@ -134,11 +134,18 @@
                             @if($stock<=$sold)
                             <button disabled class="btn btn-primary btn-block btn-sm text-sm m-0 rounded-lg">{{__('Sold Out')}}</button>
                             @else
+
+                            @if(date('Y-m-d H:i:s') >= date('Y-m-d ').$periodEnd)
+                            <button disabled class="btn btn-primary btn-block btn-sm text-sm m-0 rounded-lg">{{__('Sold Out')}}</button>
+                            @else
                                 @auth
                                 <button wire:click="addToCart({{$product->id}}, {{$storeid}}, {{$periodId->id}}, '{{$menu_date}}')" class="btn btn-primary btn-block btn-sm text-sm m-0 rounded-lg">{{__('Add To Cart')}}</button>
                                 @else
                                 <a href="{{route('login')}}" class="btn btn-primary btn-block btn-sm text-sm m-0 rounded-lg">{{__('Add To Cart')}}</a>
                                 @endauth
+
+
+                            @endif
                             @endif
                             
                             
