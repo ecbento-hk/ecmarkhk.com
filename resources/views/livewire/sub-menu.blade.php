@@ -67,10 +67,7 @@
 
 
     <div class="hidden lg:block py-4 rounded-box">
-        <p class="mb-4 text-gray-500">
-        {{__('Please pick up your order after 11:00am')}} <br>
-        {{__('For food safety reason, please consume your order within 2 Hours')}}</p>
-
+ 
         <ul class="menu w-full text-gray-600">
             <li class="menu-title">
                 <span>
@@ -104,6 +101,10 @@
                     </svg>
                     = {{__('Products in cart')}}
                 </a>
+            </li>
+            <li>
+            {{__('Please pick up your order after 11:00am')}} <br>
+            {{__('For food safety reason, please consume your order within 2 Hours')}}
             </li>
         </ul>
     </div>
