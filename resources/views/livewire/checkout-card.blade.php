@@ -77,7 +77,7 @@
           <h1 class="ml-2 font-bold uppercase">{{__('Payment Method')}}</h1>
         </div>
         <div class="p-4">
-          <p class="mb-4 italic">Please choose a payment method to pay your order.</p>
+          <p class="mb-4 italic">{{__('Please choose a payment method to pay your order.')}}</p>
           @php
           $userCards = auth()->user()->payments()->where(['brand'=>'STRIPE'])->get();
           @endphp
