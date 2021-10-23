@@ -190,7 +190,7 @@
         </div>
         <div class="p-4">
           <p class="mb-6 italic">
-        {{__('Please pick up your order after 11:00am')}}
+        {{__('Please pick up your order after 11:00am')}} <br>
         {{__('For food safety reason, please consume your order within 2 Hours')}}
           </p>
           <div class="flex justify-between border-b">
