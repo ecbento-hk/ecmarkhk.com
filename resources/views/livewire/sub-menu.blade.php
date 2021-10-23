@@ -102,10 +102,10 @@
                     = {{__('Products in cart')}}
                 </a>
             </li>
-            <li>
+            <!-- <li>
             {{__('Please pick up your order after 11:00am')}} <br>
             {{__('For food safety reason, please consume your order within 2 Hours')}}
-            </li>
+            </li> -->
         </ul>
     </div>
 
