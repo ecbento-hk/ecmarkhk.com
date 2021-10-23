@@ -189,7 +189,10 @@
           <h1 class="ml-2 font-bold uppercase">{{__('Order Details')}}</h1>
         </div>
         <div class="p-4">
-          <p class="mb-6 italic">Shipping and additionnal costs are calculated based on values you have entered</p>
+          <p class="mb-6 italic">
+        {{__('Please pick up your order after 11:00am')}}
+        {{__('For food safety reason, please consume your order within 2 Hours')}}
+          </p>
           <div class="flex justify-between border-b">
             <div class="lg:px-4 lg:py-2 m-2 font-bold text-center text-gray-800">
               {{__('Subtotal')}}
@@ -243,6 +246,7 @@
               <label>{{ session('message') }}</label>
             </div>
           </div>
+        
 
           @endif
 

@@ -91,6 +91,9 @@
     "Orders": "訂單",
     "Loading Menu": "載入菜單中",
 
+    "Please pick up your order after 11:Showing": "請於當天早上11點後領取",
+    "For food safety reason, please consume your order within 2 Hours": "基於食物安全，食物必須於兩小時內食用",
+    
     "Showing": "目前顯示",
     "to": "至",
     "of": "項目，共",
