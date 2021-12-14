@@ -35,7 +35,7 @@
   <div class="footer  w-full max-w-screen-2xl mx-auto px-0 lg:px-12 ">
   <div>
   <div class="pt-0 mt-0">
-      <x-jet-authentication-card-logo class="py-4 px-4 rounded-b-box bg-primary rounded-box" />
+      <x-jet-authentication-card-logo class="py-4 px-4 rounded-b-box" />
     </div>
     <p>Copyright © {{date('Y')}} - All right reserved by {{config('app.company')}}</p>
   </div> 
