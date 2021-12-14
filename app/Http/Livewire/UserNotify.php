@@ -14,12 +14,12 @@ class UserNotify extends Component
     
     public function mount($location = null)
     {
-        $this->stores = Store::where('active',1)->whereIn('id',[54,59])->get();
+        $this->stores = Store::where('active',1)->whereIn('id',[60])->get();
         if(Auth::check()){
         $this->user_store = UserAddress::where('user_id',Auth::user()->id)->orderBy('created_at','desc')->first();
         $this->storeid = $this->user_store->location_id;
         } else {
-            $this->storeid = 54;
+            $this->storeid = 60;
 
             if($location!==null){
                 $this->storeid = $location;

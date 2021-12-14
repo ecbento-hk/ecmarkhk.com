@@ -44,7 +44,7 @@ class GiftResource extends JsonResource
             'active' => $this->active,
             'remark' => $this->remark,
             // 'location' => '2/F, 30 Wong Chuk Hang Road, Wong Chuk Hang'
-            'location' => Store::find(54)->full_address,
+            'location' => Store::find(60)->full_address,
         ];
     }
 }

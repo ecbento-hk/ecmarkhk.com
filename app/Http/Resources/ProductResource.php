@@ -197,7 +197,7 @@ class ProductResource extends JsonResource
             $supplierName = '';
         }
         
-        if ($location == 54) {
+        if ($location == 60) {
             if ($lang != 'en') {
                 $product_title = str_replace(' ', '', $product_title);
             }
