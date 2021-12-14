@@ -11,7 +11,7 @@ class SubMenu extends Component
 {
     public $menu_quantity = 0;
     public $menu_date = 0;
-    public $location = 54;
+    public $location = 60;
     public $period = [2];
     
     protected $listeners = [
