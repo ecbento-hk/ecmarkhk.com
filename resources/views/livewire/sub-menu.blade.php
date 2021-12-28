@@ -1,7 +1,7 @@
 <div class="w-full">
 
-
-    @livewire('user-notify',['location'=>$location?$location:null])
+    
+    {{-- @livewire('user-notify',['location'=>$location?$location:null]) --}}
 
     <div class="hidden lg:block py-4 bg-base-200 text-base-content w-full card shadow-lg rounded-box mb-8">
 
