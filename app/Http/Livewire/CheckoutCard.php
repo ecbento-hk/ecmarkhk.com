@@ -366,7 +366,7 @@ class CheckoutCard extends Component
                     break;
                 case 'offline':
                     // dd('redirect to asiapay');
-                    $order->payment_status = 'created';
+                    $order->payment_status = 'paid';
                     $order->paid_at = now();
                     $order->closed = 1;
                     $order->save();
