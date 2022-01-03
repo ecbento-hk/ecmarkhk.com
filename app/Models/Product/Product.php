@@ -121,9 +121,9 @@ class Product extends Model
     {
         if ($this->media) {
 
-            // if(strpos($this->code,"SUP-")!== false){
-            //     return str_replace("https://air.ecbento.com/","https://supplier.ecbento.com/",$this->media->url);
-            // }
+            if(strpos($this->code,"SUP-")!== false){
+                return str_replace("https://air.ecbento.com/","https://supplier.ecbento.com/",$this->media->url);
+            }
             
             
             return $this->media->url;
