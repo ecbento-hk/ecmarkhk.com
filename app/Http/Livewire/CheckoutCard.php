@@ -123,7 +123,7 @@ class CheckoutCard extends Component
     {
         // session()->flash('message', 'Post successfully updated.');
         $this->cartItems = Auth::user()->cartItem()->get();
-        $this->payments  = Payment::whereIn('id', [9,5])->get();
+        $this->payments  = Payment::whereIn('id', [9])->get();
         $this->coupons   = Auth::user()->coupons()->where('status', 'available')->whereDate('expired_at','>=',date('Y-m-d'))->inRandomOrder()->limit(10)->get();
         // $this->coupons   = [];
     }
