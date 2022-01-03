@@ -79,7 +79,7 @@
         <div class="p-4">
           <!-- <p class="mb-4 italic">Please choose a coupon to pay your order.</p> -->
           @php
-          $userCoupon = auth()->user()->coupon()->where(['coupon_id'=>'68'])->get();
+          $userCoupon = auth()->user()->coupons()->where(['coupon_id'=>'68'])->get();
           @endphp
           <div class="grid grid-cols-3 grid-rows-1 gap-4">
             @if(count($userCoupon)>0)
