@@ -88,6 +88,8 @@ class CheckoutCard extends Component
     {
         if($payment == 'new'){
             $this->done = true;
+        } else if($payment == 'free'){
+            $this->done = true;
         } else {
             if($this->selected_card){
                 $this->done = true;
