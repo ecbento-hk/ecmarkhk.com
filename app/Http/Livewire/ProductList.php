@@ -78,7 +78,7 @@ class ProductList extends Component
         //     $query->where('store_id', $store)->whereNotNull('stock');
         // })->active()->first();
 
-        $menu = Menu::where('menu_date','>=',$date)->where('end_date','<=',$date)
+        $menu = Menu::whereDate('menu_date','>=',$date)->whereDate('end_date','<=',$date)
         ->where('period_id',$period_id)
         ->whereHas('locations', function($query) use($store){
             $query->where('store_id', $store)->whereNotNull('stock');
