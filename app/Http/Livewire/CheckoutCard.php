@@ -230,9 +230,6 @@ class CheckoutCard extends Component
                 $payment = Payment::find(5);
     
                 $gateway = \Omnipay\Omnipay::create('Stripe');
-                // $gateway->setApiKey('sk_test_51JABlsBmpGYTwMtr7MtjIMpNFXXSkkbjjbfMuWECJ6IOHWOaSvXnptSQepBv38rJRxfrUaz03n8GUe7YqRpN5eK000vpVQghH0');
-                // $gateway->setApiKey('sk_test_UE3xmTh2owaSc94Adn91xJOx00ES1c7uqG');
-                // $gateway->setApiKey('sk_live_DOnG2rKpmX3aipEdyCCWuaKC00gjeG2yB9');
                 if(config('app.payment_test')){
                     $gateway->setApiKey(config('app.payment_stripe_test_key'));
                 } else {
@@ -311,9 +308,6 @@ class CheckoutCard extends Component
                     }
                     
                     $gateway = \Omnipay\Omnipay::create('Stripe');
-                    // $gateway->setApiKey('sk_test_51JABlsBmpGYTwMtr7MtjIMpNFXXSkkbjjbfMuWECJ6IOHWOaSvXnptSQepBv38rJRxfrUaz03n8GUe7YqRpN5eK000vpVQghH0');
-                    // $gateway->setApiKey('sk_test_UE3xmTh2owaSc94Adn91xJOx00ES1c7uqG');
-                    // $gateway->setApiKey('sk_live_DOnG2rKpmX3aipEdyCCWuaKC00gjeG2yB9');
                     if(config('app.payment_test')){
                         $gateway->setApiKey(config('app.payment_stripe_test_key'));
                     } else {
