@@ -357,10 +357,23 @@ class CheckoutCard extends Component
                     break;
     
                 case 'paydollar':
-                    dd('redirect to asiapay');
+                    // dd('redirect to asiapay');
                     break;
                 case 'mpgs':
-                    dd('redirect to asiapay');
+                    // dd('redirect to asiapay');
+                    break;
+                case 'offline':
+                    // dd('redirect to asiapay');
+                    $order->payment_status = 'created';
+                    $order->paid_at = now();
+                    $order->closed = 1;
+                    $order->save();
+                    auth()->user()->cartItem()->delete();
+                    $this->checkingOut = false;
+                    session()->flash('message', 'Order successfully created.');
+                    // $this->emit('$refresh');
+                 
+                    return redirect('orders');
                     break;
             }
 
