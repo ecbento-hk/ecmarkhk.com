@@ -2,7 +2,7 @@
     <x-jet-authentication-card>
         <x-slot name="logo">
         <div class="w-64">
-           <x-jet-authentication-card-logo class="py-4 px-4 rounded-box bg-primary" />
+           <x-jet-authentication-card-logo class="py-4 px-4 rounded-box" />
            </div>
         </x-slot>
 
