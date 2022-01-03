@@ -124,7 +124,8 @@ class ProductList extends Component
 
         if(Auth::check()){
             $this->user_store = UserAddress::where('user_id',Auth::user()->id)->orderBy('created_at','desc')->first();
-            $this->storeid = $this->user_store->location_id;
+            // $this->storeid = $this->user_store->location_id;
+            $this->storeid = 60;
             if($this->storeid !== $this->location){
                 $this->storeid = $this->location;
             }
