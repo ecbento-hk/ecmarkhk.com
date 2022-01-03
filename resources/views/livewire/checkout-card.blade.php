@@ -113,9 +113,9 @@
               @endforeach
             @endif
 
-            <div wire:click="$emit('payment_method','new')" class="{{ ($selected_payment=='new')?'bg-primary text-white':'bg-base-100 text-gray-400' }} text-center text-lg cursor-pointer hover:shadow-lg shadow-md font-bold p-2 rounded-lg">
+            {{-- <div wire:click="$emit('payment_method','new')" class="{{ ($selected_payment=='new')?'bg-primary text-white':'bg-base-100 text-gray-400' }} text-center text-lg cursor-pointer hover:shadow-lg shadow-md font-bold p-2 rounded-lg">
             {{__('New Credit Cards')}}
-            </div>
+            </div> --}}
 
           </div>
 
