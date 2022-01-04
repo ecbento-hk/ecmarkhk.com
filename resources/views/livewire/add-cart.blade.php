@@ -68,12 +68,12 @@
               </div>
              
             </div>
-            <!-- <div class="flex mt-6 mb-6 items-center">
+            <div class="flex mt-6 mb-6 items-center">
             <div class="flex items-center">
                 <span class="mr-3">{{__('Remark')}}</span>
-                <input type="text" class="input" placeholder="如外賣：請輸入地址">
+                <input type="text" class="input" placeholder="有需要：請輸入名稱">
               </div>
-              </div> -->
+              </div>
 
           @if(session()->has('message'))
           <div class="alert alert-error mt-6 mb-6">
