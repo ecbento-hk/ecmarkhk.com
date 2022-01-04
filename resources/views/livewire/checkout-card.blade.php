@@ -106,13 +106,11 @@
           @endphp
           <div class="grid grid-cols-3 grid-rows-1 gap-4">
 
-            @if(count($userCards)>0)
               @foreach ($payments as $payment)
               <div wire:click="$emit('payment_method','{{$payment->code}}')" class="{{ ($selected_payment==$payment->code)?'bg-primary text-white':'bg-base-100 text-gray-400' }} text-center text-lg cursor-pointer hover:shadow-lg shadow-md font-bold p-2 rounded-lg">
                 {{$payment->title}}
               </div>
               @endforeach
-            @endif
 
             {{-- <div wire:click="$emit('payment_method','new')" class="{{ ($selected_payment=='new')?'bg-primary text-white':'bg-base-100 text-gray-400' }} text-center text-lg cursor-pointer hover:shadow-lg shadow-md font-bold p-2 rounded-lg">
             {{__('New Credit Cards')}}
