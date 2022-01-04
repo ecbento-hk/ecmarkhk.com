@@ -105,6 +105,7 @@
               <span class="mr-10">{{__('New')}}</span>
               <div class="relative">
                   <select id="new_student_class" class="select mb-3" wire:model.defer="student.class" placeholder="Class">
+                    <option value="">----</option>
                     <option value="PGB1B">PGB1B</option>
                     <option value="PGB">PGB</option>
                     <option value="PGA1">PGA1</option>
