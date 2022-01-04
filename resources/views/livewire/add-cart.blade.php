@@ -71,7 +71,7 @@
             <div class="flex mt-6 mb-6 items-center">
             <div class="flex items-center">
                 <span class="mr-3">{{__('Remark')}}</span>
-                <input type="text" class="input" placeholder="有需要：請輸入名稱">
+                <input type="text" class="input" wire:model="remark" placeholder="有需要：請輸入名稱">
               </div>
               </div>
 
