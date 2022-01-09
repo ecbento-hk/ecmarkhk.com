@@ -102,18 +102,20 @@ class ProductList extends Component
            
             if ($menu) {
                 $this->menuId = $menu->id;
-                $this->dinnerMenuId = $dinnerMenu->id;
-                // foreach ($menu as $key => $submenu) {
                 $this->products = $menu->products()->get();
-                $this->dinnerProducts = $menu->products()->get();
-
-                // dd($this->products);
-                // }
             } else {
                 $this->products = [];
+            }
+
+
+            if ($dinnerMenu) {
+                $this->dinnerMenuId = $dinnerMenu->id;
+                $this->dinnerProducts = $dinnerMenu->products()->get();
+            } else {
                 $this->dinnerProducts = [];
                 $this->filter = [];
             }
+
 
        } catch (\Throwable $th) {
             $this->products = [];
