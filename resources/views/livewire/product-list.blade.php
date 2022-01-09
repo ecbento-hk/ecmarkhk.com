@@ -157,8 +157,8 @@
                 @endforeach
             @endif 
             
-            <h3 class="col-span-12 font-semibold">{{__('Dinner')}}:</h3>
             @if(count($dinnerProducts))
+            <h3 class="col-span-12 font-semibold">{{__('Dinner')}}:</h3>
                 @foreach ($dinnerProducts as $dproduct)
                 <div class="col-span-6 md:col-span-4 lg:col-span-4 xl:col-span-3 md:flex pb-8 w-full indicator">
                     <div class="card bordered shadow-lg w-full rounded-box bg-base-200">
