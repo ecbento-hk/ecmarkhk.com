@@ -52,6 +52,7 @@ class SubMenu extends Component
         // dd($date);
         $this->menu_date = $date;
         $this->emitTo('product-list','changeMenuDate', $date);
+        $this->emitTo('dinner-list','changeMenuDate', $date);
         $this->emit('$refresh');
     }
 
@@ -60,6 +61,7 @@ class SubMenu extends Component
         $period = $this->period;
         // dd($this->period);
         $this->emitTo('product-list','startDate',$period[0]);
+        $this->emitTo('dinner-list','startDate',$period[0]);
         // $startDate = new \DateTime('NOW');
         // $endDate = (new \DateTime('NOW'))->modify('+7 day');
         // $interval = \DateInterval::createFromDateString('1 day');
