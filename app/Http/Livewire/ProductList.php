@@ -18,10 +18,12 @@ class ProductList extends Component
     use WithPagination;
 
     public $products = [];
+    public $dinnerProducts = [];
     public $brand = 'ecbento';
     public $menu_date;
     public $period = [];
     public $periodId;
+    public $dinnerPeriodId;
     public $menuId = 0;
     public $search = '';
     public $type;
@@ -87,22 +89,35 @@ class ProductList extends Component
         ->whereHas('locations', function($query) use($store){
             $query->where('store_id', $store)->whereNotNull('stock');
         })->active()->first();
+        
+        $dinnerMenu = Menu::where('menu_date','<=',$date)
+        ->where('end_date','>=',$date)
+        ->whereNotNull('end_date')
+        ->where('period_id',20)
+        ->whereHas('locations', function($query) use($store){
+            $query->where('store_id', $store)->whereNotNull('stock');
+        })->active()->first();
 
        try {
            
             if ($menu) {
                 $this->menuId = $menu->id;
+                $this->dinnerMenuId = $dinnerMenu->id;
                 // foreach ($menu as $key => $submenu) {
                 $this->products = $menu->products()->get();
+                $this->dinnerProducts = $menu->products()->get();
+
                 // dd($this->products);
                 // }
             } else {
                 $this->products = [];
+                $this->dinnerProducts = [];
                 $this->filter = [];
             }
 
        } catch (\Throwable $th) {
             $this->products = [];
+            $this->dinnerProducts = [];
             $this->filter = [];
        }
        
@@ -114,6 +129,7 @@ class ProductList extends Component
     {
         $period_id = 17;
         $this->periodId = Period::find( $period_id );
+        $this->dinnerPeriodId = Period::find( 20 );
 
         $this->period = config('menu.date');
         try {
