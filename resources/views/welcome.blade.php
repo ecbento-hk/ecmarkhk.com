@@ -31,9 +31,6 @@
                 <div class="flex justify-center @if(!session('errors')) lg:mt-0 md:mt-0 @endif py-8">
                     @livewire('product-list',['filter'=>isset($_GET['menu'])?$_GET['menu']:null])
                 </div>
-                <div class="flex justify-center @if(!session('errors')) lg:mt-0 md:mt-0 @endif py-8">
-                    @livewire('dinner-list',['filter'=>isset($_GET['menu'])?$_GET['menu']:null])
-                </div>
             </div>
 
         </div>
