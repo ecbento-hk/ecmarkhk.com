@@ -22,6 +22,7 @@ class ProductList extends Component
     public $menu_date;
     public $period = [];
     public $periodId;
+    public $dinnerPeriodId;
     public $search = '';
     public $type;
     public $location = 60;
@@ -115,6 +116,7 @@ class ProductList extends Component
     {
         $period_id = 2;
         $this->periodId = Period::find( $period_id );
+        $this->dinnerPeriodId = Period::find( 20 );
 
         $this->period = config('menu.date');
         try {
