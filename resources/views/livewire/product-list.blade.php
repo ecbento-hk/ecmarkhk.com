@@ -177,6 +177,62 @@
 
          
 
+            @if($dinnerProducts)
+            <h3 class="col-span-12 font-semibold">{{__('Dinner')}}:</h3>
+            @foreach ($dinnerProducts as $product)
+            <div class="col-span-6 md:col-span-4 lg:col-span-4 xl:col-span-3 md:flex pb-8 w-full indicator">
+                <div class="card bordered shadow-lg w-full rounded-box bg-base-200">
+                    <figure class="px-4 pt-4">
+                        <img src="{{$product->image_file? $product->image_file : 'https://www.kenyons.com/wp-content/uploads/2017/04/default-image-620x600.jpg'}}" class="h-40 object-cover object-center rounded-box bg-cover bg-center">
+                    </figure>
+                    <div class="card-body h-30 px-5 pt-4 pb-0">
+                        <span class="menu-title text-opacity-50 text-xs text-gray-800">
+                            @php
+                            try {
+                                //$product->brand->name;
+                            } catch (\Throwable $th) {
+                                //$product->id;
+                            }
+                            $periodEnd = $periodId->preorder_end;
+                            $stock = 1;
+                            @endphp
+                        </span>
+                        <h4 class="font-bold text-xs lg:text-md">
+                            {{$product->title}}
+                        </h4>
+                        <p class="hidden lg:block text-xs mt-2">{{ mb_strimwidth($product->description, 0, 50, "...") }}</p>
+
+                    </div>
+
+
+                    <div class="pb-4 px-5 w-full mt-3 justify-between">
+                        <h3 class="text-md font-bold mb-3">
+                            ${{$product->price}}
+                        </h3>
+
+                        @if($stock <= 0)
+                        <button disabled class="btn btn-primary btn-block btn-sm text-sm m-0 rounded-lg">{{__('Sold Out')}}</button>
+                        @else
+                            @auth
+                            @if(date('Y-m-d H:i:s') >= $menu_date.' 15:00:00')
+                            <button disabled class="btn btn-primary btn-block btn-sm text-sm m-0 rounded-lg">{{__('Sold Out')}}</button>
+                            @else 
+                            <button wire:click="addToCart({{$product->id}}, {{$storeid}}, {{$periodId->id}}, '{{$menu_date}}')" class="btn btn-primary btn-block btn-sm text-sm m-0 rounded-lg">{{__('Add To Cart')}}</button>
+                                @endif
+                            @else
+                            <a href="{{route('login')}}" class="btn btn-primary btn-block btn-sm text-sm m-0 rounded-lg">{{__('Add To Cart')}}</a>
+                            @endauth
+                        @endif
+                        
+                        
+                    </div>
+                </div>
+                <!-- ordered -->
+                
+            </div>
+            @endforeach
+            @endif
+
 
             @livewire('add-cart')
             <!-- <div class="col-span-12 hidden font-bold" wire:loading.class.remove="hidden">

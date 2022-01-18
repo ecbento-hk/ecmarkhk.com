@@ -17,6 +17,7 @@ class ProductList extends Component
     use WithPagination;
 
     public $products = [];
+    public $dinnerProducts = [];
     public $brand = 'ecbento';
     public $menu_date;
     public $period = [];
@@ -90,6 +91,22 @@ class ProductList extends Component
             $this->filter = [];
         }
        
+        $dinnerMenu = Menu::where('menu_date','<=',$date)
+        ->where('end_date','>=',$date)
+        ->whereNotNull('end_date')
+        ->where('period_id',3)
+        ->whereHas('locations', function($query) use($store){
+            $query->where('store_id', $store)->whereNotNull('stock');
+        })->active()->first();
+
+        if ($dinnerMenu) {
+            $this->dinnerProducts = $dinnerMenu->products()->get();
+        } else {
+            $this->dinnerProducts = [];
+            $this->filter = [];
+        }
+       
+
         // dd($this->products);
         // $this->emit('$refresh');
     }
