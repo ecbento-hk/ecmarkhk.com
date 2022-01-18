@@ -65,6 +65,7 @@ class SubMenu extends Component
         // $interval = \DateInterval::createFromDateString('1 day');
         // $period = new \DatePeriod($startDate, $interval, $endDate);
         // dd($this->location);
+        dd($period);
 
         return view('livewire.sub-menu',['items'=>$period]);
     }
