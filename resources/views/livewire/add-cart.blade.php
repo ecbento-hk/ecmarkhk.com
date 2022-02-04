@@ -64,7 +64,18 @@
             <div class="flex mt-6 items-center">
               <div class="flex items-center">
                 <span class="mr-3">{{__('Quantity')}}</span>
-                <x-input.quantity wire:model="quantity" />
+                <!-- <x-input.quantity wire:model="quantity" /> -->
+                <div class="relative">
+                  <select wire:model="quantity" class="select pl-3 pr-10">
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                    <option>5</option>
+                    <option>6</option>
+                    <option>7</option>
+                  </select>
+                </div>
               </div>
              
             </div>
