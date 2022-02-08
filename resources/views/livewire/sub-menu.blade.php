@@ -27,8 +27,7 @@
                 }
                 @endphp
 
-                @if(date('N',strtotime($menuDate))>=6)
-                @continue
+            
                 @endif
                 <li class="flex justify-between @if($menu_date==$menuDate) bg-gray-200 @endif text-sm @if($quantity>0) text-secondary @endif">
                     <a href="?menu={{base64_encode($payload)}}" class="flex justify-between">
