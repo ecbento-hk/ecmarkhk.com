@@ -105,7 +105,11 @@ class ProductList extends Component
         })->active()->first();
 
         if ($dinnerMenu) {
-            $this->dinnerProducts = $dinnerMenu->products()->get();
+            if(date('H:i')<=date('H:i',strtotime('19:00'))){
+                $this->dinnerProducts = $dinnerMenu->products()->get();
+            } else {
+                $this->dinnerProducts = [];
+            }
         } else {
             $this->dinnerProducts = [];
             $this->filter = [];
