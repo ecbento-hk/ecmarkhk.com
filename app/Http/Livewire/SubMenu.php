@@ -33,7 +33,7 @@ class SubMenu extends Component
         $this->period = config('menu.date');
         if(empty($this->period)){
             $this->period = [
-                date('Y-m-d')
+                date('Y-m-d',strtotime('+1 day'))
             ];
         }
         if(Auth::check()){
