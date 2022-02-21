@@ -91,6 +91,7 @@ class ProductList extends Component
     {
         $period_id = [18];
         $menu = Menu::where([
+            'active' => 1,
             'menu_date' => $this->menu_date,
         ])->whereIn('period_id',$period_id)->first();
         if ($menu) {
