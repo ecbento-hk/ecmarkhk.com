@@ -61,7 +61,7 @@ class SettingServiceProvider extends ServiceProvider
         for($i = $begin; $i < $end; $i->modify('+1 day')){
             $menu_date[] = $i->format("Y-m-d");
         }
-        // dd($begin);
+        dd($menu_date);
         config()->set('menu.date', $menu_date);
 
         // $user_store = 54;
