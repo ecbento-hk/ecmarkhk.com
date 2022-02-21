@@ -46,6 +46,10 @@ class SettingServiceProvider extends ServiceProvider
             })->get();
         }
 
+        if(empty($menu)){
+            $menu = [];
+        }
+        
         $menu2 = Menu::with('products')->where('menu_date', '>=', date('Y-m-d'))
         // ->where('menu_date', '<=', date('Y-m-d',strtotime('last day of this month')))
         ->whereIn('period_id', [18])
