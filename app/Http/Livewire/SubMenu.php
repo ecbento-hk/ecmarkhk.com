@@ -31,6 +31,9 @@ class SubMenu extends Component
         }
        
         $this->period = config('menu.date');
+        if(empty($this->period)){
+            $this->period = [];
+        }
         if(Auth::check()){
             // if(in_array(Auth::user()->id ,['10207','32434'])){
             if(Auth::user()->buffur){
