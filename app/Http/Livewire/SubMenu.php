@@ -53,6 +53,7 @@ class SubMenu extends Component
     {
         $period = $this->period;
         if(is_array($period)){
+            dd($period);
            $this->emitTo('product-list','startDate',$period[0]);
         }
         // $startDate = new \DateTime('NOW');
