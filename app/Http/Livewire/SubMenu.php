@@ -52,7 +52,9 @@ class SubMenu extends Component
     public function render()
     {
         $period = $this->period;
-        $this->emitTo('product-list','startDate',$period[0]);
+        if(is_array($period)){
+           $this->emitTo('product-list','startDate',$period[0]);
+        }
         // $startDate = new \DateTime('NOW');
         // $endDate = (new \DateTime('NOW'))->modify('+7 day');
         // $interval = \DateInterval::createFromDateString('1 day');
