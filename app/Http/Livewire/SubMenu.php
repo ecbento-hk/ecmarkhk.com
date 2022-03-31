@@ -53,9 +53,9 @@ class SubMenu extends Component
     {
         $period = $this->period;
         if(is_array($period)){
-            dd($period);
+         if(count($period)){
            $this->emitTo('product-list','startDate',$period[0]);
-        }
+        }  }
         // $startDate = new \DateTime('NOW');
         // $endDate = (new \DateTime('NOW'))->modify('+7 day');
         // $interval = \DateInterval::createFromDateString('1 day');
