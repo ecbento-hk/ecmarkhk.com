@@ -350,7 +350,7 @@
               
             </div> --}}
 
-            <section>
+            <section class="w-full col-span-12 mt-6">
 <style type="text/css">
   p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 24.0px Helvetica; color: #1e0e27}
   p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 16.0px Helvetica; color: #1e0e27}
