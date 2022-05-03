@@ -214,7 +214,7 @@
                         <button disabled class="btn btn-primary btn-block btn-sm text-sm m-0 rounded-lg">{{__('Sold Out')}}</button>
                         @else
                             @auth
-                            @if(date('Y-m-d H:i:s') >= $menu_date.' 15:00:00')
+                            @if(date('Y-m-d H:i:s') >= $menu_date.' 19:00:00')
                             <button disabled class="btn btn-primary btn-block btn-sm text-sm m-0 rounded-lg">{{__('Sold Out')}}</button>
                             @else 
                             <button wire:click="addToCart({{$product->id}}, {{$storeid}}, {{$dinnerPeriodId->id}}, '{{$menu_date}}')" class="btn btn-primary btn-block btn-sm text-sm m-0 rounded-lg">{{__('Add To Cart')}}</button>
