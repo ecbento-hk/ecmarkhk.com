@@ -86,7 +86,7 @@ class ProductList extends Component
             $query->where('store_id', $store)->whereNotNull('stock');
         })->active()->first();
         if ($menu) {
-            if(date('H:i')<=date('H:i',strtotime('23:30'))){
+            if(date('H:i')<=date('H:i',strtotime('21:30'))){
                 $this->products = $menu->products()->get();
             } else {
                 $this->products = [];
@@ -105,7 +105,7 @@ class ProductList extends Component
         })->active()->first();
 
         if ($dinnerMenu) {
-            if(date('H:i')<=date('H:i',strtotime('19:00'))){
+            if(date('H:i')<=date('H:i',strtotime('23:00'))){
                 $this->dinnerProducts = $dinnerMenu->products()->get();
             } else {
                 $this->dinnerProducts = [];
