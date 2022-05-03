@@ -55,7 +55,7 @@ class SettingServiceProvider extends ServiceProvider
         $menu_date = [];
         $begin = new DateTime('now');
         $end = new DateTime('now');
-        $end = $end->modify('+30 day');
+        $end = $end->modify('+50 day');
         // $end->modify('+1 day');
         // dd($end);
         for($i = $begin; $i < $end; $i->modify('+1 day')){
