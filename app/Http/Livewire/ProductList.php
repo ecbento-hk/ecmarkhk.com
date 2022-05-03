@@ -86,7 +86,7 @@ class ProductList extends Component
             $query->where('store_id', $store)->whereNotNull('stock');
         })->active()->first();
         if ($menu) {
-            if(date('H:i')<=date('H:i',strtotime('14:30'))){
+            if(date('H:i')<=date('H:i',strtotime('23:30'))){
                 $this->products = $menu->products()->get();
             } else {
                 $this->products = [];
