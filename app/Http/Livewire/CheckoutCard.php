@@ -132,7 +132,8 @@ class CheckoutCard extends Component
         \Log::channel('order')->info('User Email: '.$this->cartItems->first()->user->email);
         \Log::channel('order')->info('Total Order: '.$this->cartItems->count());
         \Log::channel('order')->info('Student Info: '.$this->cartItems->first()->remark);
-        $extraction_code = $this->genExctrationCode();
+        // $extraction_code = $this->genExctrationCode();
+        $extraction_code = $this->cartItems->first()->product_id;
         $total_amount = ($this->cartItems->sum('amount') - $this->selected_coupon_price) <=0 ? 0 : $this->cartItems->sum('amount') - $this->selected_coupon_price;
         $order = Order::create([
             'no' => date('YmdHis') . mt_rand(1000, 9999),
