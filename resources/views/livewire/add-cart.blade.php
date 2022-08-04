@@ -165,6 +165,7 @@
                     <option value="12-5">12-5</option>
                   </optgroup>
                   <optgroup label="Staff">
+                    <option value="Staff Grade 4-6">Staff Grade 1-3</option>
                     <option value="Staff Grade 4-6">Staff Grade 4-6</option>
                     <option value="Staff Grade 7-8">Staff Grade 7-8</option>
                     <option value="Staff Grade 9 -12">Staff Grade 9 -12</option>
