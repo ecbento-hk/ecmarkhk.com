@@ -43,7 +43,7 @@
 
             <div class="mt-4">
                 <label class="block text-gray-700">Phone</label>
-                <input type="text" name="phone" id="" placeholder="Enter Your Phone" minlength="6" class="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-primary-500 focus:bg-white focus:outline-none" required>
+                <input type="text" name="phone_no" id="" placeholder="Enter Your Phone" minlength="6" class="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-primary-500 focus:bg-white focus:outline-none" required>
             </div>
             <input type="hidden" name="merchant_id" value="34">
             @if(true)
