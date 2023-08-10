@@ -425,7 +425,7 @@
 <br>
 </span><span class="s1"><b>Payment</b> </span><span class="s2"><br>
 <br>
-</span><span class="s1">Payments are processed by Asia Pay (HK) Limited or Stripe , which is the ultimate holding of the local company in Hong Kong. Cross-border surcharges may be applicable.</span><span class="s2"><br>
+</span><span class="s1">Payments are processed by Asia Pay (HK) Limited or Stripe, which is the ultimate holding of the local company in Hong Kong. Cross-border surcharges may be applicable.</span><span class="s2"><br>
 <br>
 </span><span class="s1"><b>Visa, Master, Alipay, PayPal.</b> The provider reserves the right to provide other payment methods or to no longer offer certain payment methods. The end customer bindingly chooses the payment method when placing the respective order. Provided that the end customer chooses an online payment method, the payment might be processed by an external payment provider cooperating with the provider. Card data will in this case be stored for future orders by the payment provider, on the condition that the end customer chooses the respective storage of such and hereby gives consent to it. </span><span class="s2"><br>
 </span><span class="s1">Payment under HK$4 will automatically switch to Alipay only. </span><span class="s2"><br>
