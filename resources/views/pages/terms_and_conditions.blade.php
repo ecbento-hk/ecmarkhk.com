@@ -367,7 +367,7 @@
 </span><span class="s1">You are entirely responsible for maintaining the confidentiality of your password and your account. And you are entirely responsible for all activity made by you or anyone that uses your account. You agree to safeguard your password from access by others. If you believe that your account has been compromised, you must immediately contact us by mail at: <b>support@ecbento.com</b>. You agree to indemnify and hold harmless<b> EC BENTO </b>for losses incurred by <b>EC BENTO</b> or another party due to someone else using your account as a result of your failure to use reasonable care to safeguard your password. </span><span class="s2"><br>
 <br>
 </span><span class="s1"><b>Cancellation</b> </span><span class="s2"><br>
-</span><span class="s1">- No cancellation will be accepted for the confirmed order unless the user has given certificate of sickness, and shall be made before 8:00AM directly to EC Bento at 96689069 on the day of absence.</span></p>
+</span></p>
 <p class="p2"><span class="s1">- No cancellation will be accepted for the confirmed order unless the user has given certificate of sickness, and shall be made before 8:00AM directly to EC Bento at 96689069 on the day of absence.</span></p>
 <p class="p2"><span class="s1">- In case of outbreak affecting lunch arrangement or last-minute school closure, refunds will be given. Provider reserves the right to make the final decisions regarding any refunds.</span></p>
 <p class="p3"><span class="s2"></span><br></p>
@@ -425,7 +425,7 @@
 <br>
 </span><span class="s1"><b>Payment</b> </span><span class="s2"><br>
 <br>
-</span><span class="s1">Payments are processed by Asia Pay (HK) Limited, which is the ultimate holding of the local company in Hong Kong. Cross-border surcharges may be applicable. </span><span class="s2"><br>
+</span><span class="s1">Payments are processed by Asia Pay (HK) Limited or Stripe , which is the ultimate holding of the local company in Hong Kong. Cross-border surcharges may be applicable.</span><span class="s2"><br>
 <br>
 </span><span class="s1"><b>Visa, Master, Alipay, PayPal.</b> The provider reserves the right to provide other payment methods or to no longer offer certain payment methods. The end customer bindingly chooses the payment method when placing the respective order. Provided that the end customer chooses an online payment method, the payment might be processed by an external payment provider cooperating with the provider. Card data will in this case be stored for future orders by the payment provider, on the condition that the end customer chooses the respective storage of such and hereby gives consent to it. </span><span class="s2"><br>
 </span><span class="s1">Payment under HK$4 will automatically switch to Alipay only. </span><span class="s2"><br>
