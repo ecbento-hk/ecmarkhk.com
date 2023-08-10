@@ -56,15 +56,10 @@
                     your password.
                     <br />
                     <br />
-                    <strong>Cancellation</strong>
-                    <br />
-                    - No cancellation will be accepted for the confirmed order unless the user has given certificate of sickness,
-                        and shall be made before 8:30AM directly to EC Bento at 96689069 on the day of absence.
                 </p>
                 <p>
-                    <!-- - The cancellation shall be made before 9AM directly to EC Bento at
-                    96689069 on the day of absence. No cancellation will be accepted after 9AM
-                    on the day. -->
+                    <strong>Cancellation</strong>
+                    <br>
                     - No cancellation will be accepted for the confirmed order unless the user has given certificate of sickness,
                     and shall be made before 8:30AM directly to EC Bento at 96689069 on the day of absence.
                 </p>
@@ -242,9 +237,7 @@
                     <strong>Payment</strong>
                     <br />
                     <br />
-                    Payments are processed by Asia Pay (HK) Limited, which is the ultimate
-                    holding of the local company in Hong Kong. Cross-border surcharges may be
-                    applicable.
+                    Payments are processed by Asia Pay (HK) Limited or Stripe , which is the ultimate holding of the local company in Hong Kong. Cross-border surcharges may be applicable.
                     <br />
                     <br />
                     <strong>Visa, Master, Alipay, PayPal.</strong>
