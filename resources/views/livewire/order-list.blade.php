@@ -56,18 +56,19 @@
                             </td>
                             <td>
                                 <div class="avatar-group -space-x-6">
-                                    @foreach($order->items as $key => $item)
+                                @foreach($order->items as $key => $item)
                                     @if($key<=3) <div class="avatar">
-                                        <div class="w-10 h-10 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
-                                            <img src="{{$item->product->image_file}}">
-                                        </div>
-                                </div>
-                                @else
-                                <div class="avatar placeholder">
-                                    <div class="bg-neutral-focus text-neutral-content rounded-full w-10 h-10">
-                                        <span>+{{count($order->items) - 4}}</span>
+                                            <div class="w-10 h-10 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
+                                                <img src="{{$item->product->image_file}}">
+                                            </div>
                                     </div>
-                                </div>
+                                    @else
+                                    <div class="avatar placeholder">
+                                        <div class="bg-neutral-focus text-neutral-content rounded-full w-10 h-10">
+                                            <span>+{{count($order->items) - 4}}</span>
+                                        </div>
+                                    </div>
+                                    @continue
                                 @endif
 
                                 @endforeach
