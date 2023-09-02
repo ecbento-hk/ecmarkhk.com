@@ -63,14 +63,15 @@
                                             </div>
                                     </div>
                                     @else
-                                    <div class="avatar placeholder">
-                                        <div class="bg-neutral-focus text-neutral-content rounded-full w-10 h-10">
-                                            <span>+{{count($order->items) - 4}}</span>
-                                        </div>
-                                    </div>
-                                    @continue
-                                @endif
-
+                                        @if($key==4)
+                                            <div class="avatar placeholder">
+                                                <div class="bg-neutral-focus text-neutral-content rounded-full w-10 h-10">
+                                                    <span>+{{count($order->items) - 4}}</span>
+                                                </div>
+                                            </div>
+                                            @continue
+                                        @endif
+                                    @endif
                                 @endforeach
             </div>
 
