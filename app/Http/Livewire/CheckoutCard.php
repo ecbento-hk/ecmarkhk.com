@@ -254,7 +254,7 @@ class CheckoutCard extends Component
                     } else {
                         $stripe_customer = auth()->user()->stripe_customer;
                     }
-
+                    dd($stripe_customer);
                     $stripePaymentMethod = $stripe->paymentMethods->create([
                         'type' => 'card',
         
