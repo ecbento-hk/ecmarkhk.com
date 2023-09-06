@@ -111,7 +111,7 @@ class User extends Authenticatable implements Wallet
     }
 
     public function payments(){
-        return $this->hasMany(UserPayment::class);
+        return $this->hasMany(UserPayment::class)->where('archived',0);
     }
 
     public function invite(){
