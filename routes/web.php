@@ -100,6 +100,10 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::get('/checkout', function () {
         return view('checkout');
     })->name('checkout');
+    Route::get('/success/{no}', function (Request $request, $no) {
+            dd($order)
+           return view('checkout');
+    })->name('success');
  
     Route::get('/checkout/stripe', function () {
 

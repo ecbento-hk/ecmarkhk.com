@@ -215,38 +215,38 @@ class CheckoutCard extends Component
 
                 if($this->selected_payment=='new'){
 
-                    if(config('app.payment_test')){
-                        \Stripe\Stripe::setApiKey(config('app.payment_stripe_test_key'));
-                        $stripe = new \Stripe\StripeClient(
-                            config('app.payment_stripe_test_key')
-                        );    
-                    } else {
-                        \Stripe\Stripe::setApiKey(config('app.payment_stripe_key'));
-                        $stripe = new \Stripe\StripeClient(
-                            config('app.payment_stripe_key')
-                        );    
-                    }
+                    // if(config('app.payment_test')){
+                    //     \Stripe\Stripe::setApiKey(config('app.payment_stripe_test_key'));
+                    //     $stripe = new \Stripe\StripeClient(
+                    //         config('app.payment_stripe_test_key')
+                    //     );    
+                    // } else {
+                    //     \Stripe\Stripe::setApiKey(config('app.payment_stripe_key'));
+                    //     $stripe = new \Stripe\StripeClient(
+                    //         config('app.payment_stripe_key')
+                    //     );    
+                    // }
 
-                    $line_items = [];
-                    foreach ($this->cartItems as $key => $cartItem) {
-                        $line_items[] = [
-                            'price_data' => [
-                              'currency' => 'hkd',
-                              'product_data' => [
-                                'name' => $cartItem->product->title
-                              ],
-                              'unit_amount' => $cartItem->price*100,
-                            ],
-                            'quantity' => $cartItem->quantity,
-                        ];
-                    }
-                    $checkout_session = $stripe->checkout->sessions->create([
-                        'line_items' => $line_items,
-                        'mode' => 'payment',
-                        'success_url' => 'https://school-dsc.ecbento.com/success',
-                        'cancel_url' => 'https://school-dsc.ecbento.com/cancel',
-                      ]);
-                    return redirect()->to($checkout_session->url);
+                    // $line_items = [];
+                    // foreach ($this->cartItems as $key => $cartItem) {
+                    //     $line_items[] = [
+                    //         'price_data' => [
+                    //           'currency' => 'hkd',
+                    //           'product_data' => [
+                    //             'name' => $cartItem->product->title
+                    //           ],
+                    //           'unit_amount' => $cartItem->price*1000,
+                    //         ],
+                    //         'quantity' => $cartItem->quantity,
+                    //     ];
+                    // }
+                    // $checkout_session = $stripe->checkout->sessions->create([
+                    //     'line_items' => $line_items,
+                    //     'mode' => 'payment',
+                    //     'success_url' => 'https://school-dsc.ecbento.com/success',
+                    //     'cancel_url' => 'https://school-dsc.ecbento.com/cancel',
+                    //   ]);
+                    // return redirect()->to($checkout_session->url);
                     // header("HTTP/1.1 303 See Other");
                     // header("Location: " . $checkout_session->url);
                     // $t = [
@@ -267,18 +267,18 @@ class CheckoutCard extends Component
                 
                     // $gateway->setTestMode(true);
                     
-                    // if(auth()->user()->stripe_customer == null){
-                    //     $stripe_customer = $stripe->customers->create([
-                    //         'email'       => auth()->user()->email,
-                    //         'name'        => auth()->user()->name,
-                    //         'description' => 'Created by School-DSC cust#'.auth()->user()->id,
-                    //     ]); 
-                    //     auth()->user()->update([
-                    //         'stripe_customer'=>$stripe_customer->id
-                    //     ]);    
-                    // } else {
-                    //     $stripe_customer = auth()->user()->stripe_customer;
-                    // }
+                    if(auth()->user()->stripe_customer == null){
+                        $stripe_customer = $stripe->customers->create([
+                            'email'       => auth()->user()->email,
+                            'name'        => auth()->user()->name,
+                            'description' => 'Created by School-DSC cust#'.auth()->user()->id,
+                        ]); 
+                        auth()->user()->update([
+                            'stripe_customer'=>$stripe_customer->id
+                        ]);    
+                    } else {
+                        $stripe_customer = auth()->user()->stripe_customer;
+                    }
               
                     // $stripePaymentMethod = $stripe->paymentMethods->create([
                     //     'type' => 'card',
