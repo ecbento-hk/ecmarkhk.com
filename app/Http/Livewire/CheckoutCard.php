@@ -255,7 +255,7 @@ class CheckoutCard extends Component
                         $stripe_customer = auth()->user()->stripe_customer;
                     }
               
-                    $stripePaymentMethod = $stripe->paymentMethods->create([
+                    dd($stripe->paymentMethods->create([
                         'type' => 'card',
         
                         'card' => [
@@ -264,7 +264,7 @@ class CheckoutCard extends Component
                             'exp_year'  => $this->exp_year,
                             'cvc'       => $this->cvc,
                         ],
-                    ]);
+                    ]));
 
                     
                     // $token = $gateway->createToken([
