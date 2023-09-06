@@ -299,6 +299,7 @@ class CheckoutCard extends Component
 
 
                 $order = $this->createOrder($payment);
+                auth()->user()->cartItem()->delete();
 
                 if($this->selected_coupon_price>0){
                     $t = UserCoupon::find($this->selected_coupon)->update([
