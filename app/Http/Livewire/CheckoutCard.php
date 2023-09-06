@@ -211,7 +211,7 @@ class CheckoutCard extends Component
         $this->loading = true;
         // $this->done = false;
         \Log::channel('order')->info('User Start of Create Order');
-        try {
+        // try {
             if($this->cartItems->count()>0){
 
                 if($this->selected_payment=='new'){
@@ -466,13 +466,13 @@ class CheckoutCard extends Component
                
 
             }
-        } catch (\Throwable $th) {
-            // dd($th);
-            // \Log::debug(auth()->user());
-            \Log::channel('order')->debug($th->getMessage());
-            session()->flash('message', $th->getMessage());
-            $this->emit('$refresh');  
-        }
+        // } catch (\Throwable $th) {
+        //     // dd($th);
+        //     // \Log::debug(auth()->user());
+        //     \Log::channel('order')->debug($th->getMessage());
+        //     session()->flash('message', $th->getMessage());
+        //     $this->emit('$refresh');  
+        // }
         \Log::channel('order')->info('User End of Create Order');
         $this->procced = 'Proceed to checkout';
         // $this->done = true;
