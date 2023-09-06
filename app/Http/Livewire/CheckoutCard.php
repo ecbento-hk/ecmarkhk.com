@@ -356,7 +356,7 @@ class CheckoutCard extends Component
                                     'product_data' => [
                                         'name' => $cartItem->product->title
                                     ],
-                                    'unit_amount' => $cartItem->price*1000,
+                                    'unit_amount' => $cartItem->price*100,
                                     ],
                                     'quantity' => $cartItem->quantity,
                                 ];
