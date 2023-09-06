@@ -350,25 +350,27 @@ class CheckoutCard extends Component
                                 );    
                             }
         
-                            $line_items = [];
+                            $cartName = '';
+                            $amount = ($this->cartItems->sum('amount') - $this->selected_coupon_price) <=0 ? 0 : $this->cartItems->sum('amount') - $this->selected_coupon_price;
+                          
                             foreach ($this->cartItems as $key => $cartItem) {
-                                $line_items[] = [
+                                $cartName = $cartName. $cartItem->product->title. '('.$cartItem->menu_date.')';
+                                if($key-1 !== $this->cartItems->count()){
+                                    $cartName = $cartName.',';
+                                }
+                            }
+                            $checkout_session = $stripe->checkout->sessions->create([
+                                'line_items' => [
                                     'price_data' => [
                                     'currency' => 'hkd',
                                     'product_data' => [
-                                        'name' => $cartItem->product->title. ' - '.$cartItem->menu_date
+                                        'name' => $cartName
                                     ],
-                                    'unit_amount' => $cartItem->price*100,
+                                    'unit_amount' => $amount*100,
                                     ],
-                                    'quantity' => $cartItem->quantity,
-                                ];
-                            }
-                            $checkout_session = $stripe->checkout->sessions->create([
-                                'line_items' => $line_items,
-                                'mode' => 'payment',
-                                'discounts' => [
-                                    'amount'=>$this->selected_coupon_price*100,
+                                    'quantity' => 1,
                                 ],
+                                'mode' => 'payment',
                                 'success_url' => 'https://school-dsc.ecbento.com/success/'.$order->no,
                                 'cancel_url' => 'https://school-dsc.ecbento.com/cancel/'.$order->no,
                             ]);
@@ -399,7 +401,6 @@ class CheckoutCard extends Component
                             // }
                             // $gateway->setTestMode(true);
                         
-                            $amount = ($this->cartItems->sum('amount') - $this->selected_coupon_price) <=0 ? 0 : $this->cartItems->sum('amount') - $this->selected_coupon_price;
                             // $response = $gateway->purchase(array(
                             //     'amount' => $amount, 'currency' => 'HKD',
                             //     'customerReference' => $customerReference,
