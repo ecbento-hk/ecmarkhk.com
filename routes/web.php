@@ -101,8 +101,15 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
         return view('checkout');
     })->name('checkout');
     Route::get('/success/{no}', function (Request $request, $no) {
-            dd($order);
-           return view('checkout');
+            $order = Order::where('no',$no)->first();
+            if($order){
+                $order->payment_status = 'paid';
+                $order->paid_at = now();
+                $order->closed = 1;
+                $order->save();
+                auth()->user()->cartItem()->delete();
+            }
+        return redirect()->route('profile');
     })->name('success');
  
     Route::get('/checkout/stripe', function () {

@@ -430,7 +430,7 @@ class CheckoutCard extends Component
                                 $order->paid_at = now();
                                 $order->closed = 1;
                                 $order->save();
-                                auth()->user()->cartItem()->delete();
+                                // auth()->user()->cartItem()->delete();
                                 $this->checkingOut = false;
                                 session()->flash('message', 'Order successfully created.');
                                 // $this->emit('$refresh');
