@@ -290,8 +290,8 @@ class CheckoutCard extends Component
 
                 } else
                 {
-                    $payment = Payment::where('code', $this->selected_payment)->first();
                 }
+                $payment = Payment::where('code', $this->selected_payment)->first();
 
                 \Log::channel('order')->info('Payment: '.$this->selected_payment);
 
