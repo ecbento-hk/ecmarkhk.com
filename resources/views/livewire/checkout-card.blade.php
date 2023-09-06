@@ -192,15 +192,15 @@
 
         </div>
 
-        @if($selected_payment == 'stripe')
+        <!-- @if($selected_payment == 'stripe')
         <div class="p-4 mt-6 bg-base-300 rounded-lg">
           <h1 class="ml-2 font-bold uppercase">Choose Your Card</h1>
         </div>
         <div class="p-4 grid grid-cols-3 gap-4">
           @foreach($userCards as $card)
-          <!-- <div wire:click="updateCardPayment('{{$card->id}}')" class="{{ ($selected_card==$card->id) ? 'bg-primary text-white':'bg-gray-300 text-gray-400' }} text-center text-md cursor-pointer hover:shadow-lg shadow-md font-bold p-2 rounded-lg">
+          <div wire:click="updateCardPayment('{{$card->id}}')" class="{{ ($selected_card==$card->id) ? 'bg-primary text-white':'bg-gray-300 text-gray-400' }} text-center text-md cursor-pointer hover:shadow-lg shadow-md font-bold p-2 rounded-lg">
             {{$card->name}}
-          </div> -->
+          </div>
 
           <div class="shadow stats cursor-pointer">
             <div wire:click="updateCardPayment('{{$card->id}}')" class="{{ ($selected_card==$card->id) ? 'bg-primary text-white':'bg-gray-100 text-gray-400' }} stat">
@@ -214,7 +214,7 @@
           @endforeach
         </div>
 
-        @endif
+        @endif -->
       </div>
 
       <div class="lg:px-2 lg:w-1/2">
