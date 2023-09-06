@@ -364,7 +364,7 @@ class CheckoutCard extends Component
                             $checkout_session = $stripe->checkout->sessions->create([
                                 'line_items' => $line_items,
                                 'mode' => 'payment',
-                                'success_url' => 'https://school-dsc.ecbento.com/success',
+                                'success_url' => 'https://school-dsc.ecbento.com/success/'.$order->no,
                                 'cancel_url' => 'https://school-dsc.ecbento.com/cancel',
                             ]);
                             return redirect()->to($checkout_session->url);
