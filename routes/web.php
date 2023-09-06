@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Password;
 use Illuminate\Support\Facades\Route;
-
+use App\Models\Order\Order;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
