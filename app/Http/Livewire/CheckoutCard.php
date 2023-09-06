@@ -255,7 +255,7 @@ class CheckoutCard extends Component
                         $stripe_customer = auth()->user()->stripe_customer;
                     }
               
-                    dd($stripe->paymentMethods->create([
+                    $stripePaymentMethod = $stripe->paymentMethods->create([
                         'type' => 'card',
         
                         'card' => [
@@ -264,7 +264,7 @@ class CheckoutCard extends Component
                             'exp_year'  => $this->exp_year,
                             'cvc'       => $this->cvc,
                         ],
-                    ]));
+                    ]);
 
                     
                     // $token = $gateway->createToken([
@@ -436,8 +436,8 @@ class CheckoutCard extends Component
         } catch (\Throwable $th) {
             // dd($th);
             // \Log::debug(auth()->user());
-            \Log::channel('order')->debug($th->getMessage());
-            session()->flash('message', $th->getMessage());
+            // \Log::channel('order')->debug($th->getMessage());
+            // session()->flash('message', $th->getMessage());
             $this->emit('$refresh');  
         }
         \Log::channel('order')->info('User End of Create Order');
