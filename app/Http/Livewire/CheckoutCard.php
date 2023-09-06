@@ -367,7 +367,7 @@ class CheckoutCard extends Component
                                 'line_items' => $line_items,
                                 'mode' => 'payment',
                                 'success_url' => 'https://school-dsc.ecbento.com/success/'.$order->no,
-                                'cancel_url' => 'https://school-dsc.ecbento.com/cancel',
+                                'cancel_url' => 'https://school-dsc.ecbento.com/cancel/'.$order->no,
                             ]);
                             return redirect()->to($checkout_session->url);
                             

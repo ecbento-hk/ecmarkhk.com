@@ -111,6 +111,15 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
             }
         return redirect()->route('profile');
     })->name('success');
+    Route::get('/cancel/{no}', function (Request $request, $no) {
+        $order = Order::where('no',$no)->first();
+        if($order){
+            $order->payment_status = 'cancelled';
+            $order->paid_at = null;
+            $order->save();
+        }
+    return redirect()->route('profile');
+    })->name('cancel');
  
     Route::get('/checkout/stripe', function () {
 
