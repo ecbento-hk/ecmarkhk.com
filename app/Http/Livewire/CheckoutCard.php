@@ -226,20 +226,25 @@ class CheckoutCard extends Component
                             config('app.payment_stripe_key')
                         );    
                     }
-                    $checkout_session = $stripe->checkout->sessions->create([
-                        'line_items' => [[
-                          'price_data' => [
-                            'currency' => 'usd',
-                            'product_data' => [
-                              'name' => 'T-shirt',
+
+                    $line_items = [];
+                    foreach ($this->cartItems as $key => $cartItem) {
+                        $line_items[] = [
+                            'price_data' => [
+                              'currency' => 'hkd',
+                              'product_data' => [
+                                'name' => $cartItem->product->title
+                              ],
+                              'unit_amount' => $cartItem->price,
                             ],
-                            'unit_amount' => 2000,
-                          ],
-                          'quantity' => 1,
-                        ]],
+                            'quantity' => $cartItem->quantity,
+                        ];
+                    }
+                    $checkout_session = $stripe->checkout->sessions->create([
+                        'line_items' => $line_items,
                         'mode' => 'payment',
-                        'success_url' => 'http://localhost:4242/success',
-                        'cancel_url' => 'http://localhost:4242/cancel',
+                        'success_url' => 'https://school-dsc.ecbento.com/success',
+                        'cancel_url' => 'https://school-dsc.ecbento.com/cancel',
                       ]);
 
                     header("HTTP/1.1 303 See Other");
