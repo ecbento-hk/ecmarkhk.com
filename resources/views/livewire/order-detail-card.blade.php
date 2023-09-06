@@ -117,7 +117,7 @@
                                             <div class="text-left"> <span class="text-muted">Discount</span> </div>
                                         </td>
                                         <td>
-                                            <div class="text-right"> <span class="text-success">${{$order->charges()->where('value','<=','0')->get()->sum('value')}}</span> </div>
+                                            <div class="text-right"> <span class="text-success">${{($order->charges()->where('value','>','0')->get()->sum('value')-$order->real_amount)}}</span> </div>
                                         </td>
                                     </tr>
                                     <tr class="border-top border-bottom">
