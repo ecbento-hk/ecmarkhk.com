@@ -363,7 +363,7 @@ class CheckoutCard extends Component
                                     'price_data' => [
                                     'currency' => 'hkd',
                                     'product_data' => [
-                                        'name' => $cartName
+                                        'name' => 'Order #'.$order->no
                                     ],
                                     'unit_amount' => $amount*100,
                                     ],
