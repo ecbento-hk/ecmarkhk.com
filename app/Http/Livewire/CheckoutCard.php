@@ -366,6 +366,9 @@ class CheckoutCard extends Component
                             $checkout_session = $stripe->checkout->sessions->create([
                                 'line_items' => $line_items,
                                 'mode' => 'payment',
+                                'discounts' => [
+                                    'amount'=>$this->selected_coupon_price*100,
+                                ]
                                 'success_url' => 'https://school-dsc.ecbento.com/success/'.$order->no,
                                 'cancel_url' => 'https://school-dsc.ecbento.com/cancel/'.$order->no,
                             ]);
