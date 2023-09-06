@@ -214,41 +214,6 @@ class CheckoutCard extends Component
             if($this->cartItems->count()>0){
 
                 if($this->selected_payment=='new'){
-
-                    // if(config('app.payment_test')){
-                    //     \Stripe\Stripe::setApiKey(config('app.payment_stripe_test_key'));
-                    //     $stripe = new \Stripe\StripeClient(
-                    //         config('app.payment_stripe_test_key')
-                    //     );    
-                    // } else {
-                    //     \Stripe\Stripe::setApiKey(config('app.payment_stripe_key'));
-                    //     $stripe = new \Stripe\StripeClient(
-                    //         config('app.payment_stripe_key')
-                    //     );    
-                    // }
-
-                    // $line_items = [];
-                    // foreach ($this->cartItems as $key => $cartItem) {
-                    //     $line_items[] = [
-                    //         'price_data' => [
-                    //           'currency' => 'hkd',
-                    //           'product_data' => [
-                    //             'name' => $cartItem->product->title
-                    //           ],
-                    //           'unit_amount' => $cartItem->price*1000,
-                    //         ],
-                    //         'quantity' => $cartItem->quantity,
-                    //     ];
-                    // }
-                    // $checkout_session = $stripe->checkout->sessions->create([
-                    //     'line_items' => $line_items,
-                    //     'mode' => 'payment',
-                    //     'success_url' => 'https://school-dsc.ecbento.com/success',
-                    //     'cancel_url' => 'https://school-dsc.ecbento.com/cancel',
-                    //   ]);
-                    // return redirect()->to($checkout_session->url);
-                    // header("HTTP/1.1 303 See Other");
-                    // header("Location: " . $checkout_session->url);
                     // $t = [
                     //     str_replace(' ','',$this->number),
                     //     $this->exp_month,
@@ -267,18 +232,18 @@ class CheckoutCard extends Component
                 
                     // $gateway->setTestMode(true);
                     
-                    if(auth()->user()->stripe_customer == null){
-                        $stripe_customer = $stripe->customers->create([
-                            'email'       => auth()->user()->email,
-                            'name'        => auth()->user()->name,
-                            'description' => 'Created by School-DSC cust#'.auth()->user()->id,
-                        ]); 
-                        auth()->user()->update([
-                            'stripe_customer'=>$stripe_customer->id
-                        ]);    
-                    } else {
-                        $stripe_customer = auth()->user()->stripe_customer;
-                    }
+                    // if(auth()->user()->stripe_customer == null){
+                    //     $stripe_customer = $stripe->customers->create([
+                    //         'email'       => auth()->user()->email,
+                    //         'name'        => auth()->user()->name,
+                    //         'description' => 'Created by School-DSC cust#'.auth()->user()->id,
+                    //     ]); 
+                    //     auth()->user()->update([
+                    //         'stripe_customer'=>$stripe_customer->id
+                    //     ]);    
+                    // } else {
+                    //     $stripe_customer = auth()->user()->stripe_customer;
+                    // }
               
                     // $stripePaymentMethod = $stripe->paymentMethods->create([
                     //     'type' => 'card',
@@ -330,6 +295,7 @@ class CheckoutCard extends Component
 
                 \Log::channel('order')->info('Payment: '.$this->selected_payment);
 
+
                 $order = $this->createOrder($payment);
 
                 if($this->selected_coupon_price>0){
@@ -369,6 +335,39 @@ class CheckoutCard extends Component
             
                         case 'stripe':
                             
+                            if(config('app.payment_test')){
+                                \Stripe\Stripe::setApiKey(config('app.payment_stripe_test_key'));
+                                $stripe = new \Stripe\StripeClient(
+                                    config('app.payment_stripe_test_key')
+                                );    
+                            } else {
+                                \Stripe\Stripe::setApiKey(config('app.payment_stripe_key'));
+                                $stripe = new \Stripe\StripeClient(
+                                    config('app.payment_stripe_key')
+                                );    
+                            }
+        
+                            $line_items = [];
+                            foreach ($this->cartItems as $key => $cartItem) {
+                                $line_items[] = [
+                                    'price_data' => [
+                                    'currency' => 'hkd',
+                                    'product_data' => [
+                                        'name' => $cartItem->product->title
+                                    ],
+                                    'unit_amount' => $cartItem->price*1000,
+                                    ],
+                                    'quantity' => $cartItem->quantity,
+                                ];
+                            }
+                            $checkout_session = $stripe->checkout->sessions->create([
+                                'line_items' => $line_items,
+                                'mode' => 'payment',
+                                'success_url' => 'https://school-dsc.ecbento.com/success',
+                                'cancel_url' => 'https://school-dsc.ecbento.com/cancel',
+                            ]);
+                            return redirect()->to($checkout_session->url);
+                            
                             // dd($this->selected_card);
     
                             if(!$customerReference){
@@ -404,20 +403,20 @@ class CheckoutCard extends Component
                             //         return $product->title;
                             //     })
                             // ))->send();
-                            $checkout_data = [
-                                'amount' =>  $amount,
-                                'currency' => 'hkd',
-                                'confirm' => true,
-                                'description' => 'SCH-DSC-'.$order->no,
-                                'customer'=>$stripe_customer,
-                                'payment_method'=>$customerReference,
-                                "metadata" => auth()->user()->cartItem->map(function($product){
-                                    return $product->title;
-                                }),
-                            ];
+                            // $checkout_data = [
+                            //     'amount' =>  $amount,
+                            //     'currency' => 'hkd',
+                            //     'confirm' => true,
+                            //     'description' => 'SCH-DSC-'.$order->no,
+                            //     'customer'=>$stripe_customer,
+                            //     'payment_method'=>$customerReference,
+                            //     "metadata" => auth()->user()->cartItem->map(function($product){
+                            //         return $product->title;
+                            //     }),
+                            // ];
 
-                            $paymentIntents =  $stripe->paymentIntents->create($checkout_data);
-                            $status = $paymentIntents->status == 'succeeded' ? 'paid': $paymentIntents->status;
+                            // $paymentIntents =  $stripe->paymentIntents->create($checkout_data);
+                            // $status = $paymentIntents->status == 'succeeded' ? 'paid': $paymentIntents->status;
             
                             // if ($response->isRedirect()) {
                             //     // redirect to offsite payment gateway
