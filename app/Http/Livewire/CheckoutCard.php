@@ -214,20 +214,6 @@ class CheckoutCard extends Component
             if($this->cartItems->count()>0){
 
                 if($this->selected_payment=='new'){
-                    $t = [
-                        str_replace(' ','',$this->number),
-                        $this->exp_month,
-                        $this->exp_year,
-                        $this->cvc
-                    ];
-                    // dd($t);
-                    $this->validate();
-                    $payment = Payment::find(5);
-
-                    // $gateway = \Omnipay\Omnipay::create('Stripe');
-                    // $gateway->setApiKey('sk_test_51JABlsBmpGYTwMtr7MtjIMpNFXXSkkbjjbfMuWECJ6IOHWOaSvXnptSQepBv38rJRxfrUaz03n8GUe7YqRpN5eK000vpVQghH0');
-                    // $gateway->setApiKey('sk_test_UE3xmTh2owaSc94Adn91xJOx00ES1c7uqG');
-                    // $gateway->setApiKey('sk_live_DOnG2rKpmX3aipEdyCCWuaKC00gjeG2yB9');
 
                     if(config('app.payment_test')){
                         \Stripe\Stripe::setApiKey(config('app.payment_stripe_test_key'));
@@ -240,31 +226,65 @@ class CheckoutCard extends Component
                             config('app.payment_stripe_key')
                         );    
                     }
+                    $checkout_session = $stripe->checkout->sessions->create([
+                        'line_items' => [[
+                          'price_data' => [
+                            'currency' => 'usd',
+                            'product_data' => [
+                              'name' => 'T-shirt',
+                            ],
+                            'unit_amount' => 2000,
+                          ],
+                          'quantity' => 1,
+                        ]],
+                        'mode' => 'payment',
+                        'success_url' => 'http://localhost:4242/success',
+                        'cancel_url' => 'http://localhost:4242/cancel',
+                      ]);
+
+                    header("HTTP/1.1 303 See Other");
+                    header("Location: " . $checkout_session->url);
+                    // $t = [
+                    //     str_replace(' ','',$this->number),
+                    //     $this->exp_month,
+                    //     $this->exp_year,
+                    //     $this->cvc
+                    // ];
+                    // // dd($t);
+                    // $this->validate();
+                    // $payment = Payment::find(5);
+
+                    // $gateway = \Omnipay\Omnipay::create('Stripe');
+                    // $gateway->setApiKey('sk_test_51JABlsBmpGYTwMtr7MtjIMpNFXXSkkbjjbfMuWECJ6IOHWOaSvXnptSQepBv38rJRxfrUaz03n8GUe7YqRpN5eK000vpVQghH0');
+                    // $gateway->setApiKey('sk_test_UE3xmTh2owaSc94Adn91xJOx00ES1c7uqG');
+                    // $gateway->setApiKey('sk_live_DOnG2rKpmX3aipEdyCCWuaKC00gjeG2yB9');
+
+                
                     // $gateway->setTestMode(true);
                     
-                    if(auth()->user()->stripe_customer == null){
-                        $stripe_customer = $stripe->customers->create([
-                            'email'       => auth()->user()->email,
-                            'name'        => auth()->user()->name,
-                            'description' => 'Created by School-DSC cust#'.auth()->user()->id,
-                        ]); 
-                        auth()->user()->update([
-                            'stripe_customer'=>$stripe_customer->id
-                        ]);    
-                    } else {
-                        $stripe_customer = auth()->user()->stripe_customer;
-                    }
+                    // if(auth()->user()->stripe_customer == null){
+                    //     $stripe_customer = $stripe->customers->create([
+                    //         'email'       => auth()->user()->email,
+                    //         'name'        => auth()->user()->name,
+                    //         'description' => 'Created by School-DSC cust#'.auth()->user()->id,
+                    //     ]); 
+                    //     auth()->user()->update([
+                    //         'stripe_customer'=>$stripe_customer->id
+                    //     ]);    
+                    // } else {
+                    //     $stripe_customer = auth()->user()->stripe_customer;
+                    // }
               
-                    $stripePaymentMethod = $stripe->paymentMethods->create([
-                        'type' => 'card',
+                    // $stripePaymentMethod = $stripe->paymentMethods->create([
+                    //     'type' => 'card',
         
-                        'card' => [
-                            'number'    => str_replace('-','',$this->number),
-                            'exp_month' => $this->exp_month,
-                            'exp_year'  => $this->exp_year,
-                            'cvc'       => $this->cvc,
-                        ],
-                    ]);
+                    //     'card' => [
+                    //         'number'    => str_replace('-','',$this->number),
+                    //         'exp_month' => $this->exp_month,
+                    //         'exp_year'  => $this->exp_year,
+                    //         'cvc'       => $this->cvc,
+                    //     ],
+                    // ]);
 
                     
                     // $token = $gateway->createToken([
@@ -276,7 +296,7 @@ class CheckoutCard extends Component
                     //     ],
                     // ])->send();
                     // $token = $token->getData();
-                    dd($stripePaymentMethod);
+                    // dd($stripePaymentMethod);
 
                     // $customers = $gateway->createCustomer([
                     //     'description' => 'My First Test Customer (created for API docs)',
@@ -288,15 +308,15 @@ class CheckoutCard extends Component
                     // $customer = $customers->getData();
                     // dd($customer);
 
-                    auth()->user()->payments()->create([
-                        'payment_id' => '5',
-                        'brand'  => 'STRIPE',
-                        'name'   => substr($this->number, 0, 6).'xxxxxx'.substr($this->number, -4),
-                        'key'    => 'stripePaymentMethod',
-                        'value'  => $stripePaymentMethod->id,
-                        'remark' => $stripePaymentMethod
-                    ]);
-                    $customerReference = $customer['id'];
+                    // auth()->user()->payments()->create([
+                    //     'payment_id' => '5',
+                    //     'brand'  => 'STRIPE',
+                    //     'name'   => substr($this->number, 0, 6).'xxxxxx'.substr($this->number, -4),
+                    //     'key'    => 'stripePaymentMethod',
+                    //     'value'  => $stripePaymentMethod->id,
+                    //     'remark' => $stripePaymentMethod
+                    // ]);
+                    // $customerReference = $customer['id'];
 
                 } else
                 {

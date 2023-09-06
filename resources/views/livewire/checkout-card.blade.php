@@ -292,4 +292,10 @@
     </div>
   </form>
   @endif
+  <script src="https://js.stripe.com/v3/"></script>
+
+  <form action="/create-checkout-session" method="POST">
+      <button type="submit">Checkout</button>
+  </form>
+
 </div>
