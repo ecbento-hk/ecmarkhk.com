@@ -244,7 +244,7 @@ class CheckoutCard extends Component
                         ],
                     ])->send();
                     $token = $token->getData();
-
+                    dd($token);
                     $customers = $gateway->createCustomer([
                         'description' => 'My First Test Customer (created for API docs)',
                         'email' => auth()->user()->email,
