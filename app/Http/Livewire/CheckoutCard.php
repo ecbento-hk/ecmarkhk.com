@@ -247,8 +247,8 @@ class CheckoutCard extends Component
                         'cancel_url' => 'https://school-dsc.ecbento.com/cancel',
                       ]);
                     return redirect()->to($checkout_session->url);
-                    header("HTTP/1.1 303 See Other");
-                    header("Location: " . $checkout_session->url);
+                    // header("HTTP/1.1 303 See Other");
+                    // header("Location: " . $checkout_session->url);
                     // $t = [
                     //     str_replace(' ','',$this->number),
                     //     $this->exp_month,
