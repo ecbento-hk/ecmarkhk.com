@@ -17,8 +17,8 @@ return [
     'company' => env('COMPANY_NAME', 'ECBento Hong Kong Ltd'),
     'merchant' => env('MERCHANT', '34'),
     'payment_test' => env('PAYMENT_TEST', true),
-    'payment_stripe_key' => env('PAYMENT_STRIPE_KEY', 'sk_live_DOnG2rKpmX3aipEdyCCWuaKC00gjeG2yB9'),
-    'payment_stripe_test_key' => env('PAYMENT_STRIPE_TEST_KEY', 'sk_test_UE3xmTh2owaSc94Adn91xJOx00ES1c7uqG'),
+    'payment_stripe_key' => env('PAYMENT_STRIPE_KEY', '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'),
+    'payment_stripe_test_key' => env('PAYMENT_STRIPE_TEST_KEY', 'sk_test_51NET0SGiBONmYgRKOgl6r3hQb95W5HveAFhqNJdz0wlIxTRJoVgG7vTt82ykSSOFt9BPwRn43wjzITQpAMB35CqJ00FzfQJ4SU'),
     /*
     |--------------------------------------------------------------------------
     | Application Environment
