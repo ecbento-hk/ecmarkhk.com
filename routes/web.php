@@ -101,7 +101,7 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
         return view('checkout');
     })->name('checkout');
     Route::get('/success/{no}', function (Request $request, $no) {
-            dd($order)
+            dd($order);
            return view('checkout');
     })->name('success');
  
