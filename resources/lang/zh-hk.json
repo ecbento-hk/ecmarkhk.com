@@ -11,5 +11,6 @@
     "Showing": "目前顯示",
     "to": "至",
     "of": "項目，共",
-    "results": "結果"
+    "results": "結果",
+    "Due to the system update of the third-party payment gateway, customers need to input credit card detail again.":"由於第三方付款平台系統更新 客戶需要重新綁定信用卡"
 }

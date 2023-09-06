@@ -99,17 +99,27 @@
         </div>
         <div class="p-4">
           <p class="mb-4 italic">Please choose a payment method to pay your order.</p>
+
+          <div class="alert alert-success my-6">
+            <div class="flex-1">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="w-6 h-6 mx-2 stroke-current">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728A9 9 0 015.636 5.636m12.728 12.728L5.636 5.636"></path>
+              </svg>
+              <label>{{__('Due to the system update of the third-party payment gateway, customers need to input credit card detail again.')}}</label>
+            </div>
+          </div>
+          
           @php
           $userCards = auth()->user()->payments()->where(['brand'=>'STRIPE'])->get();
           @endphp
           <div class="grid grid-cols-3 grid-rows-3 gap-4">
             @if(count($userCards)>0)
-            @foreach ($payments as $payment)
-            <div wire:click="$emit('payment_method','{{$payment->code}}')" class="{{ ($selected_payment==$payment->code)?'bg-primary text-white':'bg-gray-100 text-gray-400' }} text-center text-md cursor-pointer hover:shadow-lg shadow-md font-bold p-2 rounded-lg">
-              <!-- {{$payment->title}} -->
-              Credit Card
-            </div>
-            @endforeach
+              @foreach ($payments as $payment)
+              <div wire:click="$emit('payment_method','{{$payment->code}}')" class="{{ ($selected_payment==$payment->code)?'bg-primary text-white':'bg-gray-100 text-gray-400' }} text-center text-md cursor-pointer hover:shadow-lg shadow-md font-bold p-2 rounded-lg">
+                <!-- {{$payment->title}} -->
+                Credit Card
+              </div>
+              @endforeach
             @endif
 
             <div wire:click="$emit('payment_method','new')" class="{{ ($selected_payment=='new')?'bg-primary text-white':'bg-gray-100 text-gray-400' }} text-center text-md cursor-pointer hover:shadow-lg shadow-md font-bold p-2 rounded-lg">
@@ -211,6 +221,7 @@
         </div>
         <div class="p-4 mb-64">
           <p class="mb-6 italic">Shipping and additionnal costs are calculated based on values you have entered</p>
+
           <div class="flex justify-between border-b">
             <div class="lg:px-4 lg:py-2 m-2 font-bold text-center text-gray-800">
               Subtotal
@@ -264,7 +275,7 @@
               <label>{{ session('message') }}</label>
             </div>
           </div>
-
+          
           @endif
 
 
