@@ -299,7 +299,6 @@ class CheckoutCard extends Component
 
 
                 $order = $this->createOrder($payment);
-                auth()->user()->cartItem()->delete();
 
                 if($this->selected_coupon_price>0){
                     $t = UserCoupon::find($this->selected_coupon)->update([
@@ -374,6 +373,9 @@ class CheckoutCard extends Component
                                 'success_url' => 'https://school-dsc.ecbento.com/success/'.$order->no,
                                 'cancel_url' => 'https://school-dsc.ecbento.com/cancel/'.$order->no,
                             ]);
+                            
+                            auth()->user()->cartItem()->delete();
+                          
                             return redirect()->to($checkout_session->url);
                             
                             // dd($this->selected_card);
