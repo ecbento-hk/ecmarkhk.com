@@ -121,7 +121,7 @@
                       <option value="3-1">3-1</option>
                       <option value="3-2">3-2</option>
                       <option value="3-3">3-3</option>
-                      <option value="3-4">3-4</option>
+                      <!-- <option value="3-4">3-4</option> -->
                       <option value="4-1">4-1</option>
                       <option value="4-2">4-2</option>
                       <option value="4-3">4-3</option>
@@ -134,6 +134,7 @@
                       <option value="6-2">6-2</option>
                       <option value="6-3">6-3</option>
                       <option value="6-4">6-4</option>
+                      <option value="6-5">6-5</option>
                     </optgroup>
                   <optgroup label="7-8">
                     <option value="7-1">7-1</option>
